@@ -2,6 +2,10 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 167 | 2026-08-21 | Plugin version goes to 2.8.0. No new discipline, so the count stays at fourteen | accepted |
+| 166 | 2026-08-21 | Where `next` and the repository disagree, the repository wins. The line was written before the gap and cannot know what happened during it | accepted |
+| 165 | 2026-08-21 | `handoff` is not vendored and nothing is grafted into `brief`. A brief is for the person at the gate, and an agent-facing resumption section is the two-audience failure the design doc warns about. `brief` already says to link rather than paste, which is the other half of upstream | accepted |
+| 164 | 2026-08-21 | `CLAIM.md` gains a `next` line: what the run after this one picks up. `phase` says where the effort got to, `next` says what is outstanding inside it, which git cannot reconstruct in phase 3 | accepted |
 | 163 | 2026-08-21 | Plugin version goes to 2.7.0 for the fourteenth discipline | accepted |
 | 162 | 2026-08-21 | Upstream's `never --abort` gains one exception: a conflict resolvable only by inventing behaviour is a slicing defect, and forcing the merge destroys a Builder's work to hide a planning error. Aborting costs the merge and nothing else, since every Builder's work is on its own branch | accepted |
 | 161 | 2026-08-21 | `resolving-merge-conflicts` is vendored as the fourteenth discipline, invoked from step 6 of phase 3. A hunk's intent comes from `plan.md`, not from Builder commit messages written for their own branches | accepted |

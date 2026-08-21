@@ -31,4 +31,6 @@ Begin by re-reading the world, per [`SKILL.md`](SKILL.md). Then:
 8. Record any decision that arose during the build. Implementation teaches things, and those belong in the log while they are fresh. Vocabulary gaps returned by a Builder or a Reviewer settle here too: the term goes into `.capstan/CONTEXT.md`, or the question goes into `.capstan/decisions.md` as `open`.
 9. When every slice is merged and reviewed, update `.capstan/effort/CLAIM.md`, then post the gate-3 brief. End the run.
 
+   If the run ends before that, for any reason, update the claim's `next` line before it does. This is the phase where slices sit in four states at once, and a branch alone does not say whether a slice is unreviewed, reviewed with findings outstanding, or ready to merge.
+
 **Done when** every slice in `plan.md` is built, reviewed, merged, and its worktree removed, and every review finding is actioned or dismissed on the record.
