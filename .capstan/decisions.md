@@ -2,6 +2,10 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 160 | 2026-08-21 | Plugin version goes to 2.6.0 for the thirteenth discipline | accepted |
+| 159 | 2026-08-21 | No full record for this one. Deleting the folder reverses it, nothing about it is surprising, and the only trade-off is an overlap now written down. Two of the three gates fail | accepted |
+| 158 | 2026-08-21 | `brief` states the split: briefs carry settled decisions out, questionnaires carry open questions out. A brief that asks the reader something has a questionnaire inside it | accepted |
+| 157 | 2026-08-21 | `to-questionnaire` is vendored onto the Architect as the thirteenth discipline, reached from the interview's third route out. Its answers resolve the `open` lines that prompted it | accepted |
 | 156 | 2026-08-21 | No second version bump. This folds into the unreleased 2.5.0 rather than shipping 2.5.1, per 7 | accepted |
 | 155 | 2026-08-21 | A repository declines an imported standard with a line in its own `.capstan/decisions.md`, and the Reviewer reads that file before grading Standards. Silence means the standard applies | accepted |
 | 154 | 2026-08-21 | Plugin version goes to 2.5.0 for the twelfth discipline | accepted |

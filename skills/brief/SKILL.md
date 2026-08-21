@@ -47,6 +47,8 @@ Write for the named person and the one thing they need to do:
 
 Draft only. Sending is gated, always.
 
+A brief and a questionnaire travel in opposite directions, and reaching for the wrong one wastes the recipient's only pass. A brief carries settled decisions out to someone who needs to act on them. A `to-questionnaire` carries open questions out to someone who holds the answers. If you are writing a brief and find yourself asking the reader something, that part is a questionnaire.
+
 ## What a brief is not
 
 Not a log of what happened. Not the artifact itself. Not a place to demonstrate thoroughness.
