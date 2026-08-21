@@ -55,7 +55,7 @@ Where the artifact is prose rather than code, name a writing standard rather tha
 
 **`writing-for-agents` grades a document an agent consumes.** A skill, an `AGENTS.md`, a `CLAUDE.md`. Applying the wrong standard is itself a finding.
 
-Invoke whichever one applies with the `Skill` tool and grade against its body, not its one-line description.
+Invoke whichever one applies with the `Skill` tool and grade against its body, not its one-line description — graded against, never applied.
 
 ## Spec
 

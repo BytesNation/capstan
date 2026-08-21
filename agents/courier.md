@@ -57,6 +57,6 @@ If the knowledge base is not a git repository, there is no commit to make. Say s
 
 ## Report back
 
-A short close-out: what shipped, what verification showed, which briefs were drafted and for whom, and the knowledge-base commit's SHA plus the paths `git log --name-only -1` shows it touched — or the note's absolute path, when the knowledge base has no repository. Flag anything still waiting on the operator.
+A short close-out: what shipped, what verification showed, which briefs were drafted and for whom, and the knowledge-base commit's SHA plus the paths `git log --name-only -1` shows it touched — or the note's absolute path, when the knowledge base has no repository. State which frontmatter values were derived and which were copied, and name any value that diverges from its neighbours along with why. Flag anything still waiting on the operator.
 
 **Done when** all three steps above are either done or reported as skipped with the reason.
