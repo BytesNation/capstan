@@ -2,7 +2,7 @@
 
 A complete Claude Code agent environment for taking work from concept to delivery, with a human at three gates.
 
-You get five roles (Scout, Architect, Builder, Reviewer, Courier) that carry the work, eleven disciplines that structure it from the interview through to delivery, and three gates where you decide whether the run continues.
+You get five roles (Scout, Architect, Builder, Reviewer, Courier) that carry the work, twelve disciplines that structure it from the interview through to delivery, and three gates where you decide whether the run continues.
 
 Plain markdown, plus one vendored bash library that `walkthrough` builds throwaway scripts from.
 
@@ -23,7 +23,7 @@ The words above are load-bearing. [`.capstan/CONTEXT.md`](.capstan/CONTEXT.md) d
 
 ## The disciplines
 
-Eleven disciplines the roles pull in, plus `effort` itself: the front door, invoked only by you.
+Twelve disciplines the roles pull in, plus `effort` itself: the front door, invoked only by you.
 
 | Skill | For |
 |---|---|
@@ -36,6 +36,7 @@ Eleven disciplines the roles pull in, plus `effort` itself: the front door, invo
 | `decision-record` | A one-line log by default, a full record only when one is earned. |
 | `brief` | Checkpoint and partner briefs, generated per recipient rather than maintained. |
 | `two-axis-review` | Standards and spec, reviewed independently, never blended into one verdict. |
+| `codebase-design` | The words for structure, so a review can say a module is too shallow instead of that it feels wrong. |
 | `unslop` | Cuts AI tells from prose a person reads. |
 | `writing-for-agents` | Keeps a document an agent consumes flat and the same shape every run. |
 
@@ -81,6 +82,12 @@ skills/walkthrough/
 
 skills/diagnosing-bugs/
   SKILL.md              vendored, three repointed lines
+  LICENSE, CREDIT.md    upstream is MIT, see the licence section
+
+skills/codebase-design/
+  SKILL.md              the vocabulary and its principles
+  DEEPENING.md          dependency categories, seam discipline, replace-don't-layer testing
+  DESIGN-IT-TWICE.md    parallel sub-agents designing one interface several ways
   LICENSE, CREDIT.md    upstream is MIT, see the licence section
 ```
 
@@ -149,11 +156,12 @@ Concurrency is capped at three efforts. Three gates each against one reader is n
 
 MIT. See [LICENSE](LICENSE). Take it, change it, ship it.
 
-Four skills here are not ours. All four are MIT, all four are redistributed with their own licence and a `CREDIT.md` in their folder noting exactly what we changed:
+Five skills here are not ours. All five are MIT, all five are redistributed with their own licence and a `CREDIT.md` in their folder noting exactly what we changed:
 
 - `skills/writing-for-agents/`: `SKILL.md` and `SKILL-MECHANICS.md` by [Matt Pocock](https://github.com/mattpocock/skills). `AUDIT.md` beside them is ours.
 - `skills/unslop/`: `SKILL.md` by [Lauren Tan](https://github.com/cursor/plugins/tree/main/pstack/skills/unslop), via cursor/plugins. Our changes are two lines, listed in that folder's `CREDIT.md`.
 - `skills/walkthrough/`: `template.sh` by [Matt Pocock](https://github.com/mattpocock/skills), vendored byte-identical to upstream. `SKILL.md` beside it is ours, written fresh around the library.
 - `skills/diagnosing-bugs/`: `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Three lines repointed at Capstan's own paths and at `walkthrough`, listed in that folder's `CREDIT.md`.
+- `skills/codebase-design/`: `SKILL.md`, `DEEPENING.md` and `DESIGN-IT-TWICE.md` by [Matt Pocock](https://github.com/mattpocock/skills). One line repointed at `.capstan/CONTEXT.md`; the first two are byte-identical.
 
-Beyond those four, nothing here is vendored, though one idea is borrowed. The frontier in `interview` (a design tree, where a question depending on an open question waits for a later round) is sharpened from Matt Pocock's [`grilling`](https://github.com/mattpocock/skills). The prose is ours. The mechanic is his.
+Beyond those five, nothing here is vendored, though one idea is borrowed. The frontier in `interview` (a design tree, where a question depending on an open question waits for a later round) is sharpened from Matt Pocock's [`grilling`](https://github.com/mattpocock/skills). The prose is ours. The mechanic is his.

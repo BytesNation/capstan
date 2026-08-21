@@ -38,7 +38,7 @@ What does stop the line: secrets and credentials, anything a third party will se
 
 ## The disciplines
 
-Eleven disciplines the roles pull in, plus `effort` itself, the front door invoked only by the operator. Three agents preload the disciplines they need via `skills:` frontmatter, so the discipline is in context before the first turn rather than hopefully invoked.
+Twelve disciplines the roles pull in, plus `effort` itself, the front door invoked only by the operator. Three agents preload the disciplines they need via `skills:` frontmatter, so the discipline is in context before the first turn rather than hopefully invoked.
 
 | Skill | Used by | For |
 |---|---|---|
@@ -51,6 +51,7 @@ Eleven disciplines the roles pull in, plus `effort` itself, the front door invok
 | `decision-record` | Architect, Courier | A one-line log by default, a full record only when it earns one, superseded rather than edited. Owns the `.capstan/CONTEXT.md` glossary, the one artifact edited in place. |
 | `brief` | Architect, Courier | BLUF checkpoint briefs, and partner briefs generated per recipient rather than maintained. |
 | `two-axis-review` | Reviewer | Standards and spec, answered independently, never blended into one verdict. |
+| `codebase-design` | Reviewer, Builder | The words for structure: module, interface, depth, seam, adapter, leverage, locality. Gives the standards axis something to judge interface shape against. Vendored from Matt Pocock, see [0003](.capstan/decisions/0003-adopt-deep-modules-as-the-design-standard.md). |
 | `unslop` | Anything writing prose | Cuts AI tells from writing a person will read. |
 | `writing-for-agents` | You, editing this repo | The levers that make a document an agent consumes behave the same way every run. |
 

@@ -38,6 +38,8 @@ Write the line the moment the decision resolves, not batched at the end of a ses
 
 `open` and `assumed` are what an interview parks when a question will not resolve, and they are the reason the `interview` skill reads this file before its first round. A question the operator could not answer in March is worth putting to them again in June. Without a line here it is simply forgotten, because the spec that held it was deleted at delivery.
 
+One use of the log is easy to miss: declining a standard that arrived with the plugin. A discipline preloaded on an agent was never consented to by the repository it is about to grade, so a repository that disagrees says so here, as one `accepted` line naming the standard and the scope it does not apply to. The Reviewer reads this file before it grades, which is what makes the line binding rather than a note.
+
 An `assumed` line is the cheaper half of the pair. It says work carried on under a default that nobody has blessed, which is a different thing from a decision, and the distinction is worth the extra word every time somebody asks why the code does that.
 
 ## Tier 2: the record

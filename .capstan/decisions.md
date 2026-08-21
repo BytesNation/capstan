@@ -2,6 +2,12 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 156 | 2026-08-21 | No second version bump. This folds into the unreleased 2.5.0 rather than shipping 2.5.1, per 7 | accepted |
+| 155 | 2026-08-21 | A repository declines an imported standard with a line in its own `.capstan/decisions.md`, and the Reviewer reads that file before grading Standards. Silence means the standard applies | accepted |
+| 154 | 2026-08-21 | Plugin version goes to 2.5.0 for the twelfth discipline | accepted |
+| 153 | 2026-08-21 | Upstream's TypeScript examples stay as written. The principles behind them are language-agnostic, and rewriting per language turns every refresh into a merge | accepted |
+| 152 | 2026-08-21 | `DESIGN-IT-TWICE.md` is vendored too. Its parallel sub-agents are the Architect's existing fan-out, not a new seat | accepted |
+| 151 | 2026-08-21 | `codebase-design` is vendored onto the Reviewer as the twelfth discipline, and Capstan takes a position on code structure for the first time. See [0003](decisions/0003-adopt-deep-modules-as-the-design-standard.md) | accepted |
 | 150 | 2026-08-21 | Plugin version goes to 2.4.0 for the eleventh discipline. The bump ships inside this change, per 7 | accepted |
 | 149 | 2026-08-21 | The Builder gets a `Bug slices` section naming the handover: `diagnosing-bugs` owns a bug slice up to the fix, `test-first` from the fix. Two preloaded skills with no stated order is a coin toss | accepted |
 | 148 | 2026-08-21 | Upstream's `scripts/hitl-loop.template.sh` is not vendored. Both references repoint at `walkthrough`, whose wizard library already covers the job and whose `ask_secret` keeps a credential out of the transcript | accepted |
