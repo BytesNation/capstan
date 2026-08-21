@@ -80,7 +80,7 @@ head: <the commit the effort starts from>
 last-touched: <ISO timestamp>
 ```
 
-Update `phase`, `head` and `last-touched` at every gate. The Courier deletes it with the rest of `.capstan/effort/` at delivery.
+Update `phase`, `head` and `last-touched` at every gate. You delete it with the rest of `.capstan/effort/` at delivery.
 
 This costs nothing and it is the only thing standing between two sessions and the same files. The three-effort ceiling counts efforts, not sessions, so without a claim two Architects will happily run the same work, fire duplicate Scouts at the same questions, and write over each other.
 

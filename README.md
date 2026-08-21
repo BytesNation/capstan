@@ -125,6 +125,8 @@ cp -r capstan/skills/effort ~/.claude/skills/
 
 **Fan-out does nothing for single-artifact work.** Parallel builders need slices that own different files. A document, a video script, a single config file: all one artifact, all inherently one Builder. Software usually fans out because slices own different things. Most non-code work does not, and a one-slice plan there is correct rather than a failure to parallelise.
 
+**A knowledge base that is not a git repository gives its note no fixed point.** The Reviewer reads the note whole instead and says so in the report. Review is degraded, never skipped.
+
 ## Configure
 
 Two things are setup-specific and read from your `CLAUDE.md` or `AGENTS.md` rather than hardcoded:
