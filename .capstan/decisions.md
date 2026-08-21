@@ -2,6 +2,10 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 150 | 2026-08-21 | Plugin version goes to 2.4.0 for the eleventh discipline. The bump ships inside this change, per 7 | accepted |
+| 149 | 2026-08-21 | The Builder gets a `Bug slices` section naming the handover: `diagnosing-bugs` owns a bug slice up to the fix, `test-first` from the fix. Two preloaded skills with no stated order is a coin toss | accepted |
+| 148 | 2026-08-21 | Upstream's `scripts/hitl-loop.template.sh` is not vendored. Both references repoint at `walkthrough`, whose wizard library already covers the job and whose `ask_secret` keeps a credential out of the transcript | accepted |
+| 147 | 2026-08-21 | `diagnosing-bugs` is vendored from mattpocock/skills onto the Builder as the eleventh discipline. Three lines repointed, everything else upstream | accepted |
 | 146 | 2026-08-21 | `[redacted]` maps BytesNation to `[redacted]` and appends sub-ventures (`[redacted]`), which contradicts 119 and would produce `[redacted]/capstan`. That file states it wins over an agent prompt. The exception is documented nowhere | open |
 | 145 | 2026-08-21 | The vault's `AGENTS.md` rule 7 forbids automatic commits; decision 117 makes committing the Courier's job and phase 4 depends on that commit existing. The Courier is sent to `AGENTS.md` for the schema, so it reads rule 7 on the way past, and nothing says which wins | open |
 | 144 | 2026-08-21 | The five pre-existing notes carrying `[redacted]` are the operator's call, not this effort's. They predate it and mass-editing committed vault notes is not a delivery step | accepted |

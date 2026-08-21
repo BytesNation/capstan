@@ -7,6 +7,7 @@ effort: high
 permissionMode: acceptEdits
 skills:
   - test-first
+  - diagnosing-bugs
 color: green
 ---
 
@@ -45,6 +46,12 @@ If you were given no worktree path, stop and say so. Do not work in the main cop
 Invoke the `test-first` skill and follow it; it owns the loop and the seam rule. The seam for your slice was agreed by the Architect and is in the spec.
 
 For slices that produce no code, the equivalent still applies: define what would show this is wrong before you produce the thing.
+
+## Bug slices
+
+A slice that fixes a bug starts in the `diagnosing-bugs` skill, not in `test-first`. That skill owns everything up to the fix: build a feedback loop that goes red on this bug, reproduce it, minimise it, rank hypotheses, instrument. No hypothesis before the loop exists, and no reading code to build a theory before you can name one command that already went red.
+
+`test-first` takes over at the fix. The minimised repro becomes the failing test at the agreed seam, and red-green runs from there. If no correct seam exists for that test, that is a finding for your report, not a reason to write a weaker test somewhere else.
 
 ## Gated actions
 
