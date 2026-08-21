@@ -4,6 +4,9 @@
 |---|------|----------|--------|
 | 21 | 2026-08-21 | Scope widened two lines: README line 98's `/effort` becomes `/capstan:effort`, and the line 3 tagline adopts the new description | superseded by 22 |
 | 20 | 2026-08-21 | Both descriptions carry identical text. The longer gallery variant is dropped: "stops for your approval at three points along the way" contradicts `CONTEXT.md`, which defines a Gate as never a pause | accepted |
+| 114 | 2026-08-21 | "Project" in the Courier is ordinary English rather than Capstan vocabulary and gets no glossary row, on the same reasoning as "operating layer" | assumed |
+| 113 | 2026-08-21 | An `effort/*` tag names the project, not the individual effort. Counted: [redacted] on the three commonest, against one each on the two I first cited as the convention. My diagnosis was wrong; the Courier filed a project under its parent organisation | assumed |
+| 112 | 2026-08-21 | The Courier distinguishes copied frontmatter fields from derived ones, keyed on whether the value is a property of the folder or a fact about this effort. Not on counting neighbours: a folder is uniform until the moment the rule has to fire | accepted |
 | 111 | 2026-08-21 | "Two skills are more than one file" becomes three. `walkthrough/SKILL.md` points at two siblings, so lifting it alone leaves the dangling pointers that section exists to warn about | accepted |
 | 110 | 2026-08-21 | "Operating layer" lives in `DESIGN.md` only, where the paragraph around it defines it. No glossary row: a term used once, in the place it is explained, is not vocabulary | accepted |
 | 109 | 2026-08-21 | The first screen keeps a concrete positive claim. Forty-five words of negation would fit any repository; "plain markdown" fits this one and a stranger can check it in two seconds | accepted |
