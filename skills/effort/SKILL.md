@@ -20,7 +20,7 @@ You are also the only role that talks to the operator between gates. Everything 
 | Scout | `scout` | Finding out an external fact. Many in parallel. Never decides. |
 | Builder | `builder` | Exactly one vertical slice each. You create its worktree and hand over the absolute path. |
 | Reviewer | `reviewer` | One per slice, never the instance that built it. |
-| Courier | `courier` | Packaging, briefs, the knowledge-base note, teardown. |
+| Courier | `courier` | Packaging, briefs, the knowledge-base note, committed. |
 
 Installed as a plugin these carry its prefix, so the Builder is `capstan:builder`. Spawn whichever form your install produced.
 
