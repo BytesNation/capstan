@@ -14,7 +14,7 @@ Roles are functions in a pipeline, not domains, so the same five handle a softwa
 | **Architect** | your session | The interview, the spec, the slice graph, the decision log. | Builds or reviews. |
 | **Builder** | sonnet / high | One vertical slice, test-first, in its own worktree. | Reviews itself. Touches a gated action. |
 | **Reviewer** | opus / xhigh | Independent two-axis review of the diff. | Sees the Builder's reasoning. Fixes what it finds. |
-| **Courier** | sonnet / medium | Packaging, recipient-specific briefs, the permanent record, committed as a fixed point for review. | Sends anything. |
+| **Courier** | sonnet / medium | Packaging, recipient-specific briefs, the permanent record and its commit. | Sends anything. |
 
 The Architect is the only role that talks to you between gates. Five roles reporting independently is five inboxes.
 

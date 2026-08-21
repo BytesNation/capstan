@@ -12,7 +12,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Scout | Read-only reconnaissance. Returns cited findings and never decides. |
 | Builder | Builds exactly one slice in its own worktree. Never reviews its own work. |
 | Reviewer | Reviews one slice's diff without the Builder's reasoning. Reports, never fixes. |
-| Courier | Packages a delivered effort, writes the knowledge-base note, commits it as the fixed point a Reviewer checks. Never sends. |
+| Courier | Packages a delivered effort, writes the knowledge-base note, commits it. Never sends. |
 | Discipline | A skill the roles pull in, as opposed to a role itself. |
 | Front door | The `effort` skill, invoked by the operator to start a run. Neither a Discipline nor an Effort. |
 | Walkthrough | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. Discarded with the effort's scratch once run. |
