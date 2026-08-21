@@ -38,7 +38,7 @@ What does stop the line: secrets and credentials, anything a third party will se
 
 ## The disciplines
 
-Thirteen disciplines the roles pull in, plus `effort` itself, the front door invoked only by the operator. Three agents preload the disciplines they need via `skills:` frontmatter, so the discipline is in context before the first turn rather than hopefully invoked.
+Fourteen disciplines the roles pull in, plus `effort` itself, the front door invoked only by the operator. Three agents preload the disciplines they need via `skills:` frontmatter, so the discipline is in context before the first turn rather than hopefully invoked.
 
 | Skill | Used by | For |
 |---|---|---|
@@ -46,6 +46,7 @@ Thirteen disciplines the roles pull in, plus `effort` itself, the front door inv
 | `spike` | Builder | A throwaway spike that settles whether something behaves right or feels right, for a design question the interview could not resolve. Never merged. |
 | `slicing` | Architect | Vertical slices with real blocking edges. Includes the expand-migrate-contract exception for wide refactors. |
 | `test-first` | Builder | Red, green, refactor. Tests at pre-agreed seams only. |
+| `resolving-merge-conflicts` | Architect | Integrating parallel Builders. Intent comes from the plan, not from commit messages, and a conflict that can only be resolved by inventing behaviour is a slicing defect rather than a merge to force. Vendored from Matt Pocock. |
 | `diagnosing-bugs` | Builder | A feedback loop that goes red on the bug before any hypothesis. Owns a bug slice up to the fix, where `test-first` takes over. Vendored from Matt Pocock. |
 | `walkthrough` | Architect | The one-time script for a human task step, stage by stage, confirming each and capturing what comes back. Vendors Matt Pocock's `wizard` library rather than reimplementing it. |
 | `decision-record` | Architect, Courier | A one-line log by default, a full record only when it earns one, superseded rather than edited. Owns the `.capstan/CONTEXT.md` glossary, the one artifact edited in place. |

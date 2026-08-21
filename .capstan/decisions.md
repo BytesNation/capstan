@@ -2,6 +2,9 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 163 | 2026-08-21 | Plugin version goes to 2.7.0 for the fourteenth discipline | accepted |
+| 162 | 2026-08-21 | Upstream's `never --abort` gains one exception: a conflict resolvable only by inventing behaviour is a slicing defect, and forcing the merge destroys a Builder's work to hide a planning error. Aborting costs the merge and nothing else, since every Builder's work is on its own branch | accepted |
+| 161 | 2026-08-21 | `resolving-merge-conflicts` is vendored as the fourteenth discipline, invoked from step 6 of phase 3. A hunk's intent comes from `plan.md`, not from Builder commit messages written for their own branches | accepted |
 | 160 | 2026-08-21 | Plugin version goes to 2.6.0 for the thirteenth discipline | accepted |
 | 159 | 2026-08-21 | No full record for this one. Deleting the folder reverses it, nothing about it is surprising, and the only trade-off is an overlap now written down. Two of the three gates fail | accepted |
 | 158 | 2026-08-21 | `brief` states the split: briefs carry settled decisions out, questionnaires carry open questions out. A brief that asks the reader something has a questionnaire inside it | accepted |

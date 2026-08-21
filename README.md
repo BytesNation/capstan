@@ -2,7 +2,7 @@
 
 A complete Claude Code agent environment for taking work from concept to delivery, with a human at three gates.
 
-You get five roles (Scout, Architect, Builder, Reviewer, Courier) that carry the work, thirteen disciplines that structure it from the interview through to delivery, and three gates where you decide whether the run continues.
+You get five roles (Scout, Architect, Builder, Reviewer, Courier) that carry the work, fourteen disciplines that structure it from the interview through to delivery, and three gates where you decide whether the run continues.
 
 Plain markdown, plus one vendored bash library that `walkthrough` builds throwaway scripts from.
 
@@ -23,7 +23,7 @@ The words above are load-bearing. [`.capstan/CONTEXT.md`](.capstan/CONTEXT.md) d
 
 ## The disciplines
 
-Thirteen disciplines the roles pull in, plus `effort` itself: the front door, invoked only by you.
+Fourteen disciplines the roles pull in, plus `effort` itself: the front door, invoked only by you.
 
 | Skill | For |
 |---|---|
@@ -31,6 +31,7 @@ Thirteen disciplines the roles pull in, plus `effort` itself: the front door, in
 | `spike` | A throwaway build, so a stalled design question gets something concrete to react to. |
 | `slicing` | Cuts a locked plan into vertical slices with real blocking edges. |
 | `test-first` | Red, green, refactor, tested only at seams agreed in advance. |
+| `resolving-merge-conflicts` | Integrating parallel Builders, where neither side of a conflict can be asked what it meant. |
 | `diagnosing-bugs` | A feedback loop that goes red on the bug before anyone theorises about the cause. |
 | `walkthrough` | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. |
 | `decision-record` | A one-line log by default, a full record only when one is earned. |
@@ -92,6 +93,10 @@ skills/codebase-design/
   LICENSE, CREDIT.md    upstream is MIT, see the licence section
 
 skills/to-questionnaire/
+  SKILL.md              vendored, two local changes
+  LICENSE, CREDIT.md    upstream is MIT, see the licence section
+
+skills/resolving-merge-conflicts/
   SKILL.md              vendored, two local changes
   LICENSE, CREDIT.md    upstream is MIT, see the licence section
 ```
@@ -161,7 +166,7 @@ Concurrency is capped at three efforts. Three gates each against one reader is n
 
 MIT. See [LICENSE](LICENSE). Take it, change it, ship it.
 
-Six skills here are not ours. All six are MIT, all six are redistributed with their own licence and a `CREDIT.md` in their folder noting exactly what we changed:
+Seven skills here are not ours. All seven are MIT, all seven are redistributed with their own licence and a `CREDIT.md` in their folder noting exactly what we changed:
 
 - `skills/writing-for-agents/`: `SKILL.md` and `SKILL-MECHANICS.md` by [Matt Pocock](https://github.com/mattpocock/skills). `AUDIT.md` beside them is ours.
 - `skills/unslop/`: `SKILL.md` by [Lauren Tan](https://github.com/cursor/plugins/tree/main/pstack/skills/unslop), via cursor/plugins. Our changes are two lines, listed in that folder's `CREDIT.md`.
@@ -169,5 +174,6 @@ Six skills here are not ours. All six are MIT, all six are redistributed with th
 - `skills/diagnosing-bugs/`: `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Three lines repointed at Capstan's own paths and at `walkthrough`, listed in that folder's `CREDIT.md`.
 - `skills/codebase-design/`: `SKILL.md`, `DEEPENING.md` and `DESIGN-IT-TWICE.md` by [Matt Pocock](https://github.com/mattpocock/skills). One line repointed at `.capstan/CONTEXT.md`; the first two are byte-identical.
 - `skills/to-questionnaire/`: `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Two changes, listed in that folder's `CREDIT.md`: the invocation flag, and where the document lands and where its answers go.
+- `skills/resolving-merge-conflicts/`: `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Two changes, listed in that folder's `CREDIT.md`: where a hunk's intent is found, and one exception to never aborting.
 
-Beyond those six, nothing here is vendored, though one idea is borrowed. The frontier in `interview` (a design tree, where a question depending on an open question waits for a later round) is sharpened from Matt Pocock's [`grilling`](https://github.com/mattpocock/skills). The prose is ours. The mechanic is his.
+Beyond those seven, nothing here is vendored, though one idea is borrowed. The frontier in `interview` (a design tree, where a question depending on an open question waits for a later round) is sharpened from Matt Pocock's [`grilling`](https://github.com/mattpocock/skills). The prose is ours. The mechanic is his.
