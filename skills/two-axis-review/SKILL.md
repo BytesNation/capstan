@@ -19,9 +19,15 @@ Report a worst finding per axis. Never name a single worst finding across both, 
 
 ## The fixed point
 
-Review `git diff <fixed-point>...HEAD`. The fixed point is a commit, a branch, or a tag, and someone has to supply it. Do not guess one.
+Someone supplies the fixed point. Never guess one. It takes one of three forms.
 
-Confirm the ref resolves and the diff is non-empty before starting. Note that `...HEAD` excludes staged and working-tree changes, so an empty diff on work you were told exists usually means nothing was committed. Say that rather than reporting a clean review.
+**A range in the effort's own repository.** Review `git diff <fixed-point>...HEAD`, where the fixed point is a commit, a branch, or a tag.
+
+**A single commit in any repository, including one that is not the effort's.** The dispatcher supplies both the repository and the commit. Reach it with `git -C <repo>`, never by changing directory: `git -C <repo> show <commit>` or `git -C <repo> diff <commit>^...<commit>`.
+
+**No fixed point, because the artifact does not live in a repository.** Read the file whole. Say in the report that no fixed point was available, so a degraded review is never mistaken for a clean one.
+
+For either of the first two forms, confirm the ref resolves and the diff is non-empty before starting. Note that `...HEAD` excludes staged and working-tree changes, so an empty diff on work you were told exists usually means nothing was committed. Say that rather than reporting a clean review.
 
 ## Standards
 
@@ -42,6 +48,12 @@ Mysterious Name, Duplicated Code, Feature Envy, Data Clumps, Primitive Obsession
 Each is a labelled heuristic, never a hard violation. Say "possible Feature Envy" and state what it is followed by how to fix it, so the finding arrives with a move attached rather than a complaint.
 
 Skip anything a linter or typechecker already enforces. Reporting what CI would have caught wastes the one pass someone will actually read.
+
+Where the artifact is prose rather than code, name a writing standard rather than assume one. The condition that picks between them is who reads the artifact, not who wrote it.
+
+**`unslop` grades prose a person reads.** The default for anything a human opens.
+
+**`writing-for-agents` grades a document an agent consumes.** A skill, an `AGENTS.md`, a `CLAUDE.md`. Applying the wrong standard is itself a finding.
 
 ## Spec
 
