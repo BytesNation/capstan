@@ -21,7 +21,7 @@ Begin by re-reading the world, per [`SKILL.md`](SKILL.md). Then:
 4. As each Builder returns, dispatch a Reviewer on **that** slice immediately. Do not wait for the whole wave. A slice reviews while its neighbours are still building.
    - Hand over the **fixed point** to review against, the slice's branch, and the absolute paths to `.capstan/effort/plan.md` and `.capstan/effort/spec.md` in the main working copy. A Reviewer will not guess a fixed point, and `.capstan/effort/` does not exist inside the worktree it is reading.
 5. Read the findings. You decide what gets acted on: every finding is either actioned or dismissed with the reason written down. A blocking finding goes back as a new Builder task on the same slice, never to the instance that wrote it.
-6. Merge in dependency order. Builders never merge; you do, or you dispatch integration explicitly.
+6. Merge in dependency order. Builders never merge; you do, or you dispatch integration explicitly. A merge that conflicts goes to the `resolving-merge-conflicts` discipline, which holds where a hunk's intent is found and the one case where aborting beats resolving.
 7. **Remove each worktree once its slice is merged**, so a dead worktree never gets handed to a later Builder:
 
    ```bash
