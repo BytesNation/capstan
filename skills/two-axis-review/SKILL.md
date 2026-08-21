@@ -35,6 +35,10 @@ The repository is the primary source and **the repository always overrides**. Re
 
 A review that does not know the repository's own rules flags what was deliberate and misses the invariants the codebase actually depends on. That failure is the reason this axis reads local documentation first.
 
+Some standards arrive with the plugin rather than the repository. `codebase-design` is one: it is loaded before you see a diff, so nothing in the repository consented to it. The override still holds, and the repository states its objection the same way it states everything else, as a line in `.capstan/decisions.md`. Read that file. A decision declining an imported standard, or narrowing it to part of the tree, binds this axis, and grading against a standard the repository has already refused is itself the finding.
+
+Absent such a line, an imported standard applies. Silence is not an objection, or every standard would need adopting twice.
+
 `.capstan/CONTEXT.md` is the repository stating what it calls things, so it gives this axis its one citable naming rule. The rule splits in two, and only one half is a finding.
 
 **A name that contradicts the glossary.** Cite the term. Blocking when other code depends on the name: a type, an export, a column, anything public. Worth doing when it is local to one file. This is Mysterious Name with the rule already written down.

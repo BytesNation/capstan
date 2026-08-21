@@ -27,6 +27,8 @@ Test at the seam that was agreed in the plan. If no seam was agreed for this sli
 
 Prefer the highest seam that can still observe the behaviour. Testing three layers down couples the suite to a structure you will want to change.
 
+When the interface itself is the question, rather than where to test it, call the `codebase-design` skill. It owns the words for that: module, interface, depth, seam, adapter. It is a reference to consult mid-slice, not a session to run.
+
 ## What makes a test worth keeping
 
 - It fails when the behaviour is wrong, and only then.
