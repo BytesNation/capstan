@@ -176,4 +176,7 @@ Seven skills here are not ours. All seven are MIT, all seven are redistributed w
 - `skills/to-questionnaire/`: `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Two changes, listed in that folder's `CREDIT.md`: the invocation flag, and where the document lands and where its answers go.
 - `skills/resolving-merge-conflicts/`: `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Two changes, listed in that folder's `CREDIT.md`: where a hunk's intent is found, and one exception to never aborting.
 
-Beyond those seven, nothing here is vendored, though one idea is borrowed. The frontier in `interview` (a design tree, where a question depending on an open question waits for a later round) is sharpened from Matt Pocock's [`grilling`](https://github.com/mattpocock/skills). The prose is ours. The mechanic is his.
+Beyond those seven, nothing here is vendored, though two ideas are borrowed, both from [Matt Pocock](https://github.com/mattpocock/skills). The prose is ours; the mechanics are his.
+
+- The frontier in `interview`: a design tree, where a question depending on an open question waits for a later round. Sharpened from `grilling`.
+- The `next` line in `CLAIM.md`: what the run after this one picks up, written for the agent that resumes rather than the person at the gate. Taken from `handoff`, sized down to a field in a file that already exists.

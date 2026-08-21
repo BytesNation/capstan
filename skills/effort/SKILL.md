@@ -77,10 +77,13 @@ effort: <slug>
 started: <ISO timestamp>
 phase: concept
 head: <the commit the effort starts from>
+next: <what the run after this one picks up>
 last-touched: <ISO timestamp>
 ```
 
-Update `phase`, `head` and `last-touched` at every gate. You delete it with the rest of `.capstan/effort/` at delivery.
+Update `phase`, `head`, `next` and `last-touched` at every gate. You delete it with the rest of `.capstan/effort/` at delivery.
+
+`next` is one line and it is written for the Architect who resumes, not for the operator. `phase` says where the effort got to; `next` says what is outstanding inside it. The difference matters most in phase 3, where a run can end with slices in four states at once. Git shows a branch and a worktree for a slice under review and for one nobody has looked at yet, and it cannot tell you which findings were dismissed or why. Write what the next run picks up, name the slices by the names `plan.md` uses, and keep it to a line.
 
 This costs nothing and it is the only thing standing between two sessions and the same files. The three-effort ceiling counts efforts, not sessions, so without a claim two Architects will happily run the same work, fire duplicate Scouts at the same questions, and write over each other.
 
@@ -92,7 +95,7 @@ Then read what already exists: `.capstan/CONTEXT.md`, `.capstan/decisions.md`, a
 
 A run **ends** at each gate, and time passes before the next one starts. Hours, sometimes. The repository moves, other sessions run, and the state you reasoned about is no longer the state in front of you.
 
-So the first act of phases 2, 3 and 4 is not the work. It is checking what changed:
+So the first act of phases 2, 3 and 4 is not the work. It is reading the claim's `next` line, which is the last run telling you where it stopped, and then checking what changed underneath it:
 
 ```bash
 git -C <repo> log --oneline <head-recorded-in-CLAIM>..HEAD
@@ -102,6 +105,8 @@ git -C <repo> status --short
 If `HEAD` has moved since the claim recorded it, **stop and read what landed** before doing anything else. Someone may have built the thing you were about to build. Report what moved and who moved it rather than dispatching on top of it.
 
 Also re-list `.capstan/effort/scout/` and compare it against what you filed. Files you did not write mean another run touched this effort, and its findings may be better than yours.
+
+Where `next` and the repository disagree, the repository wins. The line was written before the gap and cannot know what happened during it.
 
 Never assume the plan you wrote is still the plan the repository needs. Verifying costs two commands. Building on a stale premise costs the whole phase.
 
@@ -113,7 +118,7 @@ Never assume the plan you wrote is still the plan the repository needs. Verifyin
    - Read what comes back rather than trusting it. A Scout that says medium confidence, or that reports a fetch it could not complete, is telling you which of its claims still need checking. Verify anything load-bearing yourself before a decision rests on it.
 3. Record decisions as they resolve, per the `decision-record` skill. Do not batch them to the end. Record the ones that refuse to resolve too, as `open` or `assumed`. A question the operator could not answer is a finding, not a hole in the interview.
 4. Write `.capstan/effort/spec.md`. Include what is explicitly out of scope. The things refused are usually the most useful lines on the page.
-5. Update `.capstan/effort/CLAIM.md` (phase, head, last-touched), then post the gate-1 brief per the `brief` skill. End the run.
+5. Update `.capstan/effort/CLAIM.md` (phase, head, next, last-touched), then post the gate-1 brief per the `brief` skill. End the run.
 
 **Done when** every question raised in the interview is answered in `spec.md`, written down there as an explicit assumption, or carried in `.capstan/decisions.md` as `open`, and every Scout return is filed.
 
@@ -157,7 +162,7 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
     decisions.md    one line per decision. committed. persists.
     decisions/      full records, only when gated. committed. persists.
     effort/         gitignored. deleted at delivery.
-      CLAIM.md      who holds this effort, what phase, from which commit
+      CLAIM.md      who holds this effort, what phase, from which commit, what is outstanding
       spec.md
       plan.md
       scout/
