@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 290 | 2026-08-23 | Slice 4's `grep -c 'commits it'` criterion was defective: the phrase appears in the corrected sentence too, so a right answer stayed red and the Builder reworded around the string rather than toward the meaning. The criterion's defect, not the Builder's, the same finding as 253 and 258. Three efforts running, three bad greps; a criterion whose target phrase can appear in the fixed text is the recurring shape | accepted |
 | 289 | 2026-08-23 | The glossary's `Courier` row drops "commits it" and its `Seam` row moves the agreement from the spec to the plan, per 268. `Owns` and `Red at base` get rows: both are now required, named parts of a plan and neither was defined. Returned as a vocabulary gap by the slice 1 review | accepted |
 | 288 | 2026-08-23 | Phase 1's done-when gains the six sections, and phase 3's gains the filing of returns. Both were stated in a step and enforced by no criterion, which is this effort's own defect one level up. Raised independently by the slice 1 and slice 2 reviews | accepted |
 | 287 | 2026-08-23 | Slice 4 is added: the sweep. The plan applied "no hunk left behind" within files and never across them, so seven hunks in five files nobody owned survived the cut. `agents/builder.md` is the sharpest, being the last file contradicting 268 and the one a Builder reads at dispatch | accepted |
