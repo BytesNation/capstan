@@ -54,7 +54,7 @@ The disciplines the roles pull in, plus `effort` itself, the front door invoked 
 | `to-questionnaire` | Architect | The other direction: open questions out to whoever holds the answers, aimed at the gap between what they know and what the effort needs. Vendored from Matt Pocock. |
 | `two-axis-review` | Reviewer | Standards and spec, answered independently, never blended into one verdict. |
 | `verify` | Architect | Runs the checks the repository declares against the merged result. A Reviewer reads a diff and skips what a typechecker would catch, on the grounds that CI catches it. This is that CI. |
-| `codebase-design` | Reviewer, Builder | The words for structure: module, interface, depth, seam, adapter, leverage, locality. Gives the standards axis something to judge interface shape against. Vendored from Matt Pocock, see decision 0003 in the decision records. |
+| `codebase-design` | Reviewer, Builder | The words for structure: module, interface, depth, seam, adapter, leverage, locality. Gives the standards axis something to judge interface shape against. Vendored from Matt Pocock, see [0003](.capstan/decisions/0003-adopt-deep-modules-as-the-design-standard.md). |
 | `unslop` | Anything writing prose | Cuts AI tells from writing a person will read. |
 | `writing-for-agents` | You, editing this repo | The levers that make a document an agent consumes behave the same way every run. |
 
@@ -77,7 +77,7 @@ Without that line you get `unslop` announcing it must always apply and nothing t
 
 Three tiers of decision, sorted by lifespan, and the glossary standing beside them.
 
-- **Glossary**: one line per term, `CONTEXT.md` in the document home. The only file here edited in place rather than superseded, because a glossary you have to read archaeologically is a glossary nobody reads. Every agent that writes or reviews code reads it; a name that contradicts it is a review finding.
+- **Glossary**: one line per term, `CONTEXT.md` in [the document home](README.md#document-home). The only file here edited in place rather than superseded, because a glossary you have to read archaeologically is a glossary nobody reads. Every agent that writes or reviews code reads it; a name that contradicts it is a review finding.
 - **Log**: one line per decision, `decisions.md` in the document home. Cannot bloat.
 - **Record**: a full document only when a decision is hard to reverse *and* surprising without context *and* a real trade-off. All three, so most efforts produce none.
 - **Brief**: generated per recipient at send time, never stored, never maintained.
@@ -92,13 +92,13 @@ The reason external documentation becomes unreadable is almost always that one a
 
 ## Why the document home is one root, never two copies
 
-Some operators would rather the glossary, the log, and the records rendered in a markdown viewer they already read than sat in the repository beside the code. The document home answers that with one configured root, resolved everywhere, defaulting to the repository so an operator who configures nothing notices no difference.
+Some operators would rather read the glossary, the log, and the records in a markdown viewer they already use than find them sitting in the repository beside the code. The document home answers that with one configured root, resolved everywhere, defaulting to the repository so an operator who configures nothing notices no difference.
 
 The alternative, writing to the repository and mirroring into the vault, was rejected outright. Two copies of the same file is a sync problem, and a sync problem needs an operating layer to keep the copies from drifting apart, which is exactly the kind of thing this project refuses to build and maintain. One root means a file exists in exactly one place, and "where is the real one" is never a question anyone has to ask.
 
 The same reasoning is why the effort scratch never follows the document home wherever it points. `CLAIM.md`, `spec.md`, `plan.md`, scout returns, and review output are per-run and thrown away at delivery. A vault is somewhere an operator keeps things; filling it with dead specs is the exact staleness the document home exists to get away from.
 
-The log stays a single file for a related reason, even inside a vault where one note per item is the native shape. Scanning every decision on one screen, in order, is the entire value of the log, and one note per decision is the bloat `decision-record` was designed to prevent. Splitting it up in a vault would buy back the ability to query decisions like data, at the cost of the one property that makes the log worth keeping: reading the whole history in one pass. That trade was made deliberately, in the log's favour.
+The log stays a single file for a related reason, even inside a vault where one note per item is the native shape. Scanning every decision on one screen, in order, is the entire value of the log, and one note per decision is the bloat `decision-record` was designed to prevent. Splitting it up in a vault would buy back the ability to query decisions like data, at the cost of the one property that makes the log worth keeping: reading the whole history in one pass. We chose that trade in the log's favour.
 
 ## Why the Architect creates worktrees by hand
 

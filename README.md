@@ -6,7 +6,7 @@ A Claude Code plugin for taking work from concept to delivery, with you at three
 
 Five roles carry the work, a discipline for each part of it, and three times the run stops so you can decide whether it continues. It is plain markdown, plus one vendored bash library that `walkthrough` builds throwaway scripts from. Nothing here needs code running to stay alive.
 
-This repository's own glossary, in its [document home](#document-home), defines every word it uses, and [`DESIGN.md`](DESIGN.md) holds the reasoning behind the shape.
+This repository's own [glossary](.capstan/CONTEXT.md) defines every word it uses — see [document home](#document-home) if you've pointed yours elsewhere — and [`DESIGN.md`](DESIGN.md) holds the reasoning behind the shape.
 
 ## Install
 
@@ -87,9 +87,13 @@ Two more things are read from your own `CLAUDE.md` or `AGENTS.md` rather than ha
 
 ## Document home
 
-The glossary, the decision log, and the decision records all resolve against one configured root, the document home. It is optional and off by default. Configure nothing and you get exactly the layout above.
+By default, the glossary, the decision log, and the decision records live in `.capstan/` in the repository, next to your code. That is the layout above, and configuring nothing keeps it that way.
 
-Point it somewhere else, a folder in an Obsidian vault, say, so those three files render in something you already read. Set `capstan-document-home` in your own `CLAUDE.md` or `AGENTS.md`, alongside the knowledge-base setting mentioned above:
+Read somewhere else instead, a folder in an Obsidian vault, say, and point Capstan there.
+
+**Capstan never commits a configured document home, and it never runs git inside one.** It writes the files and stops; committing them from then on is yours, the same as committing anything else in that vault. Left uncommitted, a document home can sit that way for days before anyone notices, so weigh that before you switch it on.
+
+Set `capstan-document-home` in this repository's own `CLAUDE.md` or `AGENTS.md` — the one at the root of this working copy, not a user-level file — alongside the knowledge-base setting mentioned above. A `~/.claude/CLAUDE.md` is never read for this key: set it only there and Capstan falls back to the default without telling you.
 
 ```markdown
 capstan-document-home: /Users/you/vault/YourProject
@@ -97,9 +101,7 @@ capstan-document-home: /Users/you/vault/YourProject
 
 The value must be an absolute path. One folder per project inside one vault, never one vault per project, and never a copy in both places. A file lives in exactly one location, and Capstan resolves every path to it against that one root.
 
-The glossary (`CONTEXT.md`), the decision log (`decisions.md`), and the decision records (`decisions/`) move there. The effort scratch never does: the claim, the spec, the plan, and scout returns stay at `.capstan/effort/` in the repository under every configuration, and are deleted at delivery.
-
-**Capstan never runs git inside a configured document home.** It writes the files and stops there; committing them is yours, the same as committing anything else in that vault. Left uncommitted, a document home can sit that way for days before anyone notices. Weigh that before you switch it on.
+The glossary (`CONTEXT.md`), the decision log (`decisions.md`), and the decision records (`decisions/`) resolve there from then on. Nothing migrates the copies already sitting in `.capstan/`: switching an existing project's document home is on you, or you end up with a stale copy in `.capstan/` and a fresh one in the vault. The effort scratch never moves regardless: the claim, the spec, the plan, and scout returns stay at `.capstan/effort/` in the repository under every configuration, and are deleted at delivery.
 
 An unreachable configured root stops the run rather than falling back to the default, since a missing source of truth would otherwise produce two records that quietly disagree.
 
