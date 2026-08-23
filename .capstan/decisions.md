@@ -2,6 +2,11 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 187 | 2026-08-21 | Plugin version goes to 2.10.0. The README is rewritten rather than corrected, so it is a minor rather than a patch | accepted |
+| 186 | 2026-08-21 | The pre-2.1.0 migration section is dropped from the README for the same reason. The detection in `effort` still runs and is now unexplained, which is a separate call | open |
+| 185 | 2026-08-21 | Every `claude-tools` reference leaves the README. The operator was its only user, so the rename section documented a migration nobody will run. Decision 0001 keeps the history | accepted |
+| 184 | 2026-08-21 | The README gains `Your first run`: what happens at each phase and what the operator does at each gate. It documented install and upgrade and never once said how a run goes | accepted |
+| 183 | 2026-08-21 | Every skill name in the disciplines table links to its `SKILL.md` by relative path, which resolves on GitHub and in a clone | accepted |
 | 182 | 2026-08-21 | Plugin version goes to 2.9.3 | accepted |
 | 181 | 2026-08-21 | `Unformed` joins the glossary beside `Open` and `Assumed`. The status shipped in 2.9.0 and the glossary that defines the other two never got it | accepted |
 | 180 | 2026-08-21 | The README's install material merges into one section, with by-hand, namespacing and multi-file skills as subsections under it. `Install` and `Install detail` had the disciplines table wedged between them | accepted |
