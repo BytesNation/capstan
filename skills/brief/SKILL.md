@@ -13,7 +13,7 @@ The reader's time is the scarce thing. Speed of review is the whole design const
 
 Bottom line up front. The first sentence states what the reader is being asked to know, decide, or approve. Everything after it is support.
 
-This inverts the instinct to build up to the point, and it is the single change that makes briefs readable. If nothing is needed from the reader, say **no action required** explicitly and early.
+If nothing is needed from the reader, say **no action required** explicitly and early.
 
 ## Checkpoint briefs
 
@@ -29,7 +29,7 @@ Every checkpoint brief carries an **assumptions** section, drawn from the `assum
 
 Beside it sits an **open questions** section, drawn from the `open` lines: the ones that would not resolve at all. State each with the route that would settle it, which is a throwaway to build, a person to ask, or a default to bless. Print "none" when there are none, because a missing section reads as an oversight rather than an empty set.
 
-Any `unformed` lines go in the same section, marked as what they are. They carry no route, because nobody can yet say what would settle them. Say what the area is and what would bring it into view. An operator who reads one of these often knows more about it than the crew does, which is the whole reason for printing it.
+Any `unformed` lines go in the same section, marked as what they are. They carry no route, because nobody can yet say what would settle them. Say what the area is and what would bring it into view.
 
 Keep it to a page. Link down to the detail; do not paste it in.
 
@@ -49,7 +49,7 @@ Write for the named person and the one thing they need to do:
 
 Draft only. Sending is gated, always.
 
-A brief and a questionnaire travel in opposite directions, and reaching for the wrong one wastes the recipient's only pass. A brief carries settled decisions out to someone who needs to act on them. A `to-questionnaire` carries open questions out to someone who holds the answers. If you are writing a brief and find yourself asking the reader something, that part is a questionnaire.
+A brief carries settled decisions out to someone who must act on them; a `to-questionnaire` carries open questions out to someone who holds the answers. If you are writing a brief and find yourself asking the reader something, that part is a questionnaire.
 
 ## What a brief is not
 
@@ -57,4 +57,4 @@ Not a log of what happened. Not the artifact itself. Not a place to demonstrate 
 
 If a section exists only to show work was done, cut it. If a sentence could appear unchanged in a brief for a different effort, it says nothing about this one and it goes.
 
-**Done when** every section left standing carries something the reader needs in order to decide.
+**Done when** the assumptions and open-questions sections are present or printed empty, and every section left standing carries something the reader needs in order to decide.

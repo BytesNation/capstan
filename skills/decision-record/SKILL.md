@@ -39,13 +39,11 @@ Write the line the moment the decision resolves, not batched at the end of a ses
 
 `open` and `assumed` are what an interview parks when a question will not resolve, and they are the reason the `interview` skill reads this file before its first round. A question the operator could not answer in March is worth putting to them again in June. Without a line here it is simply forgotten, because the spec that held it was deleted at delivery.
 
-`unformed` is the one that is not a question. It names an area the effort will reach and nobody has thought about yet: an integration nobody has opened, a phase of the work whose shape is still fog. It exists because the alternative is worse. Written as `open`, it gets asked as a question, stalls because it is not answerable, gets asked again, and is parked a second time, which is two rounds spent on something that needed work rather than an answer. Written nowhere, it is a surprise in phase 3.
+An `assumed` line is the cheaper half of that pair. It says work carried on under a default that nobody has blessed, which is a different thing from a decision, and the distinction is worth the extra word every time somebody asks why the code does that.
 
-An `unformed` line graduates. As the work advances, the area comes into view and the line is rewritten as a real `open` question, or several. That rewrite is the one place a line changes rather than being superseded, because nothing was decided and there is no history to protect. Once it is `open`, the ordinary rules resume.
+`unformed` is the one that is not a question. It names an area the effort will reach and nobody has thought about yet: an integration nobody has opened, a phase of the work whose shape is still fog. Written as `open` it gets asked, stalls because it needs work rather than an answer, and is parked a second time. Written nowhere it is a surprise in phase 3. It graduates: as the area comes into view the line is rewritten as a real `open` question, or several, and that rewrite is the one place a line changes rather than being superseded, because nothing was decided and there is no history to protect.
 
 One use of the log is easy to miss: declining a standard that arrived with the plugin. A discipline preloaded on an agent was never consented to by the repository it is about to grade, so a repository that disagrees says so here, as one `accepted` line naming the standard and the scope it does not apply to. The Reviewer reads this file before it grades, which is what makes the line binding rather than a note.
-
-An `assumed` line is the cheaper half of the pair. It says work carried on under a default that nobody has blessed, which is a different thing from a decision, and the distinction is worth the extra word every time somebody asks why the code does that.
 
 ## Tier 2: the record
 
@@ -85,13 +83,11 @@ The condition that would make this worth reopening. Write one, or admit there is
 
 Never stored. Generated per recipient at send time by the `brief` skill, which owns the shape.
 
-Do not maintain partner documentation. Regenerate it.
-
 ## Never edit an accepted record
 
 When a decision changes, write a new one that supersedes the old and cross-link both. Mark the old one `superseded by NNNN` and give the new one a `supersedes NNNN` line. Update both files, every time.
 
-This is the mechanic that keeps the set honest, and it is mechanical enough to be worth doing without thinking. Editing an accepted record destroys the history of why the direction shifted, which is usually the most valuable thing in the folder.
+This is the mechanic that keeps the set honest. Editing an accepted record destroys the history of why the direction shifted, which is usually the most valuable thing in the folder.
 
 Never delete a record. Superseded records stay, marked, out of the reading path.
 
@@ -124,3 +120,5 @@ Specs, plans, research findings, review output, and checkpoint drafts all live i
 ## The permanent note
 
 At delivery the Courier writes one note per effort into the knowledge base: what it was, what was decided, what was rejected, and links out to the code and the records. That note is the only thing that can answer what has been decided across every venture at once, which no single repository can.
+
+**Done when** every decision this session settled is a line, every question it could not settle is `open`, `assumed` or `unformed`, and every line that passes all three gates has a record beside it.
