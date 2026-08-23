@@ -58,7 +58,7 @@ If the work has no repository, say so and ask whether to create one. An effort n
 
 The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records. It defaults to `<working copy>/.capstan`.
 
-Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside the knowledge-base setting already documented there, before resolving the term anywhere else. The value is an absolute path to the folder:
+Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside the knowledge-base setting already documented there, before resolving the term anywhere else. Both files carrying the key with a different value stops the phase, and says so: two roots means two logs, the same "two records that disagree" outcome this section stops for elsewhere, and not a case to resolve by precedence or first-wins. A value that is not itself an absolute path stops the phase too, and says so: resolving it would mean assuming the session's working directory, which the Precondition section above forbids. The value is an absolute path to the folder:
 
 ```
 capstan-document-home: /Users/example/vault/ProjectName
@@ -72,7 +72,7 @@ A file lives in exactly one place, never two. Copying between the repository and
 
 A document home configured away from the default that is unreachable stops the phase, and says so. This is the deliberate exception to "stop for consequence, never for ambiguity": a missing source of truth is not ambiguity, and falling back to the default would produce two records that disagree. The default is not held to this: nothing creates `<working copy>/.capstan/` ahead of an effort, so it is missing on a repository's first run, and that first write creates it rather than stopping anything.
 
-When the document home is configured away from the default, Capstan writes files there and never runs git in it, and the operator commits. Tell the operator, at the point they configure a root, that the vault is theirs to commit and that a document home can therefore sit unversioned for days.
+At the default, the crew commits it as ordinary unattended work, per the Authority table below. When the document home is configured away from the default, Capstan writes files there and never runs git in it, and the operator commits. Tell the operator, at the point they configure a root, that the vault is theirs to commit and that a document home can therefore sit unversioned for days.
 
 Every frontmatter property Capstan writes carries a `capstan_` prefix. Obsidian types a property vault-wide by name, so a bare `status` collides with whatever the operator's vault already assigned that name.
 
@@ -111,8 +111,8 @@ A run **ends** at each gate, and time passes before the next one starts. Hours, 
 So the first act of phases 2, 3 and 4 is not the work. It is reading the claim's `next` line, which is the last run telling you where it stopped, and then checking what changed underneath it:
 
 ```bash
-git -C <repo> log --oneline <head-recorded-in-CLAIM>..HEAD
-git -C <repo> status --short
+git -C <working copy> log --oneline <head-recorded-in-CLAIM>..HEAD
+git -C <working copy> status --short
 ```
 
 If `HEAD` has moved since the claim recorded it, **stop and read what landed** before doing anything else. Someone may have built the thing you were about to build. Report what moved and who moved it rather than dispatching on top of it.
