@@ -15,6 +15,8 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Courier | Packages a delivered effort, writes the knowledge-base note, commits it. Never sends. |
 | Discipline | A skill the roles pull in, as opposed to a role itself. |
 | Project | The work an Effort belongs to and outlives. One Project holds many Efforts, its own Document home, and, once built, its Tracker. |
+| `capstan_type` | The frontmatter property naming which durable artifact a note is: `glossary`, `decision-log` or `decision-record`. Prefixed per the vault-wide typing rule. |
+| `capstan-document-home` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding an absolute path to the Document home. Unset means the default. |
 | Document home | Where the glossary, the log and the records live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
 | Tracker | A surface holding slice and seam state through to completion, authoritative when configured. A separate feature from the Document home, and not yet built. |
 | Front door | The `effort` skill, invoked by the operator to start a run. Neither a Discipline nor an Effort. |
