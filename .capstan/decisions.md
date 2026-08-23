@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 307 | 2026-08-23 | Verification is green and degraded, and says which. The repository declares one executable check and it validates a manifest, so the ten seams and three whole-repository sweeps are the evidence. The strongest evidence is not a check: this effort ran under its own new rules while building them, and eight returns are filed rather than lost | accepted |
 | 306 | 2026-08-23 | Slice 4 merges after one review and one fix round, verified by the Architect. Seven specific findings, all actioned, output the Architect can judge by reading. Same call as 257 | accepted |
 | 305 | 2026-08-23 | Slices 2 and 3 merge after two reviews and two fix rounds each, verified by the Architect rather than a third review. Both round-2 Spec axes were clean and every remaining finding was `noted`. Slice 2's sub-bullet move to step 4 was the Builder's judgement call and it picked the phase 1 shape, which resolved the forward-reference without a reword | accepted |
 | 304 | 2026-08-23 | Slice 1 merges after two reviews and two fix rounds, without a third review. Round 2's Spec axis was clean, both Standards findings were `noted`, and the three fixes were specific enough for the Architect to verify directly. Same call as 252 and 257 | accepted |
