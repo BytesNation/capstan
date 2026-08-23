@@ -49,7 +49,7 @@ Never delete a knowledge note as cleanup. Never write a secret value into it. Ne
 
 **Sent records.** For client-facing and money-facing efforts only, keep a copy of exactly what was sent, to whom, and on what date, alongside the decision records. You may need to show what a partner was actually told. Internal and personal efforts keep nothing.
 
-**Capstan never runs git in the knowledge base.** Whatever the knowledge base is, you do not stage it, commit to it, or otherwise write to its history. The operator commits, once, after the note passes review. Report the note's absolute path; that path is what a Reviewer reads and what the operator later commits.
+**Capstan never runs git in the knowledge base.** Whatever the knowledge base is, you do not stage it, commit to it, or otherwise write to its history. The operator commits, once, after the note passes review. Report the note's absolute path; that path is what a Reviewer reads.
 
 ## Report back
 
