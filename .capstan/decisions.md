@@ -6,7 +6,9 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
-| 281 | 2026-08-23 | The three defects are one effort rather than three. They share a cause, the scratch having no specified shape, and splitting them means three claims for prose edits to the same four files. Revisit if slicing cannot find a demonstrable cut | assumed |
+| 283 | 2026-08-23 | `skills/effort/SKILL.md` goes wholly to slice 1, including the Files-tree annotation that is slice 2's concern. 241's precedent: scope discipline that leaves one hunk behind means no slice ever fixes it, and two Builders in one file is an ownership question review will raise even when git merges it cleanly | accepted |
+| 282 | 2026-08-23 | Supersedes 281. Slicing found three demonstrable cuts inside the one effort, so the three defects stay one effort. The cut fans out three ways with no blocking edges, which the document home could not do | accepted |
+| 281 | 2026-08-23 | The three defects are one effort rather than three. They share a cause, the scratch having no specified shape, and splitting them means three claims for prose edits to the same four files. Revisit if slicing cannot find a demonstrable cut | superseded by 282 |
 | 280 | 2026-08-23 | Specifying sections changes what an agent writes. Untested, and the same class of gap as 229. Revisit if a later effort produces a spec that ignores the sections | assumed |
 | 279 | 2026-08-23 | `agents/reviewer.md` is told its return is filed verbatim and read later without the session around it. A return written to be read aloud and one written to be filed are different documents, and saying so costs a sentence | accepted |
 | 278 | 2026-08-23 | The operator commits the knowledge-base note once, after the note review passes. Phase 4's second-commit correction path and its fixed-point language go: with 275 in force the note review is permanently the degraded kind | accepted |
