@@ -20,8 +20,8 @@ Begin by re-reading the world, per [`SKILL.md`](SKILL.md). Then:
 3. Fan-out inside an effort is unbounded. The three-effort ceiling is about efforts, not slices. A one-slice plan means one Builder, and that is a correct outcome rather than a failure to parallelise.
 4. As each Builder returns, dispatch a Reviewer on **that** slice immediately. Do not wait for the whole wave. A slice reviews while its neighbours are still building.
    - Hand over the **fixed point** to review against, the slice's branch, the absolute paths to `.capstan/effort/plan.md` and `.capstan/effort/spec.md` in the main working copy, and the resolved document home. A Reviewer will not guess a fixed point, and `.capstan/effort/` does not exist inside the worktree it is reading.
+   - **You** write each Reviewer return verbatim to `.capstan/effort/review/<slice>-<n>.md`, where `<n>` is a round counter starting at 1. Do not summarise it on the way in; the citations and the finding format are the parts that matter later.
 5. Read the findings. You decide what gets acted on: every finding is either actioned or dismissed with the reason written down in `decisions.md` in the document home, never in the review file itself, which holds the return and nothing else. A blocking finding goes back as a new Builder task on the same slice, never to the instance that wrote it.
-   - **A Reviewer has no write tools, so it returns findings as text and cannot file them.** You write each return verbatim to `.capstan/effort/review/<slice>-<n>.md`, where `<n>` is a round counter starting at 1. Do not summarise it on the way in; the citations and the finding format are the parts that matter later.
 6. Merge in dependency order. Builders never merge; you do, or you dispatch integration explicitly. A merge that conflicts goes to the `resolving-merge-conflicts` discipline, which holds where a hunk's intent is found and the one case where aborting beats resolving.
 7. **Remove each worktree once its slice is merged**, so a dead worktree never gets handed to a later Builder:
 
@@ -29,7 +29,8 @@ Begin by re-reading the world, per [`SKILL.md`](SKILL.md). Then:
    git -C <repo> worktree remove <worktrees-dir>/<effort>-<slice>
    ```
 
-8. **Verify the integration**, per the `verify` discipline. Every slice passed in its own worktree, which says nothing about them together, and the gate-3 brief is about to claim the work is done. File the verify return the same way: write it verbatim to `.capstan/effort/review/verify-<n>.md`, `<n>` a round counter, and keep that file to the return alone — actioning or dismissing what it finds still goes in `decisions.md` in the document home. Red goes back as a Builder task on the slice the merge order implicates, not into this run.
+8. **Verify the integration**, per the `verify` discipline. Every slice passed in its own worktree, which says nothing about them together, and the gate-3 brief is about to claim the work is done. Red goes back as a Builder task on the slice the merge order implicates, not into this run.
+   - File the verify return the same way: write it verbatim to `.capstan/effort/review/verify-<n>.md`, `<n>` a round counter, and keep that file to the return alone — actioning or dismissing what it finds still goes in `decisions.md` in the document home.
 
 9. Record any decision that arose during the build. Implementation teaches things, and those belong in the log while they are fresh. Vocabulary gaps returned by a Builder or a Reviewer settle here too: the term goes into the glossary (`CONTEXT.md`), or the question goes into the decision log (`decisions.md`) as `open`, both in the document home, which is `<working copy>/.capstan/` unless configured otherwise.
 10. When every slice is merged, reviewed and verified, update `.capstan/effort/CLAIM.md`, then post the gate-3 brief. End the run.
