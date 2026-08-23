@@ -52,19 +52,25 @@ Everything below refers to that path. **It is not necessarily the session's work
 
 Never `cd` and never ask for a session to be restarted elsewhere. `git -C <path>` and absolute paths do everything a different working directory would.
 
-If the work has no repository, say so and ask whether to create one. An effort needs a repository, because slices are branches and the decision log is committed.
+If the work has no repository, say so and ask whether to create one. An effort needs a repository because slices are branches, and, under the default document home, because the decision log is committed there too.
 
 ## Document home
 
-The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records. It defaults to `<repo>/.capstan`.
+The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records. It defaults to `<working copy>/.capstan`.
 
-Read `CLAUDE.md` or `AGENTS.md` for a document-home entry naming a folder path, beside the knowledge-base setting already documented there, before resolving the term anywhere else. An unset one resolves to the default above. Configuration cannot live inside the thing being relocated, so it never lives inside `.capstan/` itself.
+Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside the knowledge-base setting already documented there, before resolving the term anywhere else. The value is an absolute path to the folder:
 
-The scratch at `<repo>/.capstan/effort/` stays repo-relative under every configuration: `CLAIM.md`, `spec.md`, `plan.md`, scout returns and review output all live there regardless of where the document home points.
+```
+capstan-document-home: /Users/example/vault/ProjectName
+```
+
+Unset, or neither file present, resolves to the default above. Configuration cannot live inside the thing being relocated, so the key never lives inside `.capstan/` itself.
+
+The scratch at `<working copy>/.capstan/effort/` stays repo-relative under every configuration: `CLAIM.md`, `spec.md`, `plan.md`, scout returns and review output all live there regardless of where the document home points.
 
 A file lives in exactly one place, never two. Copying between the repository and a vault is a sync problem, and a sync problem needs an operating layer Capstan refuses to build. One vault holds one folder per Project — never one vault per Project.
 
-An unreachable or missing document home stops the phase, and says so. This is the deliberate exception to "stop for consequence, never for ambiguity": a missing source of truth is not ambiguity, and falling back to the default would produce two records that disagree.
+A document home configured away from the default that is unreachable stops the phase, and says so. This is the deliberate exception to "stop for consequence, never for ambiguity": a missing source of truth is not ambiguity, and falling back to the default would produce two records that disagree. The default is not held to this: nothing creates `<working copy>/.capstan/` ahead of an effort, so it is missing on a repository's first run, and that first write creates it rather than stopping anything.
 
 When the document home is configured away from the default, Capstan writes files there and never runs git in it, and the operator commits. Tell the operator, at the point they configure a root, that the vault is theirs to commit and that a document home can therefore sit unversioned for days.
 
@@ -154,7 +160,7 @@ This is not a gate and it does not belong at one. It is a pause mid-phase: when 
 
 Uncertainty is not on that list.
 
-**Stop for consequence, never for ambiguity**, except the document home's unreachable-root case documented above. When something is unclear, take the most defensible reading, write it into `decisions.md` in the document home as `assumed` with the condition that would reopen it, and keep moving. Assumptions surface at the next gate where they cost almost nothing to correct. A crew that halts on every ambiguity turns the operator into the bottleneck the fleet was supposed to remove.
+**Stop for consequence, never for ambiguity**, except the document home's stop case documented above. When something is unclear, take the most defensible reading, write it into `decisions.md` in the document home as `assumed` with the condition that would reopen it, and keep moving. Assumptions surface at the next gate where they cost almost nothing to correct. A crew that halts on every ambiguity turns the operator into the bottleneck the fleet was supposed to remove.
 
 ## Infrastructure
 
@@ -163,10 +169,11 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
 ## Files
 
 ```
-<document home>/          defaults to <working copy>/.capstan/
-  CONTEXT.md      one line per term. committed. persists. edited in place.
-  decisions.md    one line per decision. committed. persists.
-  decisions/      full records, only when gated. committed. persists.
+<document home>/          defaults to <working copy>/.capstan/. Committed automatically only at
+                           the default; the operator commits a configured one, per Document home above.
+  CONTEXT.md      one line per term. persists. edited in place.
+  decisions.md    one line per decision. persists.
+  decisions/      full records, only when gated. persists.
 
 <working copy>/
   .capstan/
