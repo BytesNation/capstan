@@ -58,18 +58,7 @@ If the work has no repository, say so and ask whether to create one. An effort n
 
 **Check for a claim.** Read `.capstan/effort/CLAIM.md` in the working copy. If it exists, another Architect already holds this effort. Do not start. Report what it says (when it started, what phase it reached, when it was last touched) and ask whether to take it over or leave it alone. Only the operator decides that.
 
-**Check for a pre-2.1.0 layout.**
-
-- **What triggers it.** Any of `CONTEXT.md`, `decisions.md`, `decisions/`, or `.effort/` at the working copy root. A candidate signal that this repository predates 2.1.0, when Capstan kept its artifacts there, not proof.
-- **Claim safety, checked before anything else below.** If `.effort/CLAIM.md` exists, that claim cannot be taken over: report what it says and stop. The operator finishes or abandons that effort on 2.0.0, or deletes `.effort/` and starts fresh.
-- **What it does.** Check `.capstan/decisions.md` for an existing `assumed` line recording these root paths as not Capstan's. If one is there, skip the question below and continue. Otherwise ask the operator whether the paths are Capstan's.
-
-| Answer | Result |
-|---|---|
-| Any of them are | Stop. The crew reads `.capstan/` only, so continuing would run against artifacts it cannot see. Report that. The operator moves `CONTEXT.md`, `decisions.md`, and `decisions/` into `.capstan/`, deletes `.effort/`, changes the `.gitignore` line from `.effort/` to `.capstan/effort/`, and starts the effort again. |
-| None of them are | Record it in `.capstan/decisions.md` as `assumed`, and continue. |
-
-Write a claim once the check above resolves without stopping, or immediately if none of the four paths were present to begin with:
+Write a claim:
 
 ```markdown
 # CLAIM

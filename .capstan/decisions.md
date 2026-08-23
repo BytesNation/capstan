@@ -2,8 +2,10 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 189 | 2026-08-21 | Plugin version goes to 2.11.0. Removing a check that stopped a run is a behaviour change, not a patch | accepted |
+| 188 | 2026-08-21 | The pre-2.1.0 detection is removed from `effort`. Supersedes 40, 48, 50, 58 and settles 186. It guards a layout only this repository ever had, and it cost context on every effort start for a case that can no longer occur | accepted |
 | 187 | 2026-08-21 | Plugin version goes to 2.10.0. The README is rewritten rather than corrected, so it is a minor rather than a patch | accepted |
-| 186 | 2026-08-21 | The pre-2.1.0 migration section is dropped from the README for the same reason. The detection in `effort` still runs and is now unexplained, which is a separate call | open |
+| 186 | 2026-08-21 | The pre-2.1.0 migration section is dropped from the README for the same reason. The detection in `effort` still runs and is now unexplained, which is a separate call | superseded by 188 |
 | 185 | 2026-08-21 | Every `claude-tools` reference leaves the README. The operator was its only user, so the rename section documented a migration nobody will run. Decision 0001 keeps the history | accepted |
 | 184 | 2026-08-21 | The README gains `Your first run`: what happens at each phase and what the operator does at each gate. It documented install and upgrade and never once said how a run goes | accepted |
 | 183 | 2026-08-21 | Every skill name in the disciplines table links to its `SKILL.md` by relative path, which resolves on GitHub and in a clone | accepted |
@@ -131,7 +133,7 @@
 | 61 | 2026-08-21 | The step reads the recorded `assumed` line before asking. A line written to stop a question recurring has to be read by the thing that asks it | accepted |
 | 60 | 2026-08-21 | Any path confirmed as Capstan's stops the run. Mixed answers resolve to stop rather than to nothing | accepted |
 | 59 | 2026-08-21 | The claim check runs before the provenance question. A claim is a fact about the repository, not an opinion the operator supplies, and asking first lets a "not ours" answer step past live work | accepted |
-| 58 | 2026-08-21 | The Architect detects a pre-2.1.0 layout and **stops**. The operator moves the files. Supersedes 36, 43, 46, 49, 51, 54 and 57, and deletes `MIGRATION.md`. Seven review rounds on a procedure the crew was going to run against a user's files is the signal the README already names: simplify rather than keep it alive | accepted |
+| 58 | 2026-08-21 | The Architect detects a pre-2.1.0 layout and **stops**. The operator moves the files. Supersedes 36, 43, 46, 49, 51, 54 and 57, and deletes `MIGRATION.md`. Seven review rounds on a procedure the crew was going to run against a user's files is the signal the README already names: simplify rather than keep it alive | superseded by 188 |
 | 57 | 2026-08-21 | Not-Capstan's and Capstan's-but-declined are different answers. The first proceeds normally, the second stops the run per 47. Folding the two asks into one confirmation had merged them | superseded by 58 |
 | 56 | 2026-08-21 | The `Claim` glossary row is not widened for the pre-2.1.0 path. Settled: `CONTEXT.md` describes the current convention, and `MIGRATION.md` is deletable once served. Raised five times; recorded so it stops recurring | accepted |
 | 55 | 2026-08-21 | A trigger firing on a repository that is not Capstan's is recorded as an `assumed` line, so it does not ask again on every later effort | accepted |
@@ -139,9 +141,9 @@
 | 53 | 2026-08-21 | Nothing confirmed means the migration returns control and the run proceeds normally. The trigger is a candidate signal, not proof | accepted |
 | 52 | 2026-08-21 | Scope widened: the README's upgrade note is corrected. Its premise that the reader has a root `.effort/` is false for any repository that has delivered an effort | accepted |
 | 51 | 2026-08-21 | `.effort/` is deleted before the migration commit, not after, so it is never both unignored and untracked while something is staged | superseded by 58 |
-| 50 | 2026-08-21 | Taking over a pre-2.1.0 claim is not supported. Finish or abandon that effort under 2.0.0, or delete `.effort/` and start fresh | accepted |
+| 50 | 2026-08-21 | Taking over a pre-2.1.0 claim is not supported. Finish or abandon that effort under 2.0.0, or delete `.effort/` and start fresh | superseded by 188 |
 | 49 | 2026-08-21 | Provenance is confirmed with the operator before any path moves. This is what makes broad detection safe, and it closes a guard that covered the trigger but never the move | superseded by 58 |
-| 48 | 2026-08-21 | Supersedes 33. Detection triggers on any root artifact, not on `.effort/`. That directory was never tracked and the Courier deletes it at delivery, so a delivered or freshly cloned 2.0.0 repository has none and the migration would never have fired | accepted |
+| 48 | 2026-08-21 | Supersedes 33. Detection triggers on any root artifact, not on `.effort/`. That directory was never tracked and the Courier deletes it at delivery, so a delivered or freshly cloned 2.0.0 repository has none and the migration would never have fired | superseded by 188 |
 | 47 | 2026-08-21 | Supersedes 45. Declining the migration ends the run. There is no decline mode, because honouring one means every phase file and skill consults a flag, which is the dual-read fallback decision 32 refused | accepted |
 | 46 | 2026-08-21 | The operator deletes `.effort/` as the last step of migration. Nothing else does, so leaving it makes the trigger fire on every later effort | superseded by 58 |
 | 45 | 2026-08-21 | A declined migration is recorded in `CLAIM.md`, which survives the run boundary, and governs reads and writes for all three paths. "For the rest of this run" expires at a gate; an effort spans four | superseded by 47 |
@@ -149,7 +151,7 @@
 | 43 | 2026-08-21 | The migration lives in `skills/effort/MIGRATION.md` behind a pointer, not inline in `Before you start`. It is a branch most runs never take, and when it has served its purpose it can be deleted whole rather than unpicked | superseded by 58 |
 | 42 | 2026-08-21 | Drop "live claim" as a term. A claim exists or it does not, matching the wording already in the file | accepted |
 | 41 | 2026-08-21 | The claim check has one home. The existing step absorbs the old-path case rather than a second rule sitting above it | accepted |
-| 40 | 2026-08-21 | The migration confirms each of the three paths rather than assuming all three are Capstan's. A repository can hold `.effort/` and an unrelated `decisions.md` | accepted |
+| 40 | 2026-08-21 | The migration confirms each of the three paths rather than assuming all three are Capstan's. A repository can hold `.effort/` and an unrelated `decisions.md` | superseded by 188 |
 | 39 | 2026-08-21 | `CONTEXT.md` gains a `.capstan/` row. The word was doing two jobs, the folder and the `capstan:` namespace prefix, which the interview skill says to challenge | accepted |
 | 38 | 2026-08-21 | The `.gitignore` rewrite for an upgrading repository belongs to slice 2's detection step. A gap in the plan, found in review, that would have shipped as unignored scratch | accepted |
 | 37 | 2026-08-21 | No marker file inside `.capstan/`. `CONTEXT.md` sits there and introduces the vocabulary better than a README nobody updates | accepted |
