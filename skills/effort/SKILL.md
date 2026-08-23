@@ -140,7 +140,7 @@ Uncertainty is not on that list.
 
 ## Infrastructure
 
-Prepare the change and run it in check mode. Present the diff at gate three. After approval, apply it, then **verify running state rather than exit status**. A playbook that exits zero over a dead service is the failure this rule exists for. Report what you observed, not what the command returned.
+Prepare the change and run it in check mode. Present the diff at gate three. After approval, apply it, then **verify running state rather than exit status**, per the `verify` discipline. A playbook that exits zero over a dead service is the failure this rule exists for. Report what you observed, not what the command returned.
 
 ## Files
 
@@ -168,6 +168,7 @@ At delivery the Courier writes one note per effort to the knowledge base. That i
 - **Decision records** only when all three gates pass, per `decision-record`. Most efforts earn none.
 - **Vertical slices**, never layer-at-a-time, per `slicing`. This is what makes parallel Builders possible at all.
 - **Independent review.** A Reviewer never has the Builder's context.
+- **Verification before the claim.** No brief says the work is done until the repository's own checks have run against the integration, per `verify`.
 
 ## What you do not do
 

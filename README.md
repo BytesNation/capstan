@@ -4,7 +4,7 @@
 
 A Claude Code plugin for taking work from concept to delivery, with you at three gates.
 
-Five roles carry the work, fourteen disciplines structure it, and three times the run stops so you can decide whether it continues. It is plain markdown, plus one vendored bash library that `walkthrough` builds throwaway scripts from. Nothing here needs code running to stay alive.
+Five roles carry the work, a discipline for each part of it, and three times the run stops so you can decide whether it continues. It is plain markdown, plus one vendored bash library that `walkthrough` builds throwaway scripts from. Nothing here needs code running to stay alive.
 
 [`.capstan/CONTEXT.md`](.capstan/CONTEXT.md) defines every word this repository uses, and [`DESIGN.md`](DESIGN.md) holds the reasoning behind the shape.
 
@@ -32,14 +32,14 @@ What happens, in order:
 1. **It interviews you.** Rounds of questions, each carrying a recommended answer, so most rounds are you confirming rather than composing. Finding things out is its job, not yours. Anything the codebase or a primary source can answer, it goes and reads.
 2. **It stops at gate one** with a brief covering what it is building, why, and what it is deliberately not building. Protect this gate. A wrong turn is cheapest to catch here, and it is the one that gets waved through because the concept feels obvious to everyone in the room.
 3. **Phase two plans.** It cuts the work into vertical slices, agrees where the tests go, and stops at gate two with the slice graph and everything it had to assume.
-4. **Phase three builds.** One Builder per slice, each in its own git worktree, each writing a failing test first. A Reviewer reads every diff without the Builder's reasoning, on two axes that never blend into one verdict. Gate three shows you what was built and what review found.
+4. **Phase three builds.** One Builder per slice, each in its own git worktree, each writing a failing test first. A Reviewer reads every diff without the Builder's reasoning, on two axes that never blend into one verdict. Once the slices merge, your repository's own checks run against the integration, because passing alone proves nothing about passing together. Gate three shows you what was built, what review found, and what verification showed.
 5. **Phase four delivers.** The Courier packages the output, writes the permanent note, and commits it. It never sends anything to anyone. That part stays yours.
 
 | Gate | The brief answers | You decide |
 |---|---|---|
 | 1. Concept locked | What we are building, why, what we are explicitly not doing | Right thing? |
 | 2. Plan locked | How, cut into slices, what runs parallel, what was assumed | Right shape? |
-| 3. Ready to deliver | What was built, what review found, what goes to whom | Ship? |
+| 3. Ready to deliver | What was built, what review and verification found, what goes to whom | Ship? |
 
 **The run ends at every gate.** Nothing polls, nothing waits in the background, and the crew never asks whether it should stop. The run being over is what makes the gate real. `.capstan/effort/CLAIM.md` records which phase the effort reached and what is still outstanding inside it, so the next session picks up where the last one stopped, however many hours later.
 
@@ -49,7 +49,7 @@ Three efforts at once is the ceiling. Three gates each against one reader is nin
 
 ## The disciplines
 
-Fourteen disciplines the roles pull in, plus [`effort`](skills/effort/SKILL.md) itself: the front door, invoked only by you.
+The disciplines the roles pull in, plus [`effort`](skills/effort/SKILL.md) itself: the front door, invoked only by you.
 
 | Skill | For |
 |---|---|
@@ -60,6 +60,7 @@ Fourteen disciplines the roles pull in, plus [`effort`](skills/effort/SKILL.md) 
 | [`diagnosing-bugs`](skills/diagnosing-bugs/SKILL.md) | A feedback loop that goes red on the bug before anyone theorises about the cause. |
 | [`codebase-design`](skills/codebase-design/SKILL.md) | The words for structure, so a review can say a module is too shallow instead of that it feels wrong. |
 | [`two-axis-review`](skills/two-axis-review/SKILL.md) | Standards and spec, reviewed independently, never blended into one verdict. |
+| [`verify`](skills/verify/SKILL.md) | Runs the checks your repository declares against the merged result, because a slice passing alone proves nothing about the ones beside it. |
 | [`resolving-merge-conflicts`](skills/resolving-merge-conflicts/SKILL.md) | Integrating parallel Builders, where neither side of a conflict can be asked what it meant. |
 | [`walkthrough`](skills/walkthrough/SKILL.md) | The one-time script that carries you through a manual procedure, stage by stage, capturing what comes back. |
 | [`decision-record`](skills/decision-record/SKILL.md) | A one-line log by default, a full record only when one is earned. |
@@ -130,9 +131,9 @@ rm -rf ~/.claude/skills/effort
 cp -r capstan/skills/effort ~/.claude/skills/
 ```
 
-### Eight skills are more than one file
+### Some skills are more than one file
 
-Seven skills here are a lone `SKILL.md`. The other eight are not, and lifting only the `SKILL.md` out of one of those leaves pointers aimed at files that are not there.
+Most skills here are a lone `SKILL.md`. The ones below are not, and lifting only the `SKILL.md` out of one of them leaves pointers aimed at files that are not there.
 
 ```
 skills/effort/
@@ -195,7 +196,7 @@ The Architect reads the file for the phase it is in, so a run that reaches gate 
 
 MIT. See [LICENSE](LICENSE). Take it, change it, ship it.
 
-Seven skills here are not ours. All seven are MIT, all seven are redistributed with their own licence and a `CREDIT.md` in their folder recording exactly what changed:
+Some skills here are not ours. Every one is MIT, and every one is redistributed with its own licence and a `CREDIT.md` in its folder recording exactly what changed:
 
 - [`skills/writing-for-agents/`](skills/writing-for-agents/): `SKILL.md` and `SKILL-MECHANICS.md` by [Matt Pocock](https://github.com/mattpocock/skills). `AUDIT.md` beside them is ours.
 - [`skills/unslop/`](skills/unslop/): `SKILL.md` by [Lauren Tan](https://github.com/cursor/plugins/tree/main/pstack/skills/unslop), via cursor/plugins. Two lines changed.
@@ -205,7 +206,7 @@ Seven skills here are not ours. All seven are MIT, all seven are redistributed w
 - [`skills/to-questionnaire/`](skills/to-questionnaire/): `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Two changes: the invocation flag, and where the document lands and where its answers go.
 - [`skills/resolving-merge-conflicts/`](skills/resolving-merge-conflicts/): `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Two changes: where a hunk's intent is found, and one exception to never aborting.
 
-Beyond those seven, nothing is vendored, though four ideas are borrowed, all from [Matt Pocock](https://github.com/mattpocock/skills). The prose is ours; the mechanics are his.
+Beyond those, nothing is vendored, though some ideas are borrowed, all from [Matt Pocock](https://github.com/mattpocock/skills). The prose is ours; the mechanics are his.
 
 - The frontier in `interview`: a design tree, where a question depending on an open question waits for a later round. Sharpened from `grilling`.
 - The `next` line in `CLAIM.md`: what the run after this one picks up, written for the agent that resumes rather than the person at the gate. From `handoff`, sized down to a field in a file that already exists.

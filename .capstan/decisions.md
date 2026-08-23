@@ -2,6 +2,14 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 197 | 2026-08-21 | No second version bump. This folds into the unreleased 2.12.0, per 7 | accepted |
+| 196 | 2026-08-21 | Counts that only say how many items are in the list beneath them are deleted rather than corrected, and the rule goes into `AUDIT.md`. A count that constrains or sets a bar stays, since it does work no list does. Four drifts in one day, the last within minutes of naming the pattern | accepted |
+| 195 | 2026-08-21 | The README stops counting single-file skills. Adding `verify` broke that number within minutes of it being written, and the count carried nothing the heading and the tree below it do not | accepted |
+| 194 | 2026-08-21 | Plugin version goes to 2.12.0 for the fifteenth discipline | accepted |
+| 193 | 2026-08-21 | `verify` reports and never fixes, like a review. Red becomes a Builder task carrying `diagnosing-bugs`, since a red check is most of a feedback loop already | accepted |
+| 192 | 2026-08-21 | The baseline for a failing check is `head` from `CLAIM.md`, re-run in a throwaway worktree only when something is red. A check already failing before the effort is not the effort's finding | accepted |
+| 191 | 2026-08-21 | `verify` goes to the Architect rather than a sixth seat. It already owns integration, and the crew has five seats by design | accepted |
+| 190 | 2026-08-21 | `verify` is added as the fifteenth discipline. Builders test in isolated worktrees, `two-axis-review` skips what a typechecker would catch on the grounds that CI catches it, and nothing was CI | accepted |
 | 189 | 2026-08-21 | Plugin version goes to 2.11.0. Removing a check that stopped a run is a behaviour change, not a patch | accepted |
 | 188 | 2026-08-21 | The pre-2.1.0 detection is removed from `effort`. Supersedes 40, 48, 50, 58 and settles 186. It guards a layout only this repository ever had, and it cost context on every effort start for a case that can no longer occur | accepted |
 | 187 | 2026-08-21 | Plugin version goes to 2.10.0. The README is rewritten rather than corrected, so it is a minor rather than a patch | accepted |

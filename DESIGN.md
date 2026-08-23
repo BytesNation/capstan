@@ -38,7 +38,7 @@ What does stop the line: secrets and credentials, anything a third party will se
 
 ## The disciplines
 
-Fourteen disciplines the roles pull in, plus `effort` itself, the front door invoked only by the operator. Three agents preload the disciplines they need via `skills:` frontmatter, so the discipline is in context before the first turn rather than hopefully invoked.
+The disciplines the roles pull in, plus `effort` itself, the front door invoked only by the operator. Three agents preload the disciplines they need via `skills:` frontmatter, so the discipline is in context before the first turn rather than hopefully invoked.
 
 | Skill | Used by | For |
 |---|---|---|
@@ -53,6 +53,7 @@ Fourteen disciplines the roles pull in, plus `effort` itself, the front door inv
 | `brief` | Architect, Courier | BLUF checkpoint briefs, and partner briefs generated per recipient rather than maintained. |
 | `to-questionnaire` | Architect | The other direction: open questions out to whoever holds the answers, aimed at the gap between what they know and what the effort needs. Vendored from Matt Pocock. |
 | `two-axis-review` | Reviewer | Standards and spec, answered independently, never blended into one verdict. |
+| `verify` | Architect | Runs the checks the repository declares against the merged result. A Reviewer reads a diff and skips what a typechecker would catch, on the grounds that CI catches it. This is that CI. |
 | `codebase-design` | Reviewer, Builder | The words for structure: module, interface, depth, seam, adapter, leverage, locality. Gives the standards axis something to judge interface shape against. Vendored from Matt Pocock, see [0003](.capstan/decisions/0003-adopt-deep-modules-as-the-design-standard.md). |
 | `unslop` | Anything writing prose | Cuts AI tells from writing a person will read. |
 | `writing-for-agents` | You, editing this repo | The levers that make a document an agent consumes behave the same way every run. |

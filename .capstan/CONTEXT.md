@@ -25,6 +25,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Seam | The test boundary agreed in the spec before the build, so a Builder never picks its own. |
 | Frontier | Every decision whose prerequisites are already settled: the questions askable now. |
 | Claim | `.capstan/effort/CLAIM.md`. Marks an effort as held, so a second Architect stops rather than starting. |
+| Verify | Running the checks the repository declares against the merged result, and reporting what they showed. Never an exit code alone. |
 | Axis | One of the two independent review questions: Standards (built right) and Spec (right thing). Never blended. |
 | Fixed point | The commit, branch or tag a review diffs against. Supplied by whoever dispatches, never guessed. |
 | Open | A log status. Raised and unsettled, with no default in force. |

@@ -16,6 +16,8 @@ List every meaning the document carries in more than one place. For each, pick t
 
 Check the environment too. A line restating `package.json`, a config file, the directory layout, or `--help` output is a cache, and it earns its load only when the lookup is expensive or the knowledge is unwritten.
 
+Counts are the cache that goes stale fastest. A number that only says how many items are in the list beneath it duplicates the list, and it is wrong the moment somebody adds an item without scrolling up. Delete it rather than correcting it. A count that constrains ("three efforts is the ceiling") or sets a bar ("all thirty-one, not the ones that come to mind") is doing work no list does, and stays.
+
 Done when every repeated meaning has one home.
 
 ## 3. Sharpen the bounds

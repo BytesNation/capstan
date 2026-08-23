@@ -23,7 +23,7 @@ Three per effort, one per gate. Each one ends a run.
 
 **Gate 2, plan locked.** How, cut into slices, in a numbered list with the blocking edges. What runs in parallel. What can be demonstrated per slice. Every assumption made so far, each on its own line.
 
-**Gate 3, ready to deliver.** What was built, in behaviour rather than file paths. What review found on each axis and what was done about it. What is going to whom. What verification actually showed, not what a command returned.
+**Gate 3, ready to deliver.** What was built, in behaviour rather than file paths. What review found on each axis and what was done about it. What is going to whom. What verification actually showed, not what a command returned, per the `verify` discipline.
 
 Every checkpoint brief carries an **assumptions** section, drawn from the `assumed` lines in `.capstan/decisions.md`. This is the mechanism that lets the crew keep moving through ambiguity instead of stopping. One line each, stated as an assumption rather than a fact, so a wrong one is cheap to catch here rather than expensive to discover later.
 
