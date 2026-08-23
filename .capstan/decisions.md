@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 306 | 2026-08-23 | Slice 4 merges after one review and one fix round, verified by the Architect. Seven specific findings, all actioned, output the Architect can judge by reading. Same call as 257 | accepted |
 | 305 | 2026-08-23 | Slices 2 and 3 merge after two reviews and two fix rounds each, verified by the Architect rather than a third review. Both round-2 Spec axes were clean and every remaining finding was `noted`. Slice 2's sub-bullet move to step 4 was the Builder's judgement call and it picked the phase 1 shape, which resolved the forward-reference without a reword | accepted |
 | 304 | 2026-08-23 | Slice 1 merges after two reviews and two fix rounds, without a third review. Round 2's Spec axis was clean, both Standards findings were `noted`, and the three fixes were specific enough for the Architect to verify directly. Same call as 252 and 257 | accepted |
 | 303 | 2026-08-23 | The knowledge-base note is called three things across the files this effort touched: the knowledge-base note, the permanent note, the permanent record. A glossary row names it; the three sites are not rewritten here | open |
