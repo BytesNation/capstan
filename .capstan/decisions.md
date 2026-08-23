@@ -6,6 +6,8 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 281 | 2026-08-23 | The three defects are one effort rather than three. They share a cause, the scratch having no specified shape, and splitting them means three claims for prose edits to the same four files. Revisit if slicing cannot find a demonstrable cut | assumed |
+| 280 | 2026-08-23 | Specifying sections changes what an agent writes. Untested, and the same class of gap as 229. Revisit if a later effort produces a spec that ignores the sections | assumed |
 | 279 | 2026-08-23 | `agents/reviewer.md` is told its return is filed verbatim and read later without the session around it. A return written to be read aloud and one written to be filed are different documents, and saying so costs a sentence | accepted |
 | 278 | 2026-08-23 | The operator commits the knowledge-base note once, after the note review passes. Phase 4's second-commit correction path and its fixed-point language go: with 275 in force the note review is permanently the degraded kind | accepted |
 | 277 | 2026-08-23 | Sections are specified as a name plus one line saying what the section must answer. No worked example, which gets copied verbatim rather than read, and no bare heading list, which is how a section becomes a heading with nothing under it | accepted |
