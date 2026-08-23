@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 304 | 2026-08-23 | Slice 1 merges after two reviews and two fix rounds, without a third review. Round 2's Spec axis was clean, both Standards findings were `noted`, and the three fixes were specific enough for the Architect to verify directly. Same call as 252 and 257 | accepted |
 | 303 | 2026-08-23 | The knowledge-base note is called three things across the files this effort touched: the knowledge-base note, the permanent note, the permanent record. A glossary row names it; the three sites are not rewritten here | open |
 | 302 | 2026-08-23 | `DESIGN.md`'s `Never` column gains "Commits the record." 286 declined the same clause in agent frontmatter on model-cost grounds, and that does not transfer: `DESIGN.md` is human-facing, costs nothing per turn, and its `Never` column exists for exactly the thing a reader would otherwise assume | accepted |
 | 301 | 2026-08-23 | `skills/slicing/SKILL.md` gains one sentence telling the Architect to name the files each slice owns. Its done-when now demands `Owns` and the skill's body never asks for it, so an agent invoking `slicing` alone cannot tell done from not-done | accepted |
