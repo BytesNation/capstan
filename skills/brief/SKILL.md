@@ -19,13 +19,13 @@ If nothing is needed from the reader, say **no action required** explicitly and 
 
 Three per effort, one per gate. Each one ends a run.
 
-**Gate 1, concept locked.** What we are building and why. What we are explicitly not building, which is usually the most useful section. The vocabulary we settled on, which is now in `.capstan/CONTEXT.md` rather than only in this brief. Anything a Scout established that changed the shape.
+**Gate 1, concept locked.** What we are building and why. What we are explicitly not building, which is usually the most useful section. The vocabulary we settled on, which is now in the glossary, in the document home, rather than only in this brief. Anything a Scout established that changed the shape.
 
 **Gate 2, plan locked.** How, cut into slices, in a numbered list with the blocking edges. What runs in parallel. What can be demonstrated per slice. Every assumption made so far, each on its own line.
 
 **Gate 3, ready to deliver.** What was built, in behaviour rather than file paths. What review found on each axis and what was done about it. What is going to whom. What verification actually showed, not what a command returned, per the `verify` discipline.
 
-Every checkpoint brief carries an **assumptions** section, drawn from the `assumed` lines in `.capstan/decisions.md`. This is the mechanism that lets the crew keep moving through ambiguity instead of stopping. One line each, stated as an assumption rather than a fact, so a wrong one is cheap to catch here rather than expensive to discover later.
+Every checkpoint brief carries an **assumptions** section, drawn from the `assumed` lines in the decision log, in the document home. This is the mechanism that lets the crew keep moving through ambiguity instead of stopping. One line each, stated as an assumption rather than a fact, so a wrong one is cheap to catch here rather than expensive to discover later.
 
 Beside it sits an **open questions** section, drawn from the `open` lines: the ones that would not resolve at all. State each with the route that would settle it, which is a throwaway to build, a person to ask, or a default to bless. Print "none" when there are none, because a missing section reads as an oversight rather than an empty set.
 

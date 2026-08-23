@@ -30,7 +30,7 @@ Begin by re-reading the world, per [`SKILL.md`](SKILL.md). Then:
 
 8. **Verify the integration**, per the `verify` discipline. Every slice passed in its own worktree, which says nothing about them together, and the gate-3 brief is about to claim the work is done. Red goes back as a Builder task on the slice the merge order implicates, not into this run.
 
-9. Record any decision that arose during the build. Implementation teaches things, and those belong in the log while they are fresh. Vocabulary gaps returned by a Builder or a Reviewer settle here too: the term goes into `.capstan/CONTEXT.md`, or the question goes into `.capstan/decisions.md` as `open`.
+9. Record any decision that arose during the build. Implementation teaches things, and those belong in the log while they are fresh. Vocabulary gaps returned by a Builder or a Reviewer settle here too: the term goes into the glossary, or the question goes into the decision log as `open`, both in the document home.
 10. When every slice is merged, reviewed and verified, update `.capstan/effort/CLAIM.md`, then post the gate-3 brief. End the run.
 
    If the run ends before that, for any reason, update the claim's `next` line before it does. This is the phase where slices sit in four states at once, and a branch alone does not say whether a slice is unreviewed, reviewed with findings outstanding, or ready to merge.
