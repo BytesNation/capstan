@@ -33,7 +33,7 @@ What happens, in order:
 2. **It stops at gate one** with a brief covering what it is building, why, and what it is deliberately not building. Protect this gate. A wrong turn is cheapest to catch here, and it is the one that gets waved through because the concept feels obvious to everyone in the room.
 3. **Phase two plans.** It cuts the work into vertical slices, agrees where the tests go, and stops at gate two with the slice graph and everything it had to assume.
 4. **Phase three builds.** One Builder per slice, each in its own git worktree, each writing a failing test first. A Reviewer reads every diff without the Builder's reasoning, on two axes that never blend into one verdict. Once the slices merge, your repository's own checks run against the integration, because passing alone proves nothing about passing together. Gate three shows you what was built, what review found, and what verification showed.
-5. **Phase four delivers.** The Courier packages the output, writes the permanent note, and commits it. It never sends anything to anyone. That part stays yours.
+5. **Phase four delivers.** The Courier packages the output and writes the permanent note. You commit it, once the note review passes. It never sends anything to anyone. That part stays yours.
 
 | Gate | The brief answers | You decide |
 |---|---|---|
@@ -210,7 +210,7 @@ The Architect reads the file for the phase it is in, so a run that reaches gate 
 
 **Fan-out does nothing for single-artifact work.** Parallel Builders need slices that own different files. A document, a video script, a single config file: each is one artifact and inherently one Builder. Software usually fans out because slices own different things. Most other work does not, and a one-slice plan there is correct rather than a failure to parallelise.
 
-**A knowledge base that is not a git repository gives its note no fixed point.** The Reviewer reads the note whole instead and says so in the report. Review is degraded, never skipped.
+**The knowledge-base note is always reviewed whole.** The note is never committed, so it has no fixed point to diff against. The Reviewer reads the full note, and review is never skipped.
 
 ## Licence
 

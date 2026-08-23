@@ -16,7 +16,8 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Scout | Read-only reconnaissance. Returns cited findings and never decides. |
 | Builder | Builds exactly one slice in its own worktree. Never reviews its own work. |
 | Reviewer | Reviews one slice's diff without the Builder's reasoning. Reports, never fixes. |
-| Courier | Packages a delivered effort, writes the knowledge-base note, commits it. Never sends. |
+| Courier | Packages a delivered effort, writes the knowledge-base note, which the operator commits. Never sends. |
+| Knowledge-base note | The one permanent note per effort the Courier writes at delivery. Written by Capstan, committed by the operator. |
 | Discipline | A skill the roles pull in, as opposed to a role itself. |
 | Project | The work an Effort belongs to and outlives. One Project holds many Efforts, its own Document home, and, once built, its Tracker. |
 | `capstan_type` | The frontmatter property naming which durable artifact a note is: `glossary`, `decision-log` or `decision-record`. Prefixed per the vault-wide typing rule. |
@@ -31,7 +32,11 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | `.capstan/` | The folder holding the artifacts Capstan writes for itself: `CONTEXT.md`, `decisions.md`, `decisions/`, and the effort scratch at `effort/`. Distinct from the namespace above, which is a prefix rather than a folder. |
 | Slice | A change that can be demonstrated on its own once it is done. |
 | Layer | A horizontal cut that nothing can demonstrate until other cuts land. What a slice must never be. |
-| Seam | The test boundary agreed in the spec before the build, so a Builder never picks its own. |
+| Owns | The files one slice, and only that slice, touches. Every file the change touches is owned by exactly one slice, so nothing is left for no slice to fix and no two Builders collide. |
+| Demonstrated | What a reader or user can observe once a slice is done. A slice with no answer is a Layer. |
+| Seam | The test boundary agreed in the plan before the build, so a Builder never picks its own. |
+| Red at base | The evidence a slice's seam check failed before that slice started. Without it a criterion can pass by having always been true. |
+| Blocked by | The slices that must land before this one can be built or verified. An edge that only feels tidier is not one. |
 | Frontier | Every decision whose prerequisites are already settled: the questions askable now. |
 | Claim | `.capstan/effort/CLAIM.md`. Marks an effort as held, so a second Architect stops rather than starting. |
 | Verify | Running the checks the repository declares against the merged result, and reporting what they showed. Never an exit code alone. |
