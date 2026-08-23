@@ -1,3 +1,7 @@
+---
+capstan_type: glossary
+---
+
 # Context
 
 The words this repository uses, defined once. This describes Capstan itself; it is not a template or a file the plugin reads from your project.

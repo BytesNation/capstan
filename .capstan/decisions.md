@@ -1,3 +1,7 @@
+---
+capstan_type: decision-log
+---
+
 # Decisions
 
 | # | Date | Decision | Status |
