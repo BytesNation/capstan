@@ -6,6 +6,8 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 266 | 2026-08-23 | The vault's `AGENTS.md` line 60 requires `[redacted]` to report zero errors after any note write, and it reports five, all on the notes 144 declared the operator's call. A Courier obeying line 60 literally would edit five committed notes 144 forbids it to touch. Surfaced to the operator; `[redacted]` is theirs to change under vault rule 8 | open |
+| 265 | 2026-08-23 | 146 bit a seventh delivery. `[redacted]` still yields `[redacted]/capstan` where 119 and every note in the folder say `[redacted]`, and it claims precedence over an agent prompt, so every Courier run re-decides it in silence. It stays open because the fix is in the operator's `[redacted]`, not in Capstan | open |
 | 264 | 2026-08-23 | `agents/courier.md` step 3 and `PHASE-4-DELIVER.md` step 2 still instruct a commit in the knowledge base and a reported SHA, which 211 forbids. Found while dispatching phase 4, after gate 3, so it is corrected in the effort 261 opens rather than by reopening a verified build | open |
 | 263 | 2026-08-23 | The Courier does not commit in the vault. 211 is unqualified about the vault, and the knowledge base is that vault, whose `AGENTS.md` rule 7 forbids an automatic commit. The note review runs degraded against the note's absolute path, which is the branch phase 4 already defines for a knowledge base with no repository | accepted |
 | 262 | 2026-08-23 | The vault layout inside a Project folder waits for the tracker effort 228 defers to, and is designed there alongside the feature that reads it. A layout nothing consumes goes stale before it ships | accepted |
