@@ -39,6 +39,8 @@ This matters most when the same crew handles code and non-code work. Software us
 
 ## Blocking edges
 
+Name the files each slice owns: the ones it, and only it, touches, so every file the change touches has exactly one slice responsible for it.
+
 Each slice declares which slices must finish before it can start. Those edges are the artifact.
 
 Keep them honest. An edge that exists because it feels tidier to do A first is not an edge, and every false edge costs you a Builder that could have been running. An edge is real only when the later slice cannot be built or cannot be verified until the earlier one lands.
