@@ -6,6 +6,8 @@ You get five roles (Scout, Architect, Builder, Reviewer, Courier) that carry the
 
 Plain markdown, plus one vendored bash library that `walkthrough` builds throwaway scripts from.
 
+The words above are load-bearing. [`.capstan/CONTEXT.md`](.capstan/CONTEXT.md) defines each one, and [`DESIGN.md`](DESIGN.md) holds the reasoning behind why the crew is shaped this way.
+
 ## Install
 
 ```bash
@@ -17,38 +19,7 @@ Restart Claude Code once it finishes: agent definitions load at session start, a
 
 Then start work with `/capstan:effort <what you want built>`.
 
----
-
-The words above are load-bearing. [`.capstan/CONTEXT.md`](.capstan/CONTEXT.md) defines each one, and [`DESIGN.md`](DESIGN.md) holds the reasoning behind why the crew is shaped this way.
-
-## The disciplines
-
-Fourteen disciplines the roles pull in, plus `effort` itself: the front door, invoked only by you.
-
-| Skill | For |
-|---|---|
-| `interview` | Rounds of questions, each carrying a recommended answer, so decisions stay yours. |
-| `spike` | A throwaway build, so a stalled design question gets something concrete to react to. |
-| `slicing` | Cuts a locked plan into vertical slices with real blocking edges. |
-| `test-first` | Red, green, refactor, tested only at seams agreed in advance. |
-| `resolving-merge-conflicts` | Integrating parallel Builders, where neither side of a conflict can be asked what it meant. |
-| `diagnosing-bugs` | A feedback loop that goes red on the bug before anyone theorises about the cause. |
-| `walkthrough` | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. |
-| `decision-record` | A one-line log by default, a full record only when one is earned. |
-| `brief` | Checkpoint and partner briefs, generated per recipient rather than maintained. |
-| `to-questionnaire` | Turns a question nobody in the room can answer into a document for the person who can. |
-| `two-axis-review` | Standards and spec, reviewed independently, never blended into one verdict. |
-| `codebase-design` | The words for structure, so a review can say a module is too shallow instead of that it feels wrong. |
-| `unslop` | Cuts AI tells from prose a person reads. |
-| `writing-for-agents` | Keeps a document an agent consumes flat and the same shape every run. |
-
-## Install detail
-
-`claude plugin install capstan@bytesnation` installs at user scope, so the crew is available in every session. Add `--scope project` to write to the project's `.claude/settings.json` instead, so the install travels with the repository, which is what you want if a team shares it.
-
-### The two installs name things differently
-
-A plugin namespaces what it ships, so the Builder is `capstan:builder` under a plugin install and plain `builder` under a manual one. `skills/effort/SKILL.md` tells the Architect which agent to spawn for each role, so use whichever form your install actually produced. The manual install is the one this crew has been run on; the plugin path is newer and less exercised.
+That installs at user scope, so the crew is available in every session. Add `--scope project` to write to the project's `.claude/settings.json` instead, so the install travels with the repository, which is what you want if a team shares it.
 
 ### Installing by hand instead
 
@@ -60,9 +31,15 @@ cp -r capstan/skills/* ~/.claude/skills/
 
 Then start work with `/effort <what you want built>`.
 
-### Three skills are more than one file
+### The two installs name things differently
 
-Most skills here are a lone `SKILL.md`. Three are not, and lifting just the `SKILL.md` out of any of them leaves pointers aimed at files that are not there.
+A plugin namespaces what it ships, so the Builder is `capstan:builder` under a plugin install and plain `builder` under a manual one. `skills/effort/SKILL.md` tells the Architect which agent to spawn for each role, so use whichever form your install actually produced.
+
+The plugin path is the exercised one: installing, updating, and a full remove and re-add have all been run against it. The manual copy is there for a setup with no marketplace, and sees less use.
+
+### Eight skills are more than one file
+
+Seven skills here are a lone `SKILL.md`. The other eight are not, and lifting only the `SKILL.md` out of one of those leaves pointers aimed at files that are not there.
 
 ```
 skills/effort/
@@ -82,14 +59,14 @@ skills/walkthrough/
   template.sh           vendored library, never edited
   LICENSE, CREDIT.md    upstream is MIT, see the licence section
 
-skills/diagnosing-bugs/
-  SKILL.md              vendored, three repointed lines
-  LICENSE, CREDIT.md    upstream is MIT, see the licence section
-
 skills/codebase-design/
   SKILL.md              the vocabulary and its principles
   DEEPENING.md          dependency categories, seam discipline, replace-don't-layer testing
   DESIGN-IT-TWICE.md    parallel sub-agents designing one interface several ways
+  LICENSE, CREDIT.md    upstream is MIT, see the licence section
+
+skills/diagnosing-bugs/
+  SKILL.md              vendored, three repointed lines
   LICENSE, CREDIT.md    upstream is MIT, see the licence section
 
 skills/to-questionnaire/
@@ -99,9 +76,34 @@ skills/to-questionnaire/
 skills/resolving-merge-conflicts/
   SKILL.md              vendored, two local changes
   LICENSE, CREDIT.md    upstream is MIT, see the licence section
+
+skills/unslop/
+  SKILL.md              vendored, two local changes
+  LICENSE, CREDIT.md    upstream is MIT, see the licence section
 ```
 
 The Architect reads the file for the phase it is in, so a run that reaches gate two with no `PHASE-2-PLAN.md` beside it has nothing to follow and will improvise a plan phase. Take the whole directory.
+
+## The disciplines
+
+Fourteen disciplines the roles pull in, plus `effort` itself: the front door, invoked only by you.
+
+| Skill | For |
+|---|---|
+| `interview` | Rounds of questions, each carrying a recommended answer, so decisions stay yours. |
+| `spike` | A throwaway build, so a stalled design question gets something concrete to react to. |
+| `slicing` | Cuts a locked plan into vertical slices with real blocking edges. |
+| `test-first` | Red, green, refactor, tested only at seams agreed in advance. |
+| `diagnosing-bugs` | A feedback loop that goes red on the bug before anyone theorises about the cause. |
+| `codebase-design` | The words for structure, so a review can say a module is too shallow instead of that it feels wrong. |
+| `two-axis-review` | Standards and spec, reviewed independently, never blended into one verdict. |
+| `resolving-merge-conflicts` | Integrating parallel Builders, where neither side of a conflict can be asked what it meant. |
+| `walkthrough` | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. |
+| `decision-record` | A one-line log by default, a full record only when one is earned. |
+| `brief` | Checkpoint and partner briefs, generated per recipient rather than maintained. |
+| `to-questionnaire` | Turns a question nobody in the room can answer into a document for the person who can. |
+| `unslop` | Cuts AI tells from prose a person reads. |
+| `writing-for-agents` | Keeps a document an agent consumes flat and the same shape every run. |
 
 ## Upgrading
 
@@ -192,7 +194,7 @@ Seven skills here are not ours. All seven are MIT, all seven are redistributed w
 - `skills/to-questionnaire/`: `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Two changes, listed in that folder's `CREDIT.md`: the invocation flag, and where the document lands and where its answers go.
 - `skills/resolving-merge-conflicts/`: `SKILL.md` by [Matt Pocock](https://github.com/mattpocock/skills). Two changes, listed in that folder's `CREDIT.md`: where a hunk's intent is found, and one exception to never aborting.
 
-Beyond those seven, nothing here is vendored, though two ideas are borrowed, both from [Matt Pocock](https://github.com/mattpocock/skills). The prose is ours; the mechanics are his.
+Beyond those seven, nothing here is vendored, though four ideas are borrowed, all from [Matt Pocock](https://github.com/mattpocock/skills). The prose is ours; the mechanics are his.
 
 - The frontier in `interview`: a design tree, where a question depending on an open question waits for a later round. Sharpened from `grilling`.
 - The `next` line in `CLAIM.md`: what the run after this one picks up, written for the agent that resumes rather than the person at the gate. Taken from `handoff`, sized down to a field in a file that already exists.
