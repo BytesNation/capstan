@@ -34,9 +34,14 @@ Write the line the moment the decision resolves, not batched at the end of a ses
 | `accepted` | Decided. |
 | `assumed` | Defaulted so the work could proceed. The line carries the condition that would make it worth reopening. |
 | `open` | Raised and unsettled. Nobody has decided and no default is in force. |
+| `unformed` | An area known to be unexplored, where the question itself cannot be phrased yet. Not a decision, and not answerable. |
 | `superseded by NNNN` | Replaced. Stays in the file, out of the reading path. |
 
 `open` and `assumed` are what an interview parks when a question will not resolve, and they are the reason the `interview` skill reads this file before its first round. A question the operator could not answer in March is worth putting to them again in June. Without a line here it is simply forgotten, because the spec that held it was deleted at delivery.
+
+`unformed` is the one that is not a question. It names an area the effort will reach and nobody has thought about yet: an integration nobody has opened, a phase of the work whose shape is still fog. It exists because the alternative is worse. Written as `open`, it gets asked as a question, stalls because it is not answerable, gets asked again, and is parked a second time, which is two rounds spent on something that needed work rather than an answer. Written nowhere, it is a surprise in phase 3.
+
+An `unformed` line graduates. As the work advances, the area comes into view and the line is rewritten as a real `open` question, or several. That rewrite is the one place a line changes rather than being superseded, because nothing was decided and there is no history to protect. Once it is `open`, the ordinary rules resume.
 
 One use of the log is easy to miss: declining a standard that arrived with the plugin. A discipline preloaded on an agent was never consented to by the repository it is about to grade, so a repository that disagrees says so here, as one `accepted` line naming the standard and the scope it does not apply to. The Reviewer reads this file before it grades, which is what makes the line binding rather than a note.
 

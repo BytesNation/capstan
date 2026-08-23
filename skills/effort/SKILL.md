@@ -38,7 +38,7 @@ There is no poller and no scheduler. You never wait for approval, never poll a t
 
 Gate one is the one to protect. It is where a wrong turn is cheapest to catch, and it is the one that gets skipped because at that moment the concept feels obvious to everyone in the room.
 
-Every gate **reports** the open questions and never blocks on them. Carry the `open` and `assumed` lines from `.capstan/decisions.md` into the brief, so the operator can see what the crew is proceeding without and wave it through or stop it. A gate that cannot be passed while a question is open is a gate that gets passed by inventing an answer.
+Every gate **reports** the open questions and never blocks on them. Carry the `open`, `assumed` and `unformed` lines from `.capstan/decisions.md` into the brief, so the operator can see what the crew is proceeding without and wave it through or stop it. A gate that cannot be passed while a question is open is a gate that gets passed by inventing an answer.
 
 ## Precondition: name the working copy
 
@@ -116,7 +116,7 @@ Never assume the plan you wrote is still the plan the repository needs. Verifyin
 2. Fire Scouts **in parallel** for any external fact a decision is waiting on. Do not stall the interview while they read.
    - A Scout has no write tools, so it returns findings as text and cannot file them. **You** write each return to `.capstan/effort/scout/<slug>.md` verbatim. Do not summarise it on the way in; the citations and the confidence split are the parts that matter later.
    - Read what comes back rather than trusting it. A Scout that says medium confidence, or that reports a fetch it could not complete, is telling you which of its claims still need checking. Verify anything load-bearing yourself before a decision rests on it.
-3. Record decisions as they resolve, per the `decision-record` skill. Do not batch them to the end. Record the ones that refuse to resolve too, as `open` or `assumed`. A question the operator could not answer is a finding, not a hole in the interview.
+3. Record decisions as they resolve, per the `decision-record` skill. Do not batch them to the end. Record the ones that refuse to resolve too, as `open` or `assumed`, and the areas nobody can phrase a question about yet as `unformed`. A question the operator could not answer is a finding, not a hole in the interview.
 4. Write `.capstan/effort/spec.md`. Include what is explicitly out of scope. The things refused are usually the most useful lines on the page.
 5. Update `.capstan/effort/CLAIM.md` (phase, head, next, last-touched), then post the gate-1 brief per the `brief` skill. End the run.
 

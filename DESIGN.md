@@ -83,6 +83,8 @@ Three tiers of decision, sorted by lifespan, and the glossary standing beside th
 
 The log carries unsettled questions too. A question the interview could not resolve becomes an `open` line, or an `assumed` one when the crew picked a default to keep moving. Both get reported at every gate, neither blocks one, and the next interview reads them back before its first round. Without that, a hard question asked in March dies with the spec that held it.
 
+A third status covers what is not yet a question at all. An `unformed` line names an area the effort will reach and nobody has looked at, and it exists because the other two mishandle it: asked as an `open` question it stalls twice and gets parked, and left out entirely it arrives as a surprise in phase 3. It is the one line that gets rewritten rather than superseded, since nothing was decided and there is no history to protect. The idea is Matt Pocock's fog of war, from `wayfinder`, without the issue tracker it is built on.
+
 Everything else lives in `.capstan/effort/`, the one gitignored piece of `.capstan/`, and is deleted at delivery. A stale spec or an old research file is worse than none, because the next agent reads it as current.
 
 The reason external documentation becomes unreadable is almost always that one artifact was made to serve two audiences with opposite needs. An internal record is dense and assumes context. A partner brief is short and assumes nothing. Do not maintain the second one. Regenerate it.
