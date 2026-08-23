@@ -7,7 +7,7 @@ description: Diagnosis loop for hard bugs and performance regressions. Use when 
 
 A discipline for hard bugs. Skip phases only when explicitly justified.
 
-When exploring the codebase, read `.capstan/CONTEXT.md` (if it exists) to get a clear mental model of the relevant modules, and check the decision log and any records under `.capstan/decisions/` for the area you are touching.
+When exploring the codebase, read the glossary, `CONTEXT.md` in the document home, which is `<working copy>/.capstan/` unless configured otherwise (if it exists), to get a clear mental model of the relevant modules, and check the decision log (`decisions.md`) and any records under `decisions/` there for the area you are touching.
 
 ## Redact
 

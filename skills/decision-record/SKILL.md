@@ -7,11 +7,17 @@ description: Record decisions so they survive without bloating anything. A one-l
 
 Three tiers, sorted by how long each thing needs to survive. Nearly everything stays in tier one.
 
+The log, the records, and the glossary are the three durable artifacts, and each carries one frontmatter property, `capstan_type`, prefixed because Obsidian types a property vault-wide by its name, naming what the note is (`decision-log`, `decision-record`, or `glossary`). That is the whole schema, and it exists so a vault can tell a Capstan note from any other one sitting beside it.
+
 ## Tier 1: the log
 
-`.capstan/decisions.md`. One line per decision. Committed.
+The decision log, `decisions.md` in the document home, which is `<working copy>/.capstan/` unless configured otherwise. One line per decision. Committed at the default; the operator's to commit otherwise.
 
 ```markdown
+---
+capstan_type: decision-log
+---
+
 # Decisions
 
 | # | Date | Decision | Status |
@@ -55,9 +61,13 @@ A full document only when the decision passes **all three** gates:
 
 All three, not any one. Most decisions fail at least one, so most efforts produce a handful of log lines and no records at all. That is the design working, not the discipline slipping. Writing a record for every decision is exactly how decision folders became the bloat you are trying to avoid.
 
-Lives at `.capstan/decisions/NNNN-short-slug.md`. Six sections, none longer than a paragraph:
+Lives at `decisions/NNNN-short-slug.md` in the document home, which is `<working copy>/.capstan/` unless configured otherwise. Six sections, none longer than a paragraph:
 
 ```markdown
+---
+capstan_type: decision-record
+---
+
 # NNNN. Sessions expire server-side, not by JWT claim
 
 **Status**: accepted
@@ -93,11 +103,15 @@ Never delete a record. Superseded records stay, marked, out of the reading path.
 
 ## The glossary
 
-`.capstan/CONTEXT.md`. One line per term. Committed, and it persists for the same reason the log does: the project's own word for a thing is a decision about language, and re-deriving it costs a conversation every time.
+The glossary, `CONTEXT.md` in the document home, which is `<working copy>/.capstan/` unless configured otherwise. One line per term. Committed at the default, the operator's to commit otherwise, and it persists for the same reason the log does: the project's own word for a thing is a decision about language, and re-deriving it costs a conversation every time.
 
 Create it lazily, on the first term that resolves. A repository with no settled vocabulary needs no file.
 
 ```markdown
+---
+capstan_type: glossary
+---
+
 # Context
 
 | Term | Means |
@@ -107,15 +121,15 @@ Create it lazily, on the first term that resolves. A repository with no settled 
 | Operator | The person at the gates. Never the crew. |
 ```
 
-Vocabulary only. A `.capstan/CONTEXT.md` that starts explaining how something works has become a spec, and a spec that outlives delivery is the stale artifact this whole model exists to prevent.
+Vocabulary only. A glossary that starts explaining how something works has become a spec, and a spec that outlives delivery is the stale artifact this whole model exists to prevent.
 
 **Edit it in place.** This is the one file here that is never superseded, because a glossary read archaeologically is a glossary nobody reads. It holds current truth and nothing else.
 
-The *change* is what gets recorded. When a term shifts meaning, or one word splits into two, write a numbered line in `.capstan/decisions.md` saying so. Current definition in one file, history in the other, and neither doing the other's job.
+The *change* is what gets recorded. When a term shifts meaning, or one word splits into two, write a numbered line in the decision log, in the document home, saying so. Current definition in one file, history in the other, and neither doing the other's job.
 
 ## What does not go here
 
-Specs, plans, research findings, review output, and checkpoint drafts all live in `.capstan/effort/`, which is gitignored and deleted at delivery. Only decisions persist.
+Specs, plans, research findings, review output, and checkpoint drafts all live in `.capstan/effort/`, which is gitignored, deleted at delivery, and never resolved against the document home. Only decisions persist.
 
 ## The permanent note
 
