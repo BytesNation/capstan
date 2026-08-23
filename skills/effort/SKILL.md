@@ -141,7 +141,7 @@ Verifying costs two commands. Building on a stale premise costs the whole phase.
    A spike section appears only when the effort ran one.
 5. Update `.capstan/effort/CLAIM.md` (phase, head, next, last-touched), then post the gate-1 brief per the `brief` skill. End the run.
 
-**Done when** `spec.md` carries all six sections, every question raised in the interview is answered in it, written down there as an explicit assumption, or carried in `decisions.md` in the document home as `open`, `assumed` or `unformed`, and every Scout return is filed.
+**Done when** `spec.md` carries Problem, What is being built, What it must do, Explicitly out of scope, Test seams and Assumptions. Every question raised in the interview is answered in it, written down there as an explicit assumption, or carried in `decisions.md` in the document home as `open`, `assumed` or `unformed`, and every Scout return is filed.
 
 ## The later phases
 
@@ -195,7 +195,7 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
 
 `.gitignore` carries `.capstan/effort/`. Add it, or replace an older scratch line with it. The scratch never enters git history, which is what keeps repositories from accumulating stale planning material.
 
-At delivery the Courier writes one note per effort to the knowledge base. That is the permanent cross-venture record.
+At delivery the Courier writes one note per effort to the knowledge base, and Capstan never runs git there — the operator commits the note. That is the permanent cross-venture record.
 
 ## Standards you enforce
 
