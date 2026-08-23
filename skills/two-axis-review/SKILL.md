@@ -31,7 +31,7 @@ For either of the first two forms, confirm the ref resolves and the diff is non-
 
 ## Standards
 
-The repository is the primary source and **the repository always overrides**. Read whatever it documents: the glossary, in the document home, if the repository keeps one, a standards file, a contributing guide, the conventions visible in neighbouring code.
+The repository is the primary source and **the repository always overrides**. Read whatever it documents: the glossary, in the document home (per the `effort` skill), if the repository keeps one, a standards file, a contributing guide, the conventions visible in neighbouring code.
 
 A review that does not know the repository's own rules flags what was deliberate and misses the invariants the codebase actually depends on. That failure is the reason this axis reads local documentation first.
 

@@ -43,7 +43,7 @@ The location and its frontmatter schema are setup-specific. Read them from `CLAU
 
 If no knowledge base is configured at all, skip this step and say so in the close-out. A note written somewhere arbitrary is worse than no note, because nothing will find it again.
 
-The body covers: what the effort was, what was decided, what was rejected and why, where the code lives, and where the full decision records live. Use the project's own vocabulary rather than generic description. Link to the decision log and the decision records, in the document home; do not copy them into the note.
+The body covers: what the effort was, what was decided, what was rejected and why, where the code lives, and where the full decision records live. Use the project's own vocabulary rather than generic description. Link to the decision log and the decision records, in the document home, per the `effort` skill; do not copy them into the note.
 
 Never delete a knowledge note as cleanup. Never write a secret value into it. Never paste a transcript body into it.
 

@@ -9,7 +9,7 @@ The most common failure in any build is not bad execution. It is that you though
 
 ## Before the first round
 
-Read the decision log, in the document home. Every line marked `open` or `assumed` is a question a previous run could not settle, and it belongs in round one alongside whatever the operator just asked about.
+Read the decision log, in the document home, per the `effort` skill. Every line marked `open` or `assumed` is a question a previous run could not settle, and it belongs in round one alongside whatever the operator just asked about.
 
 Read the glossary too, in the document home, if there is one. You are about to spend a session using words, and half of them are already defined.
 

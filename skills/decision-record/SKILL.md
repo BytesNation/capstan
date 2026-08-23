@@ -7,13 +7,17 @@ description: Record decisions so they survive without bloating anything. A one-l
 
 Three tiers, sorted by how long each thing needs to survive. Nearly everything stays in tier one.
 
-The log, the records, and the glossary are the three durable artifacts, and each carries one property beyond the plain `capstan_` prefix: `capstan_type`, naming what the note is (`decision-log`, `decision-record`, or `glossary`). That is the whole schema, and it exists so a vault can tell a Capstan note from any other one sitting beside it.
+The log, the records, and the glossary are the three durable artifacts, and each carries one frontmatter property, `capstan_type`, prefixed per the vault-wide typing rule, naming what the note is (`decision-log`, `decision-record`, or `glossary`). That is the whole schema, and it exists so a vault can tell a Capstan note from any other one sitting beside it.
 
 ## Tier 1: the log
 
-The decision log, in the document home. One line per decision. Committed.
+The decision log, in the document home, per the `effort` skill. One line per decision. Committed at the default; the operator's to commit otherwise.
 
 ```markdown
+---
+capstan_type: decision-log
+---
+
 # Decisions
 
 | # | Date | Decision | Status |
@@ -60,6 +64,10 @@ All three, not any one. Most decisions fail at least one, so most efforts produc
 Lives at `decisions/NNNN-short-slug.md` in the document home. Six sections, none longer than a paragraph:
 
 ```markdown
+---
+capstan_type: decision-record
+---
+
 # NNNN. Sessions expire server-side, not by JWT claim
 
 **Status**: accepted
@@ -95,11 +103,15 @@ Never delete a record. Superseded records stay, marked, out of the reading path.
 
 ## The glossary
 
-The glossary, in the document home. One line per term. Committed, and it persists for the same reason the log does: the project's own word for a thing is a decision about language, and re-deriving it costs a conversation every time.
+The glossary, in the document home. One line per term. Committed at the default, the operator's to commit otherwise, and it persists for the same reason the log does: the project's own word for a thing is a decision about language, and re-deriving it costs a conversation every time.
 
 Create it lazily, on the first term that resolves. A repository with no settled vocabulary needs no file.
 
 ```markdown
+---
+capstan_type: glossary
+---
+
 # Context
 
 | Term | Means |

@@ -19,7 +19,7 @@ If nothing is needed from the reader, say **no action required** explicitly and 
 
 Three per effort, one per gate. Each one ends a run.
 
-**Gate 1, concept locked.** What we are building and why. What we are explicitly not building, which is usually the most useful section. The vocabulary we settled on, which is now in the glossary, in the document home, rather than only in this brief. Anything a Scout established that changed the shape.
+**Gate 1, concept locked.** What we are building and why. What we are explicitly not building, which is usually the most useful section. The vocabulary we settled on, which is now in the glossary, in the document home (per the `effort` skill), rather than only in this brief. Anything a Scout established that changed the shape.
 
 **Gate 2, plan locked.** How, cut into slices, in a numbered list with the blocking edges. What runs in parallel. What can be demonstrated per slice. Every assumption made so far, each on its own line.
 

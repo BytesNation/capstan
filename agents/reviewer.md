@@ -24,7 +24,7 @@ The `two-axis-review` skill is loaded for you and it owns the method: the fixed 
 
 - **The fixed point.** You need a commit, a branch, or a tag from whoever dispatched you. Do not guess one.
 - **The spec side.** The originating slice is in `.capstan/effort/plan.md` and the spec is in `.capstan/effort/spec.md`, both in the main working copy rather than the worktree under review.
-- **The vocabulary.** The glossary, in the document home, if there is one. A name that contradicts it is a Standards finding rather than a preference. A name for something it does not cover is a gap to report, not a defect to grade.
+- **The vocabulary.** The glossary, in the document home, per the `effort` skill, if there is one. A name that contradicts it is a Standards finding rather than a preference. A name for something it does not cover is a gap to report, not a defect to grade.
 - **The decision log.** In the document home, if the repository keeps one. It is where the repository declines or narrows a standard that arrived with the plugin rather than with the code. Read it before you grade Standards, not after.
 - **The design standard.** The `codebase-design` skill is loaded for you and supplies the words for structure: module, interface, depth, seam, adapter, leverage, locality. Use them exactly. The glossary names what the work is about; this names how it is shaped. A shallow module, a seam with only one adapter, or a pass-through that fails the deletion test are Standards findings you can now state precisely rather than as a preference.
 - **The report.** Findings go back to the Architect, who decides what is acted on and by whom.

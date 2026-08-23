@@ -7,7 +7,7 @@ description: Diagnosis loop for hard bugs and performance regressions. Use when 
 
 A discipline for hard bugs. Skip phases only when explicitly justified.
 
-When exploring the codebase, read the glossary in the document home (if it exists) to get a clear mental model of the relevant modules, and check the decision log and any records there for the area you are touching.
+When exploring the codebase, read the glossary in the document home, per the `effort` skill (if it exists), to get a clear mental model of the relevant modules, and check the decision log and any records there for the area you are touching.
 
 ## Redact
 
