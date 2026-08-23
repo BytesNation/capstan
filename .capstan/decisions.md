@@ -2,6 +2,10 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 182 | 2026-08-21 | Plugin version goes to 2.9.3 | accepted |
+| 181 | 2026-08-21 | `Unformed` joins the glossary beside `Open` and `Assumed`. The status shipped in 2.9.0 and the glossary that defines the other two never got it | accepted |
+| 180 | 2026-08-21 | The README's install material merges into one section, with by-hand, namespacing and multi-file skills as subsections under it. `Install` and `Install detail` had the disciplines table wedged between them | accepted |
+| 179 | 2026-08-21 | Four README counts were wrong and all four had drifted the same way: a set grew and its count did not. Three skills were eight, most skills were seven of fifteen, two borrowed ideas were four, and `unslop` was missing from the tree | accepted |
 | 178 | 2026-08-21 | Plugin version goes to 2.9.2. README ships inside the plugin, so a documentation change is still a release | accepted |
 | 177 | 2026-08-21 | The `Upgrading` section documents remove-and-re-add, leading with the uninstall it causes. Run alone, the remove leaves the operator with no Capstan | accepted |
 | 176 | 2026-08-21 | Re-pointing the marketplace source is documented as optional. The redirect works, and the argument for doing it is that the old name is not ours to hold | accepted |
