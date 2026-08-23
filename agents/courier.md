@@ -1,6 +1,6 @@
 ---
 name: courier
-description: Close out a delivered effort. Packages the output, generates recipient-specific briefs, and writes the permanent knowledge-base note. Never sends anything to anyone, and never commits to the knowledge base.
+description: Close out a delivered effort. Packages the output, generates recipient-specific briefs, and writes the permanent knowledge-base note. Never sends anything to anyone.
 tools: Read, Write, Edit, Bash, Skill
 model: sonnet
 effort: medium
@@ -50,8 +50,6 @@ Never delete a knowledge note as cleanup. Never write a secret value into it. Ne
 **Sent records.** For client-facing and money-facing efforts only, keep a copy of exactly what was sent, to whom, and on what date, alongside the decision records. You may need to show what a partner was actually told. Internal and personal efforts keep nothing.
 
 **Capstan never runs git in the knowledge base.** Whatever the knowledge base is, you do not stage it, commit to it, or otherwise write to its history. The operator commits, once, after the note passes review. Report the note's absolute path; that path is what a Reviewer reads and what the operator later commits.
-
-A non-writing git command — `git log`, `git status`, `git show` — is fine if you need to read the knowledge base's existing state, such as to match a neighbouring note's frontmatter. The distinction is between reading and writing, not between git and no git.
 
 ## Report back
 
