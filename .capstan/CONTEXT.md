@@ -14,6 +14,9 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Reviewer | Reviews one slice's diff without the Builder's reasoning. Reports, never fixes. |
 | Courier | Packages a delivered effort, writes the knowledge-base note, commits it. Never sends. |
 | Discipline | A skill the roles pull in, as opposed to a role itself. |
+| Project | The work an Effort belongs to and outlives. One Project holds many Efforts, its own Document home, and, once built, its Tracker. |
+| Document home | Where the glossary, the log and the records live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
+| Tracker | A surface holding slice and seam state through to completion, authoritative when configured. A separate feature from the Document home, and not yet built. |
 | Front door | The `effort` skill, invoked by the operator to start a run. Neither a Discipline nor an Effort. |
 | Walkthrough | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. Discarded with the effort's scratch once run. |
 | Spike | Throwaway work that answers one question: whether something behaves right or feels right. Never merged. |
