@@ -56,17 +56,17 @@ If the work has no repository, say so and ask whether to create one. An effort n
 
 ## Document home
 
-The **document home** is the one configured root every path Capstan resolves for its own durable artifacts resolves against: the glossary, the decision log, the decision records. It defaults to `<repo>/.capstan`. An operator who configures nothing gets exactly today's behaviour.
+The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records. It defaults to `<repo>/.capstan`.
 
-Configure it in the operator's `CLAUDE.md` or `AGENTS.md`, beside the knowledge-base setting already documented there. Configuration cannot live inside the thing being relocated, so it never lives inside `.capstan/` itself.
+Read `CLAUDE.md` or `AGENTS.md` for a document-home entry naming a folder path, beside the knowledge-base setting already documented there, before resolving the term anywhere else. An unset one resolves to the default above. Configuration cannot live inside the thing being relocated, so it never lives inside `.capstan/` itself.
 
-The scratch at `<repo>/.capstan/effort/` never resolves against the document home. `CLAIM.md`, `spec.md`, `plan.md`, scout returns and review output stay at `<repo>/.capstan/effort/` under every configuration.
+The scratch at `<repo>/.capstan/effort/` stays repo-relative under every configuration: `CLAIM.md`, `spec.md`, `plan.md`, scout returns and review output all live there regardless of where the document home points.
 
-A file lives in exactly one place, never two. Copying between the repository and a vault is a sync problem, and a sync problem needs an operating layer this repository refuses. One vault holds one folder per Project — never one vault per project.
+A file lives in exactly one place, never two. Copying between the repository and a vault is a sync problem, and a sync problem needs an operating layer Capstan refuses to build. One vault holds one folder per Project — never one vault per Project.
 
 An unreachable or missing document home stops the phase, and says so. This is the deliberate exception to "stop for consequence, never for ambiguity": a missing source of truth is not ambiguity, and falling back to the default would produce two records that disagree.
 
-Capstan writes files into the vault and never runs git there. The operator commits. Tell the operator, at the point they configure a root, that the vault is theirs to commit and that a document home can therefore sit unversioned for days.
+When the document home is configured away from the default, Capstan writes files there and never runs git in it, and the operator commits. Tell the operator, at the point they configure a root, that the vault is theirs to commit and that a document home can therefore sit unversioned for days.
 
 Every frontmatter property Capstan writes carries a `capstan_` prefix. Obsidian types a property vault-wide by name, so a bare `status` collides with whatever the operator's vault already assigned that name.
 
@@ -154,7 +154,7 @@ This is not a gate and it does not belong at one. It is a pause mid-phase: when 
 
 Uncertainty is not on that list.
 
-**Stop for consequence, never for ambiguity.** When something is unclear, take the most defensible reading, write it into `decisions.md` in the document home as `assumed` with the condition that would reopen it, and keep moving. Assumptions surface at the next gate where they cost almost nothing to correct. A crew that halts on every ambiguity turns the operator into the bottleneck the fleet was supposed to remove.
+**Stop for consequence, never for ambiguity**, except the document home's unreachable-root case documented above. When something is unclear, take the most defensible reading, write it into `decisions.md` in the document home as `assumed` with the condition that would reopen it, and keep moving. Assumptions surface at the next gate where they cost almost nothing to correct. A crew that halts on every ambiguity turns the operator into the bottleneck the fleet was supposed to remove.
 
 ## Infrastructure
 
