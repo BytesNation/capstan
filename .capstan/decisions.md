@@ -6,6 +6,9 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 298 | 2026-08-23 | Phase 1's done-when names the six sections rather than counting them. Phase 2's naming was the model, and a count is satisfiable by counting headings without reading them | accepted |
+| 297 | 2026-08-23 | `skills/effort/SKILL.md` gains one clause where the knowledge base is already the subject. Its Authority table grants the crew `commit to a branch, push a branch` unattended and carves out only a configured document home, so the file read alone permits the commit 211, 275 and 278 forbid | accepted |
+| 296 | 2026-08-23 | The role-table row in `SKILL.md` loses `committed` and does not gain the operator in its place. The `For` column discriminates at dispatch, and who runs git after the note is written is not a dispatch fact. Same reasoning as 286. Recorded because 289 covers only the glossary's twin of this row | accepted |
 | 295 | 2026-08-23 | Scratch paths are written bare (`.capstan/effort/...`) throughout the phase files while the Precondition forbids assuming the session's working directory. Repository-wide and older than this effort, raised by the slice 2 review. Out of scope here | open |
 | 294 | 2026-08-23 | The filing rule bolds the actor rather than the rationale, and `agents/reviewer.md` names the Architect as the filer. Phase 1 bolds **You** because who files is the load-bearing fact; a passive "is filed" hands a Reviewer a belief and the means to act on it with no path to act on | accepted |
 | 293 | 2026-08-23 | "A Reviewer has no write tools" is false: `agents/reviewer.md` grants `Read, Bash, Skill` and Bash writes. The Scout it was mirrored from grants `Read, WebSearch, WebFetch` and genuinely cannot. The Architect's dispatch brief told the Builder to carry the reason across and the reason does not transfer. Second defect this effort has traced to a brief rather than a Builder, after 285 | accepted |
