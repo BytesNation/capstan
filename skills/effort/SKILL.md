@@ -38,7 +38,7 @@ There is no poller and no scheduler. You never wait for approval, never poll a t
 
 Gate one is the one to protect. It is where a wrong turn is cheapest to catch, and it is the one that gets skipped because at that moment the concept feels obvious to everyone in the room.
 
-Every gate **reports** the open questions and never blocks on them. Carry the `open`, `assumed` and `unformed` lines from `.capstan/decisions.md` into the brief, so the operator can see what the crew is proceeding without and wave it through or stop it. A gate that cannot be passed while a question is open is a gate that gets passed by inventing an answer.
+Every gate **reports** the open questions and never blocks on them. Carry the `open`, `assumed` and `unformed` lines from `decisions.md` in the document home into the brief, so the operator can see what the crew is proceeding without and wave it through or stop it. A gate that cannot be passed while a question is open is a gate that gets passed by inventing an answer.
 
 ## Precondition: name the working copy
 
@@ -52,7 +52,31 @@ Everything below refers to that path. **It is not necessarily the session's work
 
 Never `cd` and never ask for a session to be restarted elsewhere. `git -C <path>` and absolute paths do everything a different working directory would.
 
-If the work has no repository, say so and ask whether to create one. An effort needs a repository, because slices are branches and the decision log is committed.
+If the work has no repository, say so and ask whether to create one. An effort needs a repository because slices are branches, and, under the default document home, because the decision log is committed there too.
+
+## Document home
+
+The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records. It defaults to `<working copy>/.capstan`.
+
+Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside the knowledge-base setting already documented there, before resolving the term anywhere else. Both files carrying the key with a different value stops the phase, and says so: two roots means two logs, the same "two records that disagree" outcome this section stops for elsewhere, and not a case to resolve by precedence or first-wins. A value that is not itself an absolute path stops the phase too, and says so: resolving it would mean assuming the session's working directory, which the Precondition section above forbids. The value is an absolute path to the folder:
+
+```
+capstan-document-home: /Users/example/vault/ProjectName
+```
+
+Unset, or neither file present, resolves to the default above. Configuration cannot live inside the thing being relocated, so the key never lives inside `.capstan/` itself.
+
+The scratch at `<working copy>/.capstan/effort/` stays repo-relative under every configuration: `CLAIM.md`, `spec.md`, `plan.md`, scout returns and review output all live there regardless of where the document home points.
+
+A file lives in exactly one place, never two. Copying between the repository and a vault is a sync problem, and a sync problem needs an operating layer Capstan refuses to build. One vault holds one folder per Project — never one vault per Project.
+
+A document home configured away from the default that is unreachable stops the phase, and says so. This is the deliberate exception to "stop for consequence, never for ambiguity": a missing source of truth is not ambiguity, and falling back to the default would produce two records that disagree. The default is not held to this: nothing creates `<working copy>/.capstan/` ahead of an effort, so it is missing on a repository's first run, and that first write creates it rather than stopping anything.
+
+At the default, the crew commits it as ordinary unattended work, per the Authority table below. When the document home is configured away from the default, Capstan writes files there and never runs git in it, and the operator commits. Tell the operator, at the point they configure a root, that the vault is theirs to commit and that a document home can therefore sit unversioned for days.
+
+Every frontmatter property Capstan writes carries a `capstan_` prefix. Obsidian types a property vault-wide by name, so a bare `status` collides with whatever the operator's vault already assigned that name.
+
+The decision log stays one file, `decisions.md`, wherever the document home points. It does not become one note per decision; the records in `decisions/` stay one note each.
 
 ## Before you start
 
@@ -78,7 +102,7 @@ The claim is the only thing standing between two sessions and the same files. Th
 
 Then check how many efforts are in flight. **Three is the ceiling.** Three gates each against one reader means nine briefs a cycle, which is the point where they stop being read and start being rubber-stamped. If three are already open, say so and ask which one to close first rather than starting a fourth.
 
-Then read what already exists: `.capstan/CONTEXT.md`, `.capstan/decisions.md`, and any prior `.capstan/decisions/` records covering this area. Also read the effort's knowledge-base note if it has one. You are bound by decisions already made. If one of them is wrong, say so out loud rather than quietly designing around it.
+Then read what already exists: `CONTEXT.md`, `decisions.md`, and any prior `decisions/` records covering this area, all in the document home. Also read the effort's knowledge-base note if it has one. You are bound by decisions already made. If one of them is wrong, say so out loud rather than quietly designing around it.
 
 ## Every phase begins by re-reading the world
 
@@ -87,8 +111,8 @@ A run **ends** at each gate, and time passes before the next one starts. Hours, 
 So the first act of phases 2, 3 and 4 is not the work. It is reading the claim's `next` line, which is the last run telling you where it stopped, and then checking what changed underneath it:
 
 ```bash
-git -C <repo> log --oneline <head-recorded-in-CLAIM>..HEAD
-git -C <repo> status --short
+git -C <working copy> log --oneline <head-recorded-in-CLAIM>..HEAD
+git -C <working copy> status --short
 ```
 
 If `HEAD` has moved since the claim recorded it, **stop and read what landed** before doing anything else. Someone may have built the thing you were about to build. Report what moved and who moved it rather than dispatching on top of it.
@@ -109,7 +133,7 @@ Verifying costs two commands. Building on a stale premise costs the whole phase.
 4. Write `.capstan/effort/spec.md`. Include what is explicitly out of scope. The things refused are usually the most useful lines on the page.
 5. Update `.capstan/effort/CLAIM.md` (phase, head, next, last-touched), then post the gate-1 brief per the `brief` skill. End the run.
 
-**Done when** every question raised in the interview is answered in `spec.md`, written down there as an explicit assumption, or carried in `.capstan/decisions.md` as `open`, `assumed` or `unformed`, and every Scout return is filed.
+**Done when** every question raised in the interview is answered in `spec.md`, written down there as an explicit assumption, or carried in `decisions.md` in the document home as `open`, `assumed` or `unformed`, and every Scout return is filed.
 
 ## The later phases
 
@@ -136,7 +160,7 @@ This is not a gate and it does not belong at one. It is a pause mid-phase: when 
 
 Uncertainty is not on that list.
 
-**Stop for consequence, never for ambiguity.** When something is unclear, take the most defensible reading, write it into `.capstan/decisions.md` as `assumed` with the condition that would reopen it, and keep moving. Assumptions surface at the next gate where they cost almost nothing to correct. A crew that halts on every ambiguity turns the operator into the bottleneck the fleet was supposed to remove.
+**Stop for consequence, never for ambiguity**, except the document home's stop case documented above. When something is unclear, take the most defensible reading, write it into `decisions.md` in the document home as `assumed` with the condition that would reopen it, and keep moving. Assumptions surface at the next gate where they cost almost nothing to correct. A crew that halts on every ambiguity turns the operator into the bottleneck the fleet was supposed to remove.
 
 ## Infrastructure
 
@@ -145,12 +169,15 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
 ## Files
 
 ```
+<document home>/          defaults to <working copy>/.capstan/. Committed automatically only at
+                           the default; the operator commits a configured one, per Document home above.
+  CONTEXT.md      one line per term. persists. edited in place.
+  decisions.md    one line per decision. persists.
+  decisions/      full records, only when gated. persists.
+
 <working copy>/
   .capstan/
-    CONTEXT.md      one line per term. committed. persists. edited in place.
-    decisions.md    one line per decision. committed. persists.
-    decisions/      full records, only when gated. committed. persists.
-    effort/         gitignored. deleted at delivery.
+    effort/         gitignored. deleted at delivery. never resolved against the document home.
       CLAIM.md      who holds this effort, what phase, from which commit, what is outstanding
       spec.md
       plan.md
