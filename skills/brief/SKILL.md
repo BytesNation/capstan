@@ -29,6 +29,8 @@ Every checkpoint brief carries an **assumptions** section, drawn from the `assum
 
 Beside it sits an **open questions** section, drawn from the `open` lines: the ones that would not resolve at all. State each with the route that would settle it, which is a throwaway to build, a person to ask, or a default to bless. Print "none" when there are none, because a missing section reads as an oversight rather than an empty set.
 
+Any `unformed` lines go in the same section, marked as what they are. They carry no route, because nobody can yet say what would settle them. Say what the area is and what would bring it into view. An operator who reads one of these often knows more about it than the crew does, which is the whole reason for printing it.
+
 Keep it to a page. Link down to the detail; do not paste it in.
 
 ## Partner briefs

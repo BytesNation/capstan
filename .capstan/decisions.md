@@ -2,6 +2,10 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 171 | 2026-08-21 | Plugin version goes to 2.9.0. Two grafts, no new discipline, count stays at fourteen | accepted |
+| 170 | 2026-08-21 | `interview` gains two moves from `domain-modeling`: challenge a term against the glossary, and invent an edge-case scenario when a relationship stays vague. Its file layout is left behind, since `CONTEXT-MAP.md` and `docs/adr/` fight the 2.1.0 move | accepted |
+| 169 | 2026-08-21 | An `unformed` line is rewritten in place when it graduates to `open`. It is the one exception to superseding, because nothing was decided and there is no history to protect | accepted |
+| 168 | 2026-08-21 | The log gains an `unformed` status for an area nobody can phrase a question about yet. Written as `open` it stalls the interview twice; written nowhere it surfaces in phase 3. From `wayfinder`, without the tracker | accepted |
 | 167 | 2026-08-21 | Plugin version goes to 2.8.0. No new discipline, so the count stays at fourteen | accepted |
 | 166 | 2026-08-21 | Where `next` and the repository disagree, the repository wins. The line was written before the gap and cannot know what happened during it | accepted |
 | 165 | 2026-08-21 | `handoff` is not vendored and nothing is grafted into `brief`. A brief is for the person at the gate, and an agent-facing resumption section is the two-audience failure the design doc warns about. `brief` already says to link rather than paste, which is the other half of upstream | accepted |

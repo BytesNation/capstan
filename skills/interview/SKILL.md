@@ -11,7 +11,11 @@ The most common failure in any build is not bad execution. It is that you though
 
 Read `.capstan/decisions.md` in the working copy. Every line marked `open` or `assumed` is a question a previous run could not settle, and it belongs in round one alongside whatever the operator just asked about.
 
+Read `.capstan/CONTEXT.md` too, if there is one. You are about to spend a session using words, and half of them are already defined.
+
 An `assumed` line is not settled, it is defaulted. Put it back on the table with its current default as the recommended answer.
+
+An `unformed` line is not a question and does not go in a round. It names an area nobody has thought about yet, so asking about it produces guesses. Ask instead what would bring it into view, and who does that.
 
 **Done when** every `open` and `assumed` line is either in round one or ruled out of scope out loud.
 
@@ -79,6 +83,10 @@ Verbosity here causes real decision fatigue. Three paragraphs of framing around 
 When a term resolves, write it into `.capstan/CONTEXT.md` immediately, one line, per the `decision-record` skill. Batching to the end of the session is how vocabulary gets lost, and the project's own word for a thing is worth more than a paragraph re-explaining the thing every time it comes up.
 
 Challenge a word that is doing two jobs. "Account" meaning the company, the login, and the ledger entry is three concepts wearing one label, and every downstream conversation pays for it.
+
+Challenge against the glossary as well as within the session. When the operator uses a term `.capstan/CONTEXT.md` already defines, and means something else by it, say so in the round rather than writing a second definition: "the glossary has cancellation as the refund, you seem to mean the booking coming off the calendar. Which is it, and what is the other one called?" A glossary contradicted quietly is worse than no glossary, because everything downstream trusts it.
+
+Invent a scenario when a relationship between two concepts stays vague. Not another way of asking the same question: a specific case at the edge, put to them concretely. "A customer cancels after the deposit clears but before the engineer is dispatched. Which of these has happened, and what is the record called at that moment?" Abstract questions about boundaries get abstract answers. A scenario forces the boundary to be drawn, and the words that come back are usually the ones worth writing down.
 
 ## When you are done
 
