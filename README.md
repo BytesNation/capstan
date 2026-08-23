@@ -115,6 +115,22 @@ claude plugin install capstan@bytesnation
 
 Add `-s project` to the uninstall and install commands if you installed at that scope. Restart Claude Code once it finishes, and every `/claude-tools:*` command becomes `/capstan:*`. Running `claude plugin marketplace update` before the uninstall step leaves the old entry reporting `Plugin claude-tools not found in marketplace bytesnation`, which is alarming, harmless, and clears once the uninstall finishes.
 
+**Re-pointing the marketplace at the new address.** Optional, and worth knowing what it costs before you start. A marketplace added as `BytesNation/Claude-tools` keeps working on the redirect, and the only argument against leaving it is that the redirect is not yours: it lasts until somebody creates a repository at the old name, and then the marketplace follows that one instead.
+
+No command edits a marketplace's source in place, and editing `~/.claude/plugins/known_marketplaces.json` by hand does not hold. The next `claude plugin marketplace update` puts the old address back. Removing and re-adding is the route that sticks.
+
+**Removing a marketplace uninstalls every plugin installed from it.** `installed_plugins.json` empties and the marketplace clone is deleted, so the second and third commands below are not tidying afterwards. They are the repair, and running the first one alone leaves you with no Capstan:
+
+```bash
+claude plugin marketplace remove bytesnation
+claude plugin marketplace add BytesNation/capstan
+claude plugin install capstan@bytesnation --scope user
+```
+
+Use `--scope project` on the last command if that is where it was installed. `capstan@bytesnation` survives the round trip because a marketplace is named by the `name` field in its `marketplace.json` rather than by the repository path, so re-adding from a different address produces the same marketplace and the same plugin identifier.
+
+The version cache under `~/.claude/plugins/cache/` is left alone throughout. A session open while you do this keeps resolving skills from the copy it already holds, and picks up the reinstall when you restart it.
+
 **Ordinary version bumps.** Once you are on `capstan`:
 
 ```bash

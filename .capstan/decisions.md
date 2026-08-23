@@ -2,6 +2,9 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 178 | 2026-08-21 | Plugin version goes to 2.9.2. README ships inside the plugin, so a documentation change is still a release | accepted |
+| 177 | 2026-08-21 | The `Upgrading` section documents remove-and-re-add, leading with the uninstall it causes. Run alone, the remove leaves the operator with no Capstan | accepted |
+| 176 | 2026-08-21 | Re-pointing the marketplace source is documented as optional. The redirect works, and the argument for doing it is that the old name is not ours to hold | accepted |
 | 175 | 2026-08-21 | Plugin version goes to 2.9.1, the first patch release. An editing pass offers nothing new | accepted |
 | 174 | 2026-08-21 | Three completion criteria widened to cover `unformed`. The grafts added a status and left every bound in the repository still naming two | accepted |
 | 173 | 2026-08-21 | `Standards you enforce` names the owning discipline instead of restating its definition. The Architect needs to know a standard is enforced, not how to run it | accepted |
