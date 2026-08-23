@@ -17,7 +17,7 @@ An `assumed` line is not settled, it is defaulted. Put it back on the table with
 
 An `unformed` line is not a question and does not go in a round. It names an area nobody has thought about yet, so asking about it produces guesses. Ask instead what would bring it into view, and who does that.
 
-**Done when** every `open` and `assumed` line is either in round one or ruled out of scope out loud.
+**Done when** every `open` and `assumed` line is either in round one or ruled out of scope out loud, and every `unformed` line has been asked what would bring it into view.
 
 ## The frontier
 
@@ -27,15 +27,15 @@ The **frontier** is every decision whose prerequisites are already settled: the 
 
 Each round of answers reshapes the tree. Recompute the frontier and ask again.
 
-**Done when** the frontier is empty: every branch visited, nothing left silently assumed. Not after a fixed number of rounds. Say plainly that you are done rather than trailing off.
+**Done when** the frontier is empty: every branch visited, nothing left silently assumed. Not after a fixed number of rounds.
 
 ## The shape
 
 **Rounds, not a dump.** Ask a batch, stop, wait for answers, ask the next batch informed by them. A wall of forty questions is not an interview, it is a form, and it gets abandoned halfway.
 
-**Every question carries a recommended answer.** "Which of these, and why" is work you are handing back. "I would do X because Y, unless Z applies to you" is a decision that takes five seconds to confirm or correct. This single habit is the difference between an interview that feels productive and one that feels like an interrogation.
+**Every question carries a recommended answer.** "Which of these, and why" is work you are handing back. "I would do X because Y, unless Z applies to you" is a decision that takes five seconds to confirm or correct.
 
-**Facts are yours, decisions are theirs.** Anything the codebase can answer, answer it by reading the codebase. Anything a primary source can answer, send a Scout, and keep asking the rest of the frontier while it runs. A Scout still working is an unsettled prerequisite, so only the questions downstream of it wait. Never spend a question on something you could have found out. Spend questions only on preference, priority, judgment, and constraint.
+**Facts are yours, decisions are theirs.** Anything the codebase can answer, answer it by reading the codebase. Anything a primary source can answer, send a Scout, and keep asking the rest of the frontier while it runs. A Scout still working is an unsettled prerequisite, so only the questions downstream of it wait. Spend questions only on preference, priority, judgment, and constraint.
 
 Number every question and give it a title, so an answer can name what it is answering:
 
@@ -54,9 +54,6 @@ The productive shapes:
 - **The fork.** Two defensible designs, and the choice changes what gets built.
 - **The edge case.** A specific concrete scenario, named. Not "what about errors" but "the upload succeeds and the callback never fires, then what."
 - **The negative.** What should this deliberately not do. Refusals are the most useful answers you get and nobody volunteers them.
-- **The word.** A term used two ways in one conversation. Resolve it now, because it will cost you every session afterward.
-
-The shapes to avoid: questions with one obvious answer, questions that restate what was already said, and questions whose answer would not change anything you build.
 
 ## When a question stalls
 
@@ -86,10 +83,10 @@ Challenge a word that is doing two jobs. "Account" meaning the company, the logi
 
 Challenge against the glossary as well as within the session. When the operator uses a term `.capstan/CONTEXT.md` already defines, and means something else by it, say so in the round rather than writing a second definition: "the glossary has cancellation as the refund, you seem to mean the booking coming off the calendar. Which is it, and what is the other one called?" A glossary contradicted quietly is worse than no glossary, because everything downstream trusts it.
 
-Invent a scenario when a relationship between two concepts stays vague. Not another way of asking the same question: a specific case at the edge, put to them concretely. "A customer cancels after the deposit clears but before the engineer is dispatched. Which of these has happened, and what is the record called at that moment?" Abstract questions about boundaries get abstract answers. A scenario forces the boundary to be drawn, and the words that come back are usually the ones worth writing down.
+Reach for the edge case when a relationship between two concepts stays vague, and ask what the thing is called at that moment: "a customer cancels after the deposit clears but before the engineer is dispatched, so what is the record called now?" The boundary gets drawn, and the word that comes back is usually the one worth writing down.
 
 ## When you are done
 
-State that the frontier is empty. Summarise what was settled, in their vocabulary rather than yours, and list what is still `open` or `assumed` so the state of the tree is visible rather than implied.
+State that the frontier is empty. Summarise what was settled, in their vocabulary rather than yours, and list what is still `open`, `assumed` or `unformed` so the state of the tree is visible rather than implied.
 
 Then hand off. Deciding and doing are different phases, and collapsing them is how a settled decision quietly becomes an unreviewed implementation.

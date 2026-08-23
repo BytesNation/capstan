@@ -2,6 +2,10 @@
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 175 | 2026-08-21 | Plugin version goes to 2.9.1, the first patch release. An editing pass offers nothing new | accepted |
+| 174 | 2026-08-21 | Three completion criteria widened to cover `unformed`. The grafts added a status and left every bound in the repository still naming two | accepted |
+| 173 | 2026-08-21 | `Standards you enforce` names the owning discipline instead of restating its definition. The Architect needs to know a standard is enforced, not how to run it | accepted |
+| 172 | 2026-08-21 | The `writing-for-agents` audit was run against `interview`, `decision-record`, `brief` and `effort`. Net five lines shorter, and the flab was almost all recently added | accepted |
 | 171 | 2026-08-21 | Plugin version goes to 2.9.0. Two grafts, no new discipline, count stays at fourteen | accepted |
 | 170 | 2026-08-21 | `interview` gains two moves from `domain-modeling`: challenge a term against the glossary, and invent an edge-case scenario when a relationship stays vague. Its file layout is left behind, since `CONTEXT-MAP.md` and `docs/adr/` fight the 2.1.0 move | accepted |
 | 169 | 2026-08-21 | An `unformed` line is rewritten in place when it graduates to `open`. It is the one exception to superseding, because nothing was decided and there is no history to protect | accepted |
