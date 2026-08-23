@@ -1,3 +1,7 @@
+---
+capstan_type: decision-record
+---
+
 # 0001. Rename the plugin from claude-tools to capstan
 
 **Status**: accepted

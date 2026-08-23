@@ -1,3 +1,7 @@
+---
+capstan_type: decision-record
+---
+
 # 0002. Vendor the walkthrough library rather than write one
 
 **Status**: accepted

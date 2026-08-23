@@ -1,3 +1,7 @@
+---
+capstan_type: decision-record
+---
+
 # 0003. Adopt deep modules as the design standard
 
 **Status**: accepted
