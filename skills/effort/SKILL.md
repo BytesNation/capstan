@@ -20,7 +20,7 @@ You are also the only role that talks to the operator between gates. Everything 
 | Scout | `scout` | Finding out an external fact. Many in parallel. Never decides. |
 | Builder | `builder` | Exactly one vertical slice each. You create its worktree and hand over the absolute path. |
 | Reviewer | `reviewer` | One per slice, never the instance that built it. |
-| Courier | `courier` | Packaging, briefs, the knowledge-base note, committed. |
+| Courier | `courier` | Packaging, briefs, the knowledge-base note. |
 
 Installed as a plugin these carry its prefix, so the Builder is `capstan:builder`. Spawn whichever form your install produced.
 
@@ -130,10 +130,18 @@ Verifying costs two commands. Building on a stale premise costs the whole phase.
    - A Scout has no write tools, so it returns findings as text and cannot file them. **You** write each return to `.capstan/effort/scout/<slug>.md` verbatim. Do not summarise it on the way in; the citations and the confidence split are the parts that matter later.
    - Read what comes back rather than trusting it. A Scout that says medium confidence, or that reports a fetch it could not complete, is telling you which of its claims still need checking. Verify anything load-bearing yourself before a decision rests on it.
 3. Record decisions as they resolve, per the `decision-record` skill. Do not batch them to the end. Record the ones that refuse to resolve too, as `open` or `assumed`, and the areas nobody can phrase a question about yet as `unformed`. A question the operator could not answer is a finding, not a hole in the interview.
-4. Write `.capstan/effort/spec.md`. Include what is explicitly out of scope. The things refused are usually the most useful lines on the page.
+4. Write `.capstan/effort/spec.md` in these six sections:
+   - **Problem**: what is wrong or missing, and how it was found.
+   - **What is being built**: the shape of the change, in one paragraph.
+   - **What it must do**: the requirements a Builder builds against.
+   - **Explicitly out of scope**: what was refused. The things refused are usually the most useful lines on the page.
+   - **Test seams**: what checks the repository declares at all.
+   - **Assumptions**: what was defaulted rather than settled, and the condition that would reopen it.
+
+   A spike section appears only when the effort ran one.
 5. Update `.capstan/effort/CLAIM.md` (phase, head, next, last-touched), then post the gate-1 brief per the `brief` skill. End the run.
 
-**Done when** every question raised in the interview is answered in `spec.md`, written down there as an explicit assumption, or carried in `decisions.md` in the document home as `open`, `assumed` or `unformed`, and every Scout return is filed.
+**Done when** `spec.md` carries Problem, What is being built, What it must do, Explicitly out of scope, Test seams and Assumptions. Every question raised in the interview is answered in it, written down there as an explicit assumption, or carried in `decisions.md` in the document home as `open`, `assumed` or `unformed`, and every Scout return is filed.
 
 ## The later phases
 
@@ -182,12 +190,12 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
       spec.md
       plan.md
       scout/
-      review/
+      review/       <slice>-<n>.md for a Reviewer's return, verify-<n>.md for a verify return
 ```
 
 `.gitignore` carries `.capstan/effort/`. Add it, or replace an older scratch line with it. The scratch never enters git history, which is what keeps repositories from accumulating stale planning material.
 
-At delivery the Courier writes one note per effort to the knowledge base. That is the permanent cross-venture record.
+At delivery the Courier writes one note per effort to the knowledge base, and Capstan never runs git there — the operator commits the note. That is the permanent cross-venture record.
 
 ## Standards you enforce
 
