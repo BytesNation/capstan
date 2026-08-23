@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 312 | 2026-08-23 | The Architect's own check on the note fix flagged two correct sentences: a rule naming where returns go must name the path. Fourth string-proxy misfire in this effort after 290 and 292, and the first by the Architect while verifying a fix rather than while writing a criterion. The pattern is now recorded three times and should be designed out rather than logged a fourth | accepted |
 | 311 | 2026-08-23 | `[redacted]` has been copied unchecked across eight Capstan notes. The vault holds `[redacted]` and `[redacted]`, either closer to a Claude Code plugin's operating layer. The operator's to settle, and it settles eight notes at once | open |
 | 310 | 2026-08-23 | The note cannot cite `.capstan/effort/review/` as evidence, because phase 4 deletes that directory in the same close-out. It cites the adjudication in the log instead, which survives. The strongest evidence this effort had was sitting in the one place delivery erases | accepted |
 | 309 | 2026-08-23 | The note restores the four headings every neighbour uses, including `## Still open`, which it dropped along with seven unsettled decisions. That section is how an open question survives the effort that raised it: this effort's own spec came from two lines the previous note carried there | accepted |
