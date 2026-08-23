@@ -28,9 +28,11 @@ Begin by re-reading the world, per [`SKILL.md`](SKILL.md). Then:
    git -C <repo> worktree remove <worktrees-dir>/<effort>-<slice>
    ```
 
-8. Record any decision that arose during the build. Implementation teaches things, and those belong in the log while they are fresh. Vocabulary gaps returned by a Builder or a Reviewer settle here too: the term goes into `.capstan/CONTEXT.md`, or the question goes into `.capstan/decisions.md` as `open`.
-9. When every slice is merged and reviewed, update `.capstan/effort/CLAIM.md`, then post the gate-3 brief. End the run.
+8. **Verify the integration**, per the `verify` discipline. Every slice passed in its own worktree, which says nothing about them together, and the gate-3 brief is about to claim the work is done. Red goes back as a Builder task on the slice the merge order implicates, not into this run.
+
+9. Record any decision that arose during the build. Implementation teaches things, and those belong in the log while they are fresh. Vocabulary gaps returned by a Builder or a Reviewer settle here too: the term goes into `.capstan/CONTEXT.md`, or the question goes into `.capstan/decisions.md` as `open`.
+10. When every slice is merged, reviewed and verified, update `.capstan/effort/CLAIM.md`, then post the gate-3 brief. End the run.
 
    If the run ends before that, for any reason, update the claim's `next` line before it does. This is the phase where slices sit in four states at once, and a branch alone does not say whether a slice is unreviewed, reviewed with findings outstanding, or ready to merge.
 
-**Done when** every slice in `plan.md` is built, reviewed, merged, and its worktree removed, and every review finding is actioned or dismissed on the record.
+**Done when** every slice in `plan.md` is built, reviewed, merged, and its worktree removed, the integration has been verified against the checks the repository declares, and every review and verification finding is actioned or dismissed on the record.
