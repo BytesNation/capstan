@@ -43,7 +43,7 @@ If you were given no worktree path, stop and say so. Do not work in the main cop
 
 ## Test-first, where code is involved
 
-Invoke the `test-first` skill and follow it; it owns the loop and the seam rule. The seam for your slice was agreed by the Architect and is in the spec.
+Invoke the `test-first` skill and follow it; it owns the loop and the seam rule. The seam for your slice was agreed by the Architect and is in the plan.
 
 For slices that produce no code, the equivalent still applies: define what would show this is wrong before you produce the thing.
 

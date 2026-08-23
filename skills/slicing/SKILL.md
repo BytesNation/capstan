@@ -79,4 +79,4 @@ Three bad shapes recur: a criterion already true before any work, a criterion on
 
 Show the numbered breakdown with its edges and get it confirmed before anything is dispatched. Ask directly whether the granularity is right, whether the edges are real, and whether anything should merge or split. This is the cheapest moment to fix a bad cut, and it is the last one.
 
-**Done when** every slice carries a demonstration, a seam, an acceptance criterion that is red at its base commit, and its blocking edges.
+**Done when** every slice carries Owns, Demonstrated, Seam, Red at base and Blocked by.
