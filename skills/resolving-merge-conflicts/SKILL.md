@@ -7,7 +7,7 @@ description: "Use when you need to resolve an in-progress git merge/rebase confl
 
 2. **Find the primary sources** for each conflict. Understand deeply why each change was made, and what the original intent was. In an effort, that is `.capstan/effort/plan.md`, which holds each slice's intent and the blocking edges between them, and `.capstan/effort/spec.md` behind it. Commit messages, PRs and tickets are the fallback when no effort is in flight; a Builder writes them for its own branch, not for the integration.
 
-3. **Resolve each hunk.** Preserve both intents where possible. Where incompatible, pick the one matching the merge's stated goal and note the trade-off as a line in the decision log, in the document home (per the `effort` skill), per `decision-record`. Do **not** invent new behaviour. Always resolve; never `--abort`.
+3. **Resolve each hunk.** Preserve both intents where possible. Where incompatible, pick the one matching the merge's stated goal and note the trade-off as a line in the decision log, `decisions.md` in the document home, which is `<working copy>/.capstan/` unless configured otherwise, per `decision-record`. Do **not** invent new behaviour. Always resolve; never `--abort`.
 
    One exception, and only one. If resolving would mean inventing behaviour neither side has, or the conflict shows the two slices were never independent, that is a defect in the slicing rather than a merge to force through. Abort and report it. Every Builder's work sits on its own branch, so an abort costs the merge and nothing else.
 

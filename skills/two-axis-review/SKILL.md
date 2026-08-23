@@ -31,11 +31,11 @@ For either of the first two forms, confirm the ref resolves and the diff is non-
 
 ## Standards
 
-The repository is the primary source and **the repository always overrides**. Read whatever it documents: the glossary, in the document home (per the `effort` skill), if the repository keeps one, a standards file, a contributing guide, the conventions visible in neighbouring code.
+The repository is the primary source and **the repository always overrides**. Read whatever it documents: the glossary, `CONTEXT.md` in the document home, which is `<working copy>/.capstan/` unless configured otherwise, if the repository keeps one, a standards file, a contributing guide, the conventions visible in neighbouring code.
 
 A review that does not know the repository's own rules flags what was deliberate and misses the invariants the codebase actually depends on. That failure is the reason this axis reads local documentation first.
 
-Some standards arrive with the plugin rather than the repository. `codebase-design` is one: it is loaded before you see a diff, so nothing in the repository consented to it. The override still holds, and the repository states its objection the same way it states everything else, as a line in the decision log, in the document home. Read that file. A decision declining an imported standard, or narrowing it to part of the tree, binds this axis, and grading against a standard the repository has already refused is itself the finding.
+Some standards arrive with the plugin rather than the repository. `codebase-design` is one: it is loaded before you see a diff, so nothing in the repository consented to it. The override still holds, and the repository states its objection the same way it states everything else, as a line in the decision log, `decisions.md` in the same document home. Read that file. A decision declining an imported standard, or narrowing it to part of the tree, binds this axis, and grading against a standard the repository has already refused is itself the finding.
 
 Absent such a line, an imported standard applies. Silence is not an objection, or every standard would need adopting twice.
 

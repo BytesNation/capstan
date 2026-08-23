@@ -9,9 +9,9 @@ The most common failure in any build is not bad execution. It is that you though
 
 ## Before the first round
 
-Read the decision log, in the document home, per the `effort` skill. Every line marked `open` or `assumed` is a question a previous run could not settle, and it belongs in round one alongside whatever the operator just asked about.
+Read the decision log, `decisions.md` in the document home, which is `<working copy>/.capstan/` unless configured otherwise. Every line marked `open` or `assumed` is a question a previous run could not settle, and it belongs in round one alongside whatever the operator just asked about.
 
-Read the glossary too, in the document home, if there is one. You are about to spend a session using words, and half of them are already defined.
+Read the glossary too, `CONTEXT.md` in the same document home, if there is one. You are about to spend a session using words, and half of them are already defined.
 
 An `assumed` line is not settled, it is defaulted. Put it back on the table with its current default as the recommended answer.
 
