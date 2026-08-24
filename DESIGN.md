@@ -73,13 +73,14 @@ spec.md and plan.md.
 
 Without that line you get `unslop` announcing it must always apply and nothing telling it where to stop.
 
-## Why decisions and the words for them are the only things that persist
+## Why decisions, the words for them, and the tracker persist
 
-Three tiers of decision, sorted by lifespan, and the glossary standing beside them.
+Three tiers of decision, sorted by lifespan, the glossary standing beside them, and the tracker recording outcomes rather than reasoning.
 
 - **Glossary**: one line per term, `CONTEXT.md` in [the document home](README.md#document-home). The only file here edited in place rather than superseded, because a glossary you have to read archaeologically is a glossary nobody reads. Every agent that writes or reviews code reads it; a name that contradicts it is a review finding.
 - **Log**: one line per decision, `decisions.md` in the document home. Cannot bloat.
 - **Record**: a full document only when a decision is hard to reverse *and* surprising without context *and* a real trade-off. All three, so most efforts produce none.
+- **Tracker**: one row per slice, `tracker.md` in the document home, carrying the effort, the slice, its status and the commit that merged it. Nothing else here records what shipped, so it is the one place that question stays answerable once the plan that shipped it is gone.
 - **Brief**: generated per recipient at send time, never stored, never maintained.
 
 The log carries unsettled questions too. A question the interview could not resolve becomes an `open` line, or an `assumed` one when the crew picked a default to keep moving. Both get reported at every gate, neither blocks one, and the next interview reads them back before its first round. Without that, a hard question asked in March dies with the spec that held it.
@@ -92,7 +93,7 @@ The reason external documentation becomes unreadable is almost always that one a
 
 ## Why the document home is one root, never two copies
 
-Some operators would rather read the glossary, the log, and the records in a markdown viewer they already use than find them sitting in the repository beside the code. The document home answers that with one configured root, resolved everywhere, defaulting to the repository so an operator who configures nothing notices no difference.
+Some operators would rather read the glossary, the log, the records, and the tracker in a markdown viewer they already use than find them sitting in the repository beside the code. The document home answers that with one configured root, resolved everywhere, defaulting to the repository so an operator who configures nothing notices no difference.
 
 The alternative, writing to the repository and mirroring into the vault, was rejected outright. Two copies of the same file is a sync problem, and a sync problem needs an operating layer to keep the copies from drifting apart, which is exactly the kind of thing this project refuses to build and maintain. One root means a file exists in exactly one place, and "where is the real one" is never a question anyone has to ask.
 
