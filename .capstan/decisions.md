@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 347 | 2026-08-23 | Verification is green and degraded, and says which. One executable check, and it validates a manifest, so six seams and four whole-repository sweeps are the evidence. The real evidence is not a check: `tracker.md` holds three merged rows written under the rules while those rules were being added | accepted |
 | 346 | 2026-08-23 | Slice 2 merges after one review and two fix rounds, verified by the Architect. The blocking finding was a missing location at three named sites and is checkable by reading; the second round was one clause the Architect had left out of the first brief | accepted |
 | 345 | 2026-08-23 | Slice 3 merges after one review and one fix round, verified by the Architect. Three blocking findings, all incomplete-sweep or false-claim, all mechanical and readable in the diff. Same call as 257 | accepted |
 | 344 | 2026-08-23 | The contraction finding rested on a false premise: `README.md` carries `you've` at line 9, so it was not the only one. The change to "it is" stands rather than being reverted, since both read fine and churn is worse. Recorded because the record should say why a finding was actioned | accepted |
