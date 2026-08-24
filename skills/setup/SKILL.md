@@ -25,15 +25,15 @@ Everything below refers to that path. It is not necessarily the session's workin
 
 ## The ask
 
-Before asking anything, read `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md`, both addressed by absolute path against the working copy above. The key is a bare line, `capstan-document-home: <value>`, never frontmatter: reading it means finding that line, not parsing YAML.
+Before asking anything, read `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md`, both addressed by absolute path against the working copy above. The key is a bare line, `capstan-document-home: <value>`, never frontmatter: reading it means finding that line, not parsing YAML. A file that does not exist and a file that exists but carries no such line reach the same result everywhere below: no value found there.
 
-Reject three shapes rather than resolve past them, in either file: the key appearing twice in one file, an empty value, and a value that is not itself an absolute path (resolving a relative one would mean assuming the session's own directory, exactly what the Precondition above forbids). Each stops the phase: report what was found and ask the operator to fix the file by hand before running this again. A file already carrying two contradictory lines is not made safe by guessing which one to keep.
+Reject three shapes rather than resolve past them, in either file: the key appearing twice in one file, an empty value, and a value that is not itself an absolute path (resolving a relative one would mean assuming the session's own directory, exactly what the Precondition above forbids). Each ends the run: report what was found and ask the operator to fix the file by hand before running this again. A file already carrying two contradictory lines is not made safe by guessing which one to keep.
 
 Strip any trailing slash from a value found before comparing it to anything else; `<working copy>/.capstan` and `<working copy>/.capstan/` name the same path. Call whatever this settles to **the home currently in force**: the value found, or the default when neither file carries the key.
 
-Report the home currently in force before asking anything else, always under the same word, "Currently:". If the two files carry the key with different values, there is no single value to put there; report both under it instead, "Currently: `CLAUDE.md` says `<value>`. `AGENTS.md` says `<value>`.", and ask which one is correct before anything else. The answer becomes the home currently in force, and step 5 removes the key from the file that lost, without asking again which file that is. Otherwise, "Currently: `<value>`." carries the single value, whether a file carries the key or not: an operator who has never run this before sees the default stated as plainly as one changing an existing answer does. Then continue below regardless, since changing an existing answer runs the same procedure as setting it the first time.
+Report the home currently in force before asking anything else, always under the same word, "Currently:". If the two files carry the key with different values, there is no single value to put there; report both under it instead, "Currently: `CLAUDE.md` says `<value>`. `AGENTS.md` says `<value>`.", and ask which one is correct before anything else. The answer becomes the home currently in force, and step 4 removes the key from the file that lost, without asking again which file that is. Otherwise, "Currently: `<value>`." carries the single value, whether a file carries the key or not: an operator who has never run this before sees the default stated as plainly as one changing an existing answer does. Then continue below regardless, since changing an existing answer runs the same procedure as setting it the first time.
 
-The layout ask below is two steps, never a three-way menu: someone who wants the default should not read two paragraphs about vault layouts to get there. Step 5 asks a different question, which file to write into, only when both `CLAUDE.md` and `AGENTS.md` already exist and agree; a disagreement already resolved above does not ask again, and either way that is a separate ask that does not turn this one into three.
+The layout ask below is two steps, never a three-way menu: someone who wants the default should not read two paragraphs about vault layouts to get there. Step 4 asks a different question, which file to write into, whenever both `CLAUDE.md` and `AGENTS.md` exist; a disagreement already resolved above does not ask again, and either way that is a separate ask that does not turn this one into three.
 
 **First, the fork.** Ask where the glossary, the decision log, the decision records and the tracker should live:
 
@@ -49,20 +49,24 @@ Both resolve to the same thing from here on, an absolute path configured away fr
 
 ## Then, in order
 
-### 1. Confirm the path
+### 1. Confirm the path, and make sure it exists
 
 The confirmed path is `<working copy>/.capstan` for "in the repository," written and compared without a trailing slash from here on even though the rest of this document spells the directory `.capstan/` to mark it as one, or the path the operator just gave for "outside." An absolute path only. A relative one is rejected right here, before it gets the chance to stop a later step on an assumption about the session's own directory. Strip any trailing slash before comparing it to the home currently in force below; the two are compared by path, not by spelling.
 
+Create the confirmed path if it does not already exist, before anything below can branch on it. Without this, choosing a folder outside the repository fails on its first run every time: a project folder named for the first time inside a vault is unreachable by definition. It also closes the case a re-confirmed key can otherwise reach: a folder deleted since the last run, waved through by every branch below because each one continues past this point rather than through it. This runs whether the confirmed path matches the home already in force or not, and whether the collision check below finds all four artifacts, some, or none: the guarantee is a property of the confirmed path itself, not of whichever branch happens to ask for it first.
+
+Created empty, it can still be empty when this run ends, most often a fresh repository choosing the default with nothing yet to move into it, or a later step that stops before anything moves. Git does not track an empty directory, so step 6 commits nothing for it, and there is nothing to unwind either way: an empty directory left here is the same expected outcome as a fresh repository choosing the default, and the operator removes it by hand if they would rather it were gone.
+
 ### 2. Check the destination
 
-When the confirmed path is the home currently in force already, there is nothing to check or move: continue at step 5. This is the ordinary case of confirming the same answer back, even on a project too new to have all four artifacts yet.
+When the confirmed path is the home currently in force already, there is nothing to check or move: continue at step 4. This is the ordinary case of confirming the same answer back, even on a project too new to have all four artifacts yet.
 
 Otherwise, check whether the confirmed path already holds any of `CONTEXT.md`, `decisions.md`, `decisions/` or `tracker.md`.
 
 **All four are there.** Report it, and ask the operator to choose:
 
-- **Give a different path.** Ask again for the absolute path, the same question **The ask** asked, and return to step 1 with the new answer.
-- **Proceed.** The confirmed path's existing four become the ones in force from here on. Skip step 4 entirely, and continue at step 5: the key still gets written, pointing at the confirmed path. If the home currently in force holds any of the four, say plainly that it now holds a stale copy; if it holds none, there is nothing to say.
+- **Give a different path.** Return to **The ask** and ask it again from the fork, so choosing the default is a live answer this time too, then return to step 1 with whatever the operator gives.
+- **Proceed.** The confirmed path's existing four become the ones in force from here on. Skip step 3 entirely, and continue at step 4: the key still gets written, pointing at the confirmed path. If the home currently in force holds any of the four, say plainly that it now holds a stale copy; if it holds none, there is nothing to say.
 
 **Some but not all four are there.** Never merge, never overwrite: a partial merge is the most dangerous kind, indistinguishable from data loss until someone diffs it by hand. Report exactly what is there, and offer only:
 
@@ -75,42 +79,29 @@ There is no third answer for a partial collision. Leaving the uncollided artifac
 
 This step runs every time a different path is in play, because two working copies pointed at one home would otherwise mean one decision log numbered by two different runs, and nothing else catches it: a working-copy-local claim file cannot see a working copy it does not know about.
 
-### 3. Create the folder if it does not exist
-
-After the operator confirms the path, create it if it is missing. Without this, choosing a folder outside the repository fails on its first run every time. A project folder named for the first time inside a vault is unreachable by definition, and an unreachable configured root stops the phase.
-
-Created empty, it can still be empty when this run ends, most often a fresh repository choosing the default with nothing yet to move into it. Git does not track an empty directory, so step 8 commits nothing for it; that is expected, not a fault.
-
-### 4. Report what would move, then move it
+### 3. Report what would move, then move it
 
 List which of the four artifacts sit at **the home currently in force** (the value read at the top of **The ask**) today and would move to the confirmed path.
 
 If none of them do, ask the operator which is true, since nothing here can tell the two apart:
 
-- **Nothing exists yet.** Proceed to step 5 with nothing moved.
+- **Nothing exists yet.** Proceed to step 4 with nothing moved.
 - **The key is wrong**, pointing at a home that is not where the artifacts actually are. Stop here. The operator corrects it by hand, then runs this again.
 
-Otherwise, on the operator's approval, move them and continue to step 5. On refusal, move nothing, say plainly that `<home currently in force>` still holds the four and the confirmed path is not receiving them, and stop here: do not write the key and do not commit. A refusal that still rewrote the key would leave that key pointing at an empty destination while the real log sat untouched at the old home, worse than either finishing the move or leaving everything as it was.
+Otherwise, on the operator's approval, move them and continue to step 4. On refusal, move nothing, say plainly that `<home currently in force>` still holds what was just listed and the confirmed path is not receiving it, and stop here: do not write the key and do not commit. A refusal that still rewrote the key would leave that key pointing at an empty destination while the real log sat untouched at the old home, worse than either finishing the move or leaving everything as it was.
 
-The move covers exactly those four: `CONTEXT.md`, `decisions.md`, `decisions/`, `tracker.md`. The effort scratch stays at `<working copy>/.capstan/effort/` under every configuration, and `.capstan/` itself is never deleted by this step. It can end up empty once the four move out and no effort is currently running, the same expected emptiness as step 3's newly created folder.
+The move covers exactly those four: `CONTEXT.md`, `decisions.md`, `decisions/`, `tracker.md`. The effort scratch stays at `<working copy>/.capstan/effort/` under every configuration, and `.capstan/` itself is never deleted by this step. It can end up empty once the four move out and no effort is currently running, the same expected emptiness as step 1's newly created folder.
 
-### 5. Write the key
+### 4. Write the key
 
-Write `capstan-document-home: <confirmed path>` into whichever of `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` exists. Neither existing creates `AGENTS.md`, since both Claude Code and Codex read it.
+Determine which file carries the key from here on:
 
-**If the file already carries a `capstan-document-home` line, replace that line in place with the new value; never append a second one.** A file that already carries the key and gets a second one appended beside it is the same disease as the two files disagreeing, inside one file instead of across two, and nothing downstream would catch it.
+- **The ask found the two files disagreeing.** The operator already picked which one is correct there; write into that file, and do not ask again.
+- **Neither `CLAUDE.md` nor `AGENTS.md` exists.** Create `AGENTS.md`, since both Claude Code and Codex read it; `CLAUDE.md` is never created by this step.
+- **Exactly one of the two exists.** Write into that one.
+- **Both exist, for any other reason.** Ask which file to write into. This covers two files that already carry the same value, two files where only one carries the key, and two files where neither does: which file exists is not settled by what either one holds, so it is the same question regardless.
 
-**When The ask found the two files disagreeing**, the operator already picked which one is correct there: write the confirmed path into that file, and remove the `capstan-document-home` line entirely from the other, together with the sentence introducing it if this step wrote that sentence itself. If nothing else remains in the losing file afterward, delete it rather than leave an empty `CLAUDE.md` or `AGENTS.md` behind; a zero-byte file in git history looks like it means something. One file carries the key from here on; the mismatch does not survive this run.
-
-**Otherwise**, meaning both files existed and already agreed, or only one existed, or neither did: both existing still means asking which one to write into. Writing into only one of two agreeing files is exactly how they end up disagreeing later, and that is a state this step must not create.
-
-A file with no existing key gets the line appended at the end, under no heading:
-
-```
-capstan-document-home: /Users/example/vault/ProjectName
-```
-
-A file this step creates holds one sentence above that line saying what the file is, for example:
+Write `capstan-document-home: <confirmed path>` into the chosen file. If it already carries a `capstan-document-home` line, replace that line in place; never append a second one. A file with no existing key gets the line appended at the end, under no heading. A file this step creates holds one sentence above the key line saying what the file is, for example:
 
 ```
 This file carries configuration read by Capstan and by other agents working in this repository.
@@ -118,30 +109,30 @@ This file carries configuration read by Capstan and by other agents working in t
 capstan-document-home: /Users/example/vault/ProjectName
 ```
 
-### 6. Write the key even when the answer is the default
+Then, whichever file was not chosen: if it still carries a `capstan-document-home` line, remove it entirely, together with the sentence introducing it if this step wrote that sentence itself. If nothing else remains in that file afterward, delete it rather than leave an empty `CLAUDE.md` or `AGENTS.md` behind; a zero-byte file in git history looks like it means something. This runs every time both files exist, not only when **The ask** found them disagreeing: a file that already agreed, or a file that carried the key while the chosen one did not, leaves a second line behind exactly the same way if this is skipped. One file carries the key line across both from here on; no mismatch, and no duplicate, survives this run regardless of how the two started.
 
-Write it even when the confirmed path is the default. Otherwise a project that was never asked and a project that was asked and chose the default look identical on disk, and telling those two states apart is the reason this skill exists.
+Write the key even when the confirmed path is the default. Otherwise a project that was never asked and a project that was asked and chose the default look identical on disk, and telling those two states apart is the reason this skill exists.
 
-### 7. Add `.capstan/effort/` to `.gitignore`
+### 5. Add `.capstan/effort/` to `.gitignore`
 
 Create `<working copy>/.gitignore` if it does not exist, and add the line if it is missing. A committed effort scratch is a stale spec sitting in someone's repository, read by the next agent as current when it no longer is.
 
-### 8. Commit everything, once
+### 6. Commit everything, once
 
-Commit every change this run made to the working copy as a single commit, subject `Configure document home`, ordinary unattended work: the mismatch resolved in **The ask**, if there was one; the artifacts removed from the home currently in force, if they moved out of the working copy; the key written in steps 5 and 6; and the `.gitignore` line from step 7. Do not commit anything on the far side of a move. That is the operator's, always, the same as anything else in a vault they did not ask this skill to touch.
+Commit every change this run made to the working copy as a single commit, subject `Configure document home`, ordinary unattended work: the key written or replaced in step 4, and a second file's key removed or the file deleted alongside it if step 4 found one; the artifacts removed from the home currently in force, if they moved out of the working copy; and the `.gitignore` line from step 5. Do not commit anything on the far side of a move. That is the operator's, always, the same as anything else in a vault they did not ask this skill to touch.
 
 Nothing to commit is a valid outcome. Confirming the same answer back changes none of the working copy's own files, and this step is then a no-op.
 
-### 9. Say the vault is theirs to commit
+### 7. Say the vault is theirs to commit
 
 When the confirmed path is a folder outside the repository, tell the operator that the vault is theirs to commit, and that a document home can sit unversioned for days if they let it. When the artifacts also moved out of a vault, the source is theirs to commit too, for the same reason: this step ran no git there either, and the deletions sitting inside it are just as real as the arrivals in the destination. Nothing here runs git outside the working copy.
 
-**Done when** exactly one `capstan-document-home` line exists across `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` combined, `<working copy>/.gitignore` carries `.capstan/effort/`, and listing the confirmed path directly, not recalling what an earlier step reported, shows either all four artifacts there or none of the four anywhere. A stale copy left at a different location under step 2's full-collision branch does not fail this: the confirmed path holds all four regardless of what else is true elsewhere.
+**Done when** exactly one `capstan-document-home` line exists across `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` combined, `<working copy>/.gitignore` carries `.capstan/effort/`, and listing the confirmed path directly, not recalling what an earlier step reported, shows a directory that exists and holds every one of the four artifacts that exists anywhere. Zero of the four, two, or all four all satisfy this equally, since step 2 itself calls some-but-not-all the ordinary case; what fails it is one of the four sitting somewhere else without also sitting at the confirmed path, or the confirmed path not existing at all. A stale copy left behind at the old home under step 2's full-collision Proceed, reported there as stale, does not fail this on its own: the confirmed path still holds every artifact currently in force.
 
 ## Re-running
 
 Running this a second time is not a special mode. It is the same skill, and the read at the top of **The ask** is what makes re-running work. It reports the current value, or the disagreement between the two files if there is one, before offering the fork again, so the operator always sees what is in force before they change it.
 
-Confirming the same value back finds nothing to move. Step 2 sees the confirmed path is the home already in force and skips straight to step 5, step 5 replaces the key line with the same value, step 7 is a no-op once the `.gitignore` line already carries it, and step 8 commits nothing. Choosing a different answer runs steps 1 through 9 exactly as a first run would, moving the four artifacts from the home currently in force, wherever that is today, to the newly confirmed path: vault A to vault B, `.capstan/` back to a vault, or any pair between them.
+Confirming the same value back finds nothing to move. Step 2 sees the confirmed path is the home already in force and skips straight to step 4, step 4 replaces the key line with the same value, step 5 is a no-op once the `.gitignore` line already carries it, and step 6 commits nothing. Choosing a different answer runs steps 1 through 7 exactly as a first run would, moving the four artifacts from the home currently in force, wherever that is today, to the newly confirmed path: vault A to vault B, `.capstan/` back to a vault, or any pair between them.
 
 This is what a one-shot question could not do. An operator who wants to change the answer runs `setup` again, rather than editing the key by hand and hoping the artifacts follow it there on their own.
