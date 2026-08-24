@@ -6,9 +6,14 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 329 | 2026-08-23 | Supersedes 322. The setup walkthrough is deferred with the Obsidian surface rather than built here. 322 and 323 contradicted each other: a walkthrough writing a setting no code reads is machinery for its own sake. Deferred, not cancelled, the same shape as 228 | accepted |
+| 328 | 2026-08-23 | `CLAIM.md` keeps its `next` line. A status column covers part of what it carried, but not the prose about what is outstanding and which findings were dismissed | accepted |
+| 327 | 2026-08-23 | Four statuses: `planned`, `building`, `merged`, `dropped`. Closed and kept, per 209 | accepted |
+| 326 | 2026-08-23 | `tracker.md` and `plan.md` are not two sources of truth. `plan.md` holds Owns, Demonstrated, Seam, Red at base and Blocked by, is authoritative during the run and dies at delivery; `tracker.md` holds effort, slice, status and merge commit and outlives it. Only the slice name overlaps | accepted |
+| 325 | 2026-08-23 | A row appears at phase 2 when the plan is written, carrying `planned`, and moves as the slice does. Not at merge: 201 puts work stalling between gates in scope, and a row that appears only on merge cannot show anything in flight | accepted |
 | 324 | 2026-08-23 | The operator accepted the whole recommended set in round 1 provisionally, to be revisited once the tracker has run on a real effort. This is the revisit condition for 318 through 323 | assumed |
 | 323 | 2026-08-23 | This effort builds the default tracker and stops. The Obsidian surface is the next effort. 203 already holds that one adapter is a hypothetical seam, and a second surface means nothing until the first exists and has been used | accepted |
-| 322 | 2026-08-23 | Setup is a `walkthrough`. It exists for operator-driven procedures, is discarded once run, and the `effort` skill rules out anything needing code to stay alive | accepted |
+| 322 | 2026-08-23 | Setup is a `walkthrough`. It exists for operator-driven procedures, is discarded once run, and the `effort` skill rules out anything needing code to stay alive | superseded by 329 |
 | 321 | 2026-08-23 | The tracker follows the document home: one root, one setting. Two settings is two things to keep in sync, which 213 refused for the same reason. Restates 207, whose protection disappears once tracking is always on | accepted |
 | 320 | 2026-08-23 | One row per slice, carrying the effort, the slice, its status and the commit that merged it. Not one row per effort: 209 wants "what shipped" answerable and slices are what ship | accepted |
 | 319 | 2026-08-23 | The durable artifact is `tracker.md`, a fourth alongside the glossary, the log and the records, one table, relocating with the document home. 223's reasoning for one scannable file applies unchanged | accepted |
