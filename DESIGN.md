@@ -73,20 +73,21 @@ spec.md and plan.md.
 
 Without that line you get `unslop` announcing it must always apply and nothing telling it where to stop.
 
-## Why decisions and the words for them are the only things that persist
+## Why decisions, the words for them, and the tracker persist
 
-Three tiers of decision, sorted by lifespan, and the glossary standing beside them.
+Three tiers of decision, sorted by lifespan, the glossary standing beside them, and the tracker recording outcomes rather than reasoning.
 
 - **Glossary**: one line per term, `CONTEXT.md` in [the document home](README.md#document-home). The only file here edited in place rather than superseded, because a glossary you have to read archaeologically is a glossary nobody reads. Every agent that writes or reviews code reads it; a name that contradicts it is a review finding.
 - **Log**: one line per decision, `decisions.md` in the document home. Cannot bloat.
 - **Record**: a full document only when a decision is hard to reverse *and* surprising without context *and* a real trade-off. All three, so most efforts produce none.
+- **Tracker**: one row per slice, `tracker.md` in the document home, carrying the effort, the slice, its status and the commit that merged it. Nothing else here records what shipped, so it is the one place that question stays answerable once the plan that shipped it is gone.
 - **Brief**: generated per recipient at send time, never stored, never maintained.
 
 The log carries unsettled questions too. A question the interview could not resolve becomes an `open` line, or an `assumed` one when the crew picked a default to keep moving. Both get reported at every gate, neither blocks one, and the next interview reads them back before its first round. Without that, a hard question asked in March dies with the spec that held it.
 
 A third status covers what is not yet a question at all. An `unformed` line names an area the effort will reach and nobody has looked at, and it exists because the other two mishandle it: asked as an `open` question it stalls twice and gets parked, and left out entirely it arrives as a surprise in phase 3. It is the one line that gets rewritten rather than superseded, since nothing was decided and there is no history to protect. The idea is Matt Pocock's fog of war, from `wayfinder`, without the issue tracker it is built on.
 
-Everything else lives in `.capstan/effort/`, the one gitignored piece of `.capstan/`, and is deleted at delivery. A stale spec or an old research file is worse than none, because the next agent reads it as current.
+Everything else lives in `.capstan/effort/`, the one gitignored piece of `.capstan/`, and is deleted at delivery. A stale spec or an old research file is worse than none, because the next agent reads it as current. The tracker exists because `plan.md`, the record of how a slice shipped, dies with that folder, and something needs to answer whether it shipped at all.
 
 The reason external documentation becomes unreadable is almost always that one artifact was made to serve two audiences with opposite needs. An internal record is dense and assumes context. A partner brief is short and assumes nothing. Do not maintain the second one. Regenerate it.
 

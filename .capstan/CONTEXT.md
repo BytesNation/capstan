@@ -12,7 +12,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Gate | A point where the run *ends* and the operator decides. Three per effort. Never a pause. |
 | Operator | The person at the gates. Never the crew, and never an agent. |
 | Crew | The five roles: Architect, Scout, Builder, Reviewer, Courier. |
-| Architect | Owns the interview, the spec, the slice graph and the decision log. Your session, not a subagent. |
+| Architect | Owns the interview, the spec, the slice graph, the decision log and the tracker. Your session, not a subagent. |
 | Scout | Read-only reconnaissance. Returns cited findings and never decides. |
 | Builder | Builds exactly one slice in its own worktree. Never reviews its own work. |
 | Reviewer | Reviews one slice's diff without the Builder's reasoning. Reports, never fixes. |
@@ -20,10 +20,10 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Knowledge-base note | The one permanent note per effort the Courier writes at delivery. Written by Capstan, committed by the operator. |
 | Discipline | A skill the roles pull in, as opposed to a role itself. |
 | Project | The work an Effort belongs to and outlives. One Project holds many Efforts, its own Document home, and, once built, its Tracker. |
-| `capstan_type` | The frontmatter property naming which durable artifact a note is: `glossary`, `decision-log` or `decision-record`. Prefixed per the vault-wide typing rule. |
+| `capstan_type` | The frontmatter property naming which durable artifact a note is: `glossary`, `decision-log`, `decision-record` or `tracker`. Prefixed per the vault-wide typing rule. |
 | `capstan-document-home` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding an absolute path to the Document home. Unset means the default. |
 | Document home | Where the glossary, the log and the records live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
-| Tracker | The surface holding slice state through to completion. Always present; the default is `tracker.md` in the Document home. Not yet built. |
+| Tracker | The surface holding slice state through to completion. Always present; the default is `tracker.md` in the Document home. |
 | Front door | The `effort` skill, invoked by the operator to start a run. Neither a Discipline nor an Effort. |
 | Walkthrough | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. Discarded with the effort's scratch once run. |
 | Spike | Throwaway work that answers one question: whether something behaves right or feels right. Never merged. |

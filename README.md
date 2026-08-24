@@ -78,16 +78,19 @@ By default, everything lands in `.capstan/`, inside the repository the work is h
   CONTEXT.md      one line per term. committed. edited in place.
   decisions.md    one line per decision. committed.
   decisions/      a full record, only when one is earned. committed.
+  tracker.md      one row per slice: effort, slice, status, merge commit. committed.
   effort/         scratch: the claim, spec, plan, scout returns. gitignored.
 ```
 
 Add `.capstan/effort/` to your `.gitignore`. That folder is deleted at delivery, because a stale spec is worse than no spec: the next agent reads it as current.
 
+`tracker.md` is the one file above that outlives a single effort. It answers what shipped, one row per slice, with the commit that merged it, and it's on by default, so you get it without configuring anything.
+
 Two more things are read from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoded. Where the Courier writes the permanent per-effort note, which it skips and says so if you have not set one. And where the document home below points, if you have moved it.
 
 ## Document home
 
-By default, the glossary, the decision log, and the decision records live in `.capstan/` in the repository, next to your code. That is the layout above, and configuring nothing keeps it that way.
+By default, the glossary, the decision log, the decision records, and the tracker live in `.capstan/` in the repository, next to your code. That is the layout above, and configuring nothing keeps it that way.
 
 Read somewhere else instead, a folder in an Obsidian vault, say, and point Capstan there.
 
@@ -101,7 +104,7 @@ capstan-document-home: /Users/you/vault/YourProject
 
 The value must be an absolute path. One folder per project inside one vault, never one vault per project, and never a copy in both places. A file lives in exactly one location, and Capstan resolves every path to it against that one root.
 
-The glossary (`CONTEXT.md`), the decision log (`decisions.md`), and the decision records (`decisions/`) resolve there from then on. Nothing migrates the copies already sitting in `.capstan/`: switching an existing project's document home is on you, or you end up with a stale copy in `.capstan/` and a fresh one in the vault. The effort scratch never moves regardless: the claim, the spec, the plan, and scout returns stay at `.capstan/effort/` in the repository under every configuration, and are deleted at delivery.
+The glossary (`CONTEXT.md`), the decision log (`decisions.md`), the decision records (`decisions/`), and the tracker (`tracker.md`) resolve there from then on. Nothing migrates the copies already sitting in `.capstan/`: switching an existing project's document home is on you, or you end up with a stale copy in `.capstan/` and a fresh one in the vault. The effort scratch never moves regardless: the claim, the spec, the plan, and scout returns stay at `.capstan/effort/` in the repository under every configuration, and are deleted at delivery.
 
 An unreachable configured root stops the run rather than falling back to the default, since a missing source of truth would otherwise produce two records that quietly disagree.
 
