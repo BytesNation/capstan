@@ -84,7 +84,7 @@ By default, everything lands in `.capstan/`, inside the repository the work is h
   effort/         scratch: the claim, spec, plan, scout returns. gitignored.
 ```
 
-`setup` adds `.capstan/effort/` to your `.gitignore`, if it is not there already. That folder is deleted at delivery, because a stale spec is worse than no spec: the next agent reads it as current.
+`effort` and `setup` both make sure `.capstan/effort/` is in your `.gitignore`, so you never have to add it by hand. That folder is deleted at delivery, because a stale spec is worse than no spec: the next agent reads it as current.
 
 `tracker.md` answers what shipped, one row per slice, with the commit that merged it, and it is on by default, so you get it without configuring anything.
 
