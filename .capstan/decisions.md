@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 336 | 2026-08-23 | The tracker cannot open its own first slice's row at phase 2, because the rule that says to did not exist yet. `tracker.md` is created after slice 1 merges, carrying slice 1 at `merged` and slices 2 and 3 at `planned`. A one-time bootstrap, not a precedent: every later effort opens rows at phase 2 per 325 | accepted |
 | 335 | 2026-08-23 | The `tracker.md` example uses this effort's own name and slice 1's real commit hash. `skills/` is payload running in a user's repository, where that history does not exist, which is the reasoning behind 94 and the no-claims-about-this-repository rule. `decision-record`'s blocks use invented domain examples and this one should too | accepted |
 | 334 | 2026-08-23 | The section names the Tracker as the surface and `tracker.md` as the default one. 318 rests on that distinction and the deferred Obsidian effort needs it; without it "the default" is a dangling comparative in a file naming no alternative. The wording came from the spec, so it is the Architect's defect | accepted |
 | 333 | 2026-08-23 | `skills/effort/SKILL.md`'s Architect line gains the tracker, and the glossary's `Architect` row joins slice 3's scope, which the plan is amended to say. Both carry the same three-artifact enumeration. Ownership is not timing, so the skill line stays slice 1's | accepted |
