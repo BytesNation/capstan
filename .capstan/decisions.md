@@ -6,6 +6,11 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 334 | 2026-08-23 | The section names the Tracker as the surface and `tracker.md` as the default one. 318 rests on that distinction and the deferred Obsidian effort needs it; without it "the default" is a dangling comparative in a file naming no alternative. The wording came from the spec, so it is the Architect's defect | accepted |
+| 333 | 2026-08-23 | `skills/effort/SKILL.md`'s Architect line gains the tracker, and the glossary's `Architect` row joins slice 3's scope, which the plan is amended to say. Both carry the same three-artifact enumeration. Ownership is not timing, so the skill line stays slice 1's | accepted |
+| 332 | 2026-08-23 | The "legibility is the discipline" clause is deleted. It states no rule, and it names a Discipline no skill in `skills/` provides while the glossary defines the word | accepted |
+| 331 | 2026-08-23 | The commit rule gains its configured-home half where an Architect updating a status reads it. 242 settled this exact scattering in this exact file and the new section reintroduced it: at a configured home there is no phase commit and the operator commits | accepted |
+| 330 | 2026-08-23 | `tracker.md` is shown as a literal fenced block, not described in prose. Every other durable artifact in this repository is specified by showing it, and an append-only file whose value is being one scannable table cannot survive two Architects inventing two header rows. This also closes the unclosed field set, since a shown header row closes it | accepted |
 | 329 | 2026-08-23 | Supersedes 322. The setup walkthrough is deferred with the Obsidian surface rather than built here. 322 and 323 contradicted each other: a walkthrough writing a setting no code reads is machinery for its own sake. Deferred, not cancelled, the same shape as 228 | accepted |
 | 328 | 2026-08-23 | `CLAIM.md` keeps its `next` line. A status column covers part of what it carried, but not the prose about what is outstanding and which findings were dismissed | accepted |
 | 327 | 2026-08-23 | Four statuses: `planned`, `building`, `merged`, `dropped`. Closed and kept, per 209 | accepted |
