@@ -64,11 +64,23 @@ Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<worki
 capstan-document-home: /Users/example/vault/ProjectName
 ```
 
-Unset, or neither file present, resolves to the default above. Configuration cannot live inside the thing being relocated, so the key never lives inside `.capstan/` itself.
+Configuration cannot live inside the thing being relocated, so the key never lives inside `.capstan/` itself.
+
+### When no document home is configured
+
+Two conditions send you here instead of resolving the key normally, both during phase 1.
+
+**The key is absent** from both files, or neither file exists. Ask one question: use the default `.capstan/` here, or run `setup` to choose a folder outside the repository. Answering default writes the key itself, so the effort proceeds and is never asked again. This does not stop the phase.
+
+**The key resolves to a home holding none of the four durable artifacts, while `<working copy>/.capstan/` holds at least one.** Report what is at each location and point at `setup`. You never perform the move yourself.
+
+A project already running on the default meets the first condition like any other project, and is asked the same way.
+
+Phases 2, 3 and 4 never ask this question. Where phase 1 left an `assumed` default, they read that line and proceed.
 
 The scratch at `<working copy>/.capstan/effort/` stays repo-relative under every configuration: `CLAIM.md`, `spec.md`, `plan.md`, scout returns and review output all live there regardless of where the document home points.
 
-A file lives in exactly one place, never two. Copying between the repository and a vault is a sync problem, and a sync problem needs an operating layer Capstan refuses to build. One vault holds one folder per Project — never one vault per Project.
+A file lives in exactly one place, never two. Copying between the repository and a vault is a sync problem, and a sync problem needs an operating layer Capstan refuses to build.
 
 A document home configured away from the default that is unreachable stops the phase, and says so. This is the deliberate exception to "stop for consequence, never for ambiguity": a missing source of truth is not ambiguity, and falling back to the default would produce two records that disagree. The default is not held to this: nothing creates `<working copy>/.capstan/` ahead of an effort, so it is missing on a repository's first run, and that first write creates it rather than stopping anything.
 
