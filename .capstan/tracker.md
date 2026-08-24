@@ -9,3 +9,8 @@ capstan_type: tracker
 | tracker | slice1 | merged | 6527694 |
 | tracker | slice2 | merged | c2bd73b |
 | tracker | slice3 | merged | 2df4063 |
+| home-setup | guard | merged | 16c799e |
+| home-setup | setup-skill | merged | 3cfc1a3 |
+| home-setup | effort-branch | merged | cdc4a80 |
+| home-setup | readme | merged | 7a81dfe |
+| home-setup | release | merged | cbbb098 |
