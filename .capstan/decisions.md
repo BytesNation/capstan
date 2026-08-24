@@ -6,6 +6,8 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 345 | 2026-08-23 | Slice 3 merges after one review and one fix round, verified by the Architect. Three blocking findings, all incomplete-sweep or false-claim, all mechanical and readable in the diff. Same call as 257 | accepted |
+| 344 | 2026-08-23 | The contraction finding rested on a false premise: `README.md` carries `you've` at line 9, so it was not the only one. The change to "it is" stands rather than being reverted, since both read fine and churn is worse. Recorded because the record should say why a finding was actioned | accepted |
 | 343 | 2026-08-23 | `durable artifact` is a counted noun with no glossary row, now hard-coded as "four" across two files. The next artifact makes it five and nothing says what qualifies, which is how the three-becomes-four sweep happens again. Raised by the slice 3 review | open |
 | 342 | 2026-08-23 | `cut` is dropped as the verb for removing a slice, in favour of `drop`, matching the status name. Phase 2 says "cut the work into vertical slices", meaning divide, and phase 3 said "a slice you cut", meaning remove; the same Architect reads both in one run. Raised by the slice 2 review as a vocabulary gap and left out of the fix brief by the Architect | accepted |
 | 341 | 2026-08-23 | `dropped` covers a slice cut at any point in phase 3, not only instead of dispatch. The Builder filled a gap the spec and plan both left, reasonably, but too narrow for the criterion beside it: a slice dispatched and then cut had no legal transition and the done-when would have forced a false `merged` | accepted |

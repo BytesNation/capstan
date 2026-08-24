@@ -8,4 +8,4 @@ capstan_type: tracker
 |---|---|---|---|
 | tracker | slice1 | merged | 6527694 |
 | tracker | slice2 | building | |
-| tracker | slice3 | building | |
+| tracker | slice3 | merged | 2df4063 |
