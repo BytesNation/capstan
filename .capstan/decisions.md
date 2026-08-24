@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 335 | 2026-08-23 | The `tracker.md` example uses this effort's own name and slice 1's real commit hash. `skills/` is payload running in a user's repository, where that history does not exist, which is the reasoning behind 94 and the no-claims-about-this-repository rule. `decision-record`'s blocks use invented domain examples and this one should too | accepted |
 | 334 | 2026-08-23 | The section names the Tracker as the surface and `tracker.md` as the default one. 318 rests on that distinction and the deferred Obsidian effort needs it; without it "the default" is a dangling comparative in a file naming no alternative. The wording came from the spec, so it is the Architect's defect | accepted |
 | 333 | 2026-08-23 | `skills/effort/SKILL.md`'s Architect line gains the tracker, and the glossary's `Architect` row joins slice 3's scope, which the plan is amended to say. Both carry the same three-artifact enumeration. Ownership is not timing, so the skill line stays slice 1's | accepted |
 | 332 | 2026-08-23 | The "legibility is the discipline" clause is deleted. It states no rule, and it names a Discipline no skill in `skills/` provides while the glossary defines the word | accepted |
