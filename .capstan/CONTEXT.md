@@ -23,7 +23,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | `capstan_type` | The frontmatter property naming which durable artifact a note is: `glossary`, `decision-log` or `decision-record`. Prefixed per the vault-wide typing rule. |
 | `capstan-document-home` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding an absolute path to the Document home. Unset means the default. |
 | Document home | Where the glossary, the log and the records live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
-| Tracker | A surface holding slice and seam state through to completion, authoritative when configured. A separate feature from the Document home, and not yet built. |
+| Tracker | The surface holding slice state through to completion. Always present; the default is `tracker.md` in the Document home. Not yet built. |
 | Front door | The `effort` skill, invoked by the operator to start a run. Neither a Discipline nor an Effort. |
 | Walkthrough | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. Discarded with the effort's scratch once run. |
 | Spike | Throwaway work that answers one question: whether something behaves right or feels right. Never merged. |
