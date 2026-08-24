@@ -6,6 +6,13 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 324 | 2026-08-23 | The operator accepted the whole recommended set in round 1 provisionally, to be revisited once the tracker has run on a real effort. This is the revisit condition for 318 through 323 | assumed |
+| 323 | 2026-08-23 | This effort builds the default tracker and stops. The Obsidian surface is the next effort. 203 already holds that one adapter is a hypothetical seam, and a second surface means nothing until the first exists and has been used | accepted |
+| 322 | 2026-08-23 | Setup is a `walkthrough`. It exists for operator-driven procedures, is discarded once run, and the `effort` skill rules out anything needing code to stay alive | accepted |
+| 321 | 2026-08-23 | The tracker follows the document home: one root, one setting. Two settings is two things to keep in sync, which 213 refused for the same reason. Restates 207, whose protection disappears once tracking is always on | accepted |
+| 320 | 2026-08-23 | One row per slice, carrying the effort, the slice, its status and the commit that merged it. Not one row per effort: 209 wants "what shipped" answerable and slices are what ship | accepted |
+| 319 | 2026-08-23 | The durable artifact is `tracker.md`, a fourth alongside the glossary, the log and the records, one table, relocating with the document home. 223's reasoning for one scannable file applies unchanged | accepted |
+| 318 | 2026-08-23 | Supersedes 200. Tracking is always on and configuration picks the surface, rather than a tracker being absent until configured. The `Tracker` glossary row loses "authoritative when configured" | accepted |
 | 317 | 2026-08-23 | Bookkeeping. 259, 260 and 264 were delivered by `scratch-shape` and 265 and 316 were settled by 315 and the worktree removal, but all five stayed `open` in the log. Closed here so the next interview does not put settled questions to the operator. 266 stays open: the five notes are corrected but `[redacted]` has not been re-run | accepted |
 | 316 | 2026-08-23 | The vault holds a [redacted] stale agent worktree at `[redacted]`, registered with git and containing a full second copy of every note. It doubled every path count during this investigation and is the likely cause of the partial revert of the tag fixes. No further vault writes until it is resolved | superseded by 317 |
 | 315 | 2026-08-23 | Supersedes 119 and settles 146. `[redacted]` is correct and needs no change; the eight Capstan notes are the defect. BytesNation tags flat, `[redacted]`, on [redacted] including project subfolders like [redacted]. [redacted] and [redacted] tag hierarchically, `[redacted]` and `[redacted]`, which is the append `[redacted]` scopes to [redacted] alone. 119 read [redacted]'s notes as carrying "the parent tag" when they carry the hierarchical one, then invented a flat project tag matching neither. `[redacted]` appears nowhere else in the vault | accepted |
@@ -123,7 +130,7 @@ capstan_type: decision-log
 | 203 | 2026-08-23 | Obsidian is built concretely. Linear, Plane and GitHub come later and design the seam then. One adapter is a hypothetical seam | accepted |
 | 202 | 2026-08-23 | A new project is scaffolded from a template rather than from a layout Capstan hardcodes | accepted |
 | 201 | 2026-08-23 | All three staleness failures are in scope: a tracker item that outlives the work, a note describing a superseded decision, and work that stops between gates unnoticed | accepted |
-| 200 | 2026-08-23 | When a tracker is configured it is authoritative, and it holds slice and seam state through to completion. `.capstan/` is not the source of truth in that configuration | accepted |
+| 200 | 2026-08-23 | When a tracker is configured it is authoritative, and it holds slice and seam state through to completion. `.capstan/` is not the source of truth in that configuration | superseded by 318 |
 | 199 | 2026-08-23 | The motivation is relocating documentation and configuration out of the repository into a markdown renderer, for operators who do not want it in the repo. Not an extension of the delivery note | accepted |
 | 198 | 2026-08-23 | Every part of this is optional. Capstan's core is unchanged and the default stays `.capstan/` in the repository, since the core is running on three live projects | accepted |
 | 197 | 2026-08-21 | No second version bump. This folds into the unreleased 2.12.0, per 7 | accepted |
