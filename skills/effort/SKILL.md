@@ -56,7 +56,7 @@ If the work has no repository, say so and ask whether to create one. An effort n
 
 ## Document home
 
-The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records. It defaults to `<working copy>/.capstan`.
+The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records, and the tracker. It defaults to `<working copy>/.capstan`.
 
 Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside the knowledge-base setting already documented there, before resolving the term anywhere else. Both files carrying the key with a different value stops the phase, and says so: two roots means two logs, the same "two records that disagree" outcome this section stops for elsewhere, and not a case to resolve by precedence or first-wins. A value that is not itself an absolute path stops the phase too, and says so: resolving it would mean assuming the session's working directory, which the Precondition section above forbids. The value is an absolute path to the folder:
 
@@ -77,6 +77,20 @@ At the default, the crew commits it as ordinary unattended work, per the Authori
 Every frontmatter property Capstan writes carries a `capstan_` prefix. Obsidian types a property vault-wide by name, so a bare `status` collides with whatever the operator's vault already assigned that name.
 
 The decision log stays one file, `decisions.md`, wherever the document home points. It does not become one note per decision; the records in `decisions/` stay one note each.
+
+## Tracker
+
+`tracker.md` is the fourth durable artifact, alongside the glossary, the log and the records. It lives in the document home and relocates with it under either configuration, the same as its three neighbours.
+
+One markdown table, one row per slice. A row carries the effort the slice belongs to, the slice itself, its status, and the commit that merged it.
+
+A row holds one of four statuses: `planned`, `building`, `merged`, `dropped`. Nothing else. Rows are closed and kept, never deleted — a tracker that erases completed work cannot answer what shipped, and legibility is the discipline that keeps that accumulation readable rather than a liability.
+
+Tracking is always on. `tracker.md` is the default, and no configuration is needed to have one. A repository with no `tracker.md` yet is normal, the same as a repository with no `.capstan/` on its first effort: the file is created on first write, not provisioned ahead of one.
+
+Like its three neighbours, it carries `capstan_type: tracker` in frontmatter.
+
+A status change rides the commit that phase already makes, rather than generating one of its own.
 
 ## Before you start
 
@@ -182,6 +196,7 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
   CONTEXT.md      one line per term. persists. edited in place.
   decisions.md    one line per decision. persists.
   decisions/      full records, only when gated. persists.
+  tracker.md      one row per slice. persists. created on first write.
 
 <working copy>/
   .capstan/
