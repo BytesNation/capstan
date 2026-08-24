@@ -84,7 +84,7 @@ By default, everything lands in `.capstan/`, inside the repository the work is h
 
 Add `.capstan/effort/` to your `.gitignore`. That folder is deleted at delivery, because a stale spec is worse than no spec: the next agent reads it as current.
 
-`tracker.md` is the one file above that outlives a single effort. It answers what shipped, one row per slice, with the commit that merged it, and it's on by default, so you get it without configuring anything.
+`tracker.md` answers what shipped, one row per slice, with the commit that merged it, and it is on by default, so you get it without configuring anything.
 
 Two more things are read from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoded. Where the Courier writes the permanent per-effort note, which it skips and says so if you have not set one. And where the document home below points, if you have moved it.
 

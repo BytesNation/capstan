@@ -7,7 +7,7 @@ description: Record decisions so they survive without bloating anything. A one-l
 
 Three tiers, sorted by how long each thing needs to survive. Nearly everything stays in tier one.
 
-The log, the records, the glossary and the tracker are the four durable artifacts, and each carries one frontmatter property, `capstan_type`, prefixed because Obsidian types a property vault-wide by its name, naming what the note is (`decision-log`, `decision-record`, `glossary`, or `tracker`). That is the whole schema, and it exists so a vault can tell a Capstan note from any other one sitting beside it. The tracker is defined in `skills/effort/SKILL.md`, not here.
+The log, the records, the glossary and the tracker are the four durable artifacts, and each carries one frontmatter property, `capstan_type`, prefixed because Obsidian types a property vault-wide by its name, naming what the note is (`decision-log`, `decision-record`, `glossary`, or `tracker`). That is the whole schema, and it exists so a vault can tell a Capstan note from any other one sitting beside it. The `effort` skill defines the tracker and owns its shape.
 
 ## Tier 1: the log
 

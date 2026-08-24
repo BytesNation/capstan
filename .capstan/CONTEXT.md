@@ -22,14 +22,14 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Project | The work an Effort belongs to and outlives. One Project holds many Efforts, its own Document home, and, once built, its Tracker. |
 | `capstan_type` | The frontmatter property naming which durable artifact a note is: `glossary`, `decision-log`, `decision-record` or `tracker`. Prefixed per the vault-wide typing rule. |
 | `capstan-document-home` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding an absolute path to the Document home. Unset means the default. |
-| Document home | Where the glossary, the log and the records live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
+| Document home | Where the glossary, the log, the records and the tracker live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
 | Tracker | The surface holding slice state through to completion. Always present; the default is `tracker.md` in the Document home. |
 | Front door | The `effort` skill, invoked by the operator to start a run. Neither a Discipline nor an Effort. |
 | Walkthrough | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. Discarded with the effort's scratch once run. |
 | Spike | Throwaway work that answers one question: whether something behaves right or feels right. Never merged. |
 | Stage | One step of a Walkthrough, confirmed with the operator before it is authored. Counted in `TOTAL_STAGES`. |
 | Namespace | The `capstan:` prefix a plugin install puts on every skill and agent. Absent under a manual install. |
-| `.capstan/` | The folder holding the artifacts Capstan writes for itself: `CONTEXT.md`, `decisions.md`, `decisions/`, and the effort scratch at `effort/`. Distinct from the namespace above, which is a prefix rather than a folder. |
+| `.capstan/` | The folder holding the artifacts Capstan writes for itself: `CONTEXT.md`, `decisions.md`, `decisions/`, `tracker.md`, and the effort scratch at `effort/`. Distinct from the namespace above, which is a prefix rather than a folder. |
 | Slice | A change that can be demonstrated on its own once it is done. |
 | Layer | A horizontal cut that nothing can demonstrate until other cuts land. What a slice must never be. |
 | Owns | The files one slice, and only that slice, touches. Every file the change touches is owned by exactly one slice, so nothing is left for no slice to fix and no two Builders collide. |

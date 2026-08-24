@@ -87,13 +87,13 @@ The log carries unsettled questions too. A question the interview could not reso
 
 A third status covers what is not yet a question at all. An `unformed` line names an area the effort will reach and nobody has looked at, and it exists because the other two mishandle it: asked as an `open` question it stalls twice and gets parked, and left out entirely it arrives as a surprise in phase 3. It is the one line that gets rewritten rather than superseded, since nothing was decided and there is no history to protect. The idea is Matt Pocock's fog of war, from `wayfinder`, without the issue tracker it is built on.
 
-Everything else lives in `.capstan/effort/`, the one gitignored piece of `.capstan/`, and is deleted at delivery. A stale spec or an old research file is worse than none, because the next agent reads it as current. The tracker exists because `plan.md`, the record of how a slice shipped, dies with that folder, and something needs to answer whether it shipped at all.
+Everything else lives in `.capstan/effort/`, the one gitignored piece of `.capstan/`, and is deleted at delivery. A stale spec or an old research file is worse than none, because the next agent reads it as current.
 
 The reason external documentation becomes unreadable is almost always that one artifact was made to serve two audiences with opposite needs. An internal record is dense and assumes context. A partner brief is short and assumes nothing. Do not maintain the second one. Regenerate it.
 
 ## Why the document home is one root, never two copies
 
-Some operators would rather read the glossary, the log, and the records in a markdown viewer they already use than find them sitting in the repository beside the code. The document home answers that with one configured root, resolved everywhere, defaulting to the repository so an operator who configures nothing notices no difference.
+Some operators would rather read the glossary, the log, the records, and the tracker in a markdown viewer they already use than find them sitting in the repository beside the code. The document home answers that with one configured root, resolved everywhere, defaulting to the repository so an operator who configures nothing notices no difference.
 
 The alternative, writing to the repository and mirroring into the vault, was rejected outright. Two copies of the same file is a sync problem, and a sync problem needs an operating layer to keep the copies from drifting apart, which is exactly the kind of thing this project refuses to build and maintain. One root means a file exists in exactly one place, and "where is the real one" is never a question anyone has to ask.
 
