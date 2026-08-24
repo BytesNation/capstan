@@ -21,10 +21,11 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Discipline | A skill the roles pull in, as opposed to a role itself. |
 | Project | The work an Effort belongs to and outlives. One Project holds many Efforts, its own Document home, and, once built, its Tracker. |
 | `capstan_type` | The frontmatter property naming which durable artifact a note is: `glossary`, `decision-log`, `decision-record` or `tracker`. Prefixed per the vault-wide typing rule. |
-| `capstan-document-home` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding an absolute path to the Document home. Unset means the default. |
+| `capstan-document-home` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding an absolute path to the Document home. Unset means the `effort` skill asks once, offering the default or Setup. |
 | Document home | Where the glossary, the log, the records and the tracker live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
 | Tracker | The surface holding slice state through to completion. Always present; the default is `tracker.md` in the Document home. |
-| Front door | The `effort` skill, invoked by the operator to start a run. Neither a Discipline nor an Effort. |
+| Setup | The `setup` skill. Configures where a Project's durable artifacts live, moves what is already there, and can be re-run. Operator-invoked, never part of an Effort. |
+| Front door | A skill the operator invokes directly, rather than one the model reaches for. Two: `effort` starts a run, `setup` configures where its artifacts live. Neither is a Discipline. |
 | Walkthrough | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. Discarded with the effort's scratch once run. |
 | Spike | Throwaway work that answers one question: whether something behaves right or feels right. Never merged. |
 | Stage | One step of a Walkthrough, confirmed with the operator before it is authored. Counted in `TOTAL_STAGES`. |
