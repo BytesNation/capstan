@@ -66,29 +66,29 @@ capstan-document-home: /Users/example/vault/ProjectName
 
 Configuration cannot live inside the thing being relocated, so the key never lives inside `.capstan/` itself.
 
-### When no document home is configured
-
-Two conditions send you here instead of resolving the key normally, both during phase 1.
-
-**The key is absent** from both files, or neither file exists. Ask one question: use the default `.capstan/` here, or run `setup` to choose a folder outside the repository. Answering default writes the key itself, so the effort proceeds and is never asked again. This does not stop the phase.
-
-**The key resolves to a home holding none of the four durable artifacts, while `<working copy>/.capstan/` holds at least one.** Report what is at each location and point at `setup`. You never perform the move yourself.
-
-A project already running on the default meets the first condition like any other project, and is asked the same way.
-
-Phases 2, 3 and 4 never ask this question. Where phase 1 left an `assumed` default, they read that line and proceed.
-
 The scratch at `<working copy>/.capstan/effort/` stays repo-relative under every configuration: `CLAIM.md`, `spec.md`, `plan.md`, scout returns and review output all live there regardless of where the document home points.
 
 A file lives in exactly one place, never two. Copying between the repository and a vault is a sync problem, and a sync problem needs an operating layer Capstan refuses to build.
 
 A document home configured away from the default that is unreachable stops the phase, and says so. This is the deliberate exception to "stop for consequence, never for ambiguity": a missing source of truth is not ambiguity, and falling back to the default would produce two records that disagree. The default is not held to this: nothing creates `<working copy>/.capstan/` ahead of an effort, so it is missing on a repository's first run, and that first write creates it rather than stopping anything.
 
-At the default, the crew commits it as ordinary unattended work, per the Authority table below. When the document home is configured away from the default, Capstan writes files there and never runs git in it, and the operator commits. Tell the operator, at the point they configure a root, that the vault is theirs to commit and that a document home can therefore sit unversioned for days.
+At the default, the crew commits it as ordinary unattended work, per the Authority table below. When the document home is configured away from the default, Capstan writes files there and never runs git in it, and the operator commits.
 
 Every frontmatter property Capstan writes carries a `capstan_` prefix. Obsidian types a property vault-wide by name, so a bare `status` collides with whatever the operator's vault already assigned that name.
 
 The decision log stays one file, `decisions.md`, wherever the document home points. It does not become one note per decision; the records in `decisions/` stay one note each.
+
+### When no document home is configured
+
+Two conditions send you here instead of accepting what the key resolves to, both during phase 1.
+
+**The key is absent** from both files, or neither file exists. Ask one question: use the default `.capstan/` here, or run `setup` to choose a folder outside the repository. Answering default writes the key itself, the same way `setup` writes it, so the effort proceeds and is never asked again. This does not stop the phase. Answering to run `setup` does: the Architect cannot invoke `setup` itself, so the operator runs it and starts the effort again.
+
+**The key resolves to a home holding none of the four durable artifacts, while `<working copy>/.capstan/` holds at least one.** Report what is at each location and point at `setup`. You never perform the move yourself.
+
+A project already running on the default meets the first condition like any other project, and is asked the same way.
+
+Phases 2, 3 and 4 never ask this question. Where phase 1 left an `assumed` default, they read that line and proceed.
 
 ## Tracker
 
@@ -231,7 +231,7 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
       review/       <slice>-<n>.md for a Reviewer's return, verify-<n>.md for a verify return
 ```
 
-`.gitignore` carries `.capstan/effort/`. Add it, or replace an older scratch line with it. The scratch never enters git history, which is what keeps repositories from accumulating stale planning material.
+This skill ensures `.gitignore` carries `.capstan/effort/`, replacing an older scratch line with it where one is already there. `setup` ensures the same line on its first run. The scratch never enters git history, which is what keeps repositories from accumulating stale planning material.
 
 At delivery the Courier writes one note per effort to the knowledge base, and Capstan never runs git there — the operator commits the note. That is the permanent cross-venture record.
 
