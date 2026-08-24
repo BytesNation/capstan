@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 350 | 2026-08-24 | The tracker survived its own delivery. Phase 4 step 4 deleted `.capstan/effort/` with the spec, the plan and five filed returns, and `tracker.md` is still there carrying three merged rows. The rule slice 2 wrote was tested by the first delivery to run under it | accepted |
 | 349 | 2026-08-24 | The note's `## Still open` must carry 343, the only row this effort left open, and its `## What was decided` must state the commit rule as 340 narrowed it rather than as the spec first wrote it. A permanent record carrying a superseded rule in the section that says what was settled is the staleness this repository keeps naming | accepted |
 | 348 | 2026-08-24 | Decisions 317 to 347 were logged with the wrong date. The session crossed midnight and the Architect kept writing 2026-08-23 while every commit landed on the 24th. Thirty-one rows corrected in place, which is a factual repair rather than a decision change, so nothing is superseded. Caught by the note review, not by the Architect | accepted |
 | 347 | 2026-08-24 | Verification is green and degraded, and says which. One executable check, and it validates a manifest, so six seams and four whole-repository sweeps are the evidence. The real evidence is not a check: `tracker.md` holds three merged rows written under the rules while those rules were being added | accepted |
