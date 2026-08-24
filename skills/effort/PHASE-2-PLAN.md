@@ -12,7 +12,9 @@ Begin by re-reading the world, per [`SKILL.md`](SKILL.md). Then:
    - **Blocked by**: which other slices must land first, or nothing.
 
    Close with a **Graph** showing the blocking edges between slices. This graph is yours and it never leaves the effort folder.
+
+   Open one row per slice in `tracker.md`, at `planned` with the commit column blank — see `## Tracker` in `SKILL.md` for what the row holds. Open it now, not when the slice merges: a row that only appears on merge cannot show a slice stalled between here and there, which is the gap this file closes.
 4. Agree each slice's seam and its red-at-base evidence here, in the plan, not during the build. The spec already states what checks the repository declares at all; the plan is where that turns into a seam and evidence per slice. A Builder handed no seam will pick one.
 5. Update `.capstan/effort/CLAIM.md`, including the `next` line, then post the gate-2 brief. End the run.
 
-**Done when** every slice in `plan.md` carries Owns, Demonstrated, Seam, Red at base and Blocked by, and the Graph accounts for every slice.
+**Done when** every slice in `plan.md` carries Owns, Demonstrated, Seam, Red at base and Blocked by, the Graph accounts for every slice, and every slice has a row in `tracker.md` at `planned`.

@@ -10,7 +10,7 @@ Begin by re-reading the world, per [`SKILL.md`](SKILL.md). Then, in order:
 
 3. Read the findings. Action every one or dismiss it with the reason written down. A blocking finding goes back to the Courier as a fix task on the same note, corrected in place: the note is not committed yet, so there is no history to preserve or rewrite.
 
-4. Delete `.capstan/effort/`. All of it: spec, plan, scratch, scout findings, review output, checkpoint drafts. A stale spec or an old research file left behind is worse than none: the next agent reads it as current and builds on something that stopped being true.
+4. Delete `.capstan/effort/`. All of it: spec, plan, scratch, scout findings, review output, checkpoint drafts. A stale spec or an old research file left behind is worse than none: the next agent reads it as current and builds on something that stopped being true. `tracker.md` is not part of this deletion — it lives in the document home, not the scratch, and stays, carrying every row this effort's slices reached.
 
 5. Report to the operator: what shipped, what review found on the note, and what was actioned or dismissed. Say that the note is reviewed and ready, and that committing it is the operator's own action, to be done once, now.
 
