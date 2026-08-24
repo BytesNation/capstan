@@ -33,6 +33,21 @@ This is what an agent reads when it opens the repository cold, and what you scan
 
 Write the line the moment the decision resolves, not batched at the end of a session. A decision that only exists in a context window is a decision that is about to be lost.
 
+### What a line records
+
+The line records the decision and the reasoning that produced it. Write it so it still makes sense to someone who has never seen the surfaces the work touched.
+
+Efforts reach outside the working copy: a knowledge base, a vault, a wiki, a ticket tracker. Those surfaces belong to the operator, and this log is committed and, for an open-source project, published. So a line about a fix made out there records what it taught the project, in the project's own vocabulary, and leaves the surface's own contents where they are. What it taught, not what it found.
+
+| Write | Rather than |
+|---|---|
+| A note's tag names the project, and the Courier reads the folder it writes into rather than generalising from one example | The names of the folders, ventures, clients or people it read them from |
+| Creating a taxonomy node in a knowledge base is the operator's, never the Courier's | Which node, in which taxonomy, across how many notes |
+| A spike ran against a scratch repository outside the knowledge base | Its absolute path |
+| The knowledge base's own health check could not be re-run, so its bar is expected rather than observed | The script's name and the rule's line number |
+
+When a line already written breaks this, repair it in place. That is a factual repair rather than a decision change, so the number stays, the status stays, and nothing is superseded. Say in a new line that the repair happened and why.
+
 ### Statuses
 
 | Status | Means |
