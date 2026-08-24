@@ -6,7 +6,7 @@ A Claude Code plugin for taking work from concept to delivery, with you at three
 
 Five roles carry the work, a discipline for each part of it, and three times the run stops so you can decide whether it continues. It is plain markdown, plus one vendored bash library that `walkthrough` builds throwaway scripts from. Nothing here needs code running to stay alive.
 
-This repository's own [glossary](.capstan/CONTEXT.md) defines every word it uses — see [document home](#document-home) if you've pointed yours elsewhere — and [`DESIGN.md`](DESIGN.md) holds the reasoning behind the shape.
+This repository's own [glossary](.capstan/CONTEXT.md) defines every word it uses (see [document home](#document-home) if you've pointed yours elsewhere), and [`DESIGN.md`](DESIGN.md) holds the reasoning behind the shape.
 
 ## Install
 
@@ -18,6 +18,8 @@ claude plugin install capstan@bytesnation
 Restart Claude Code once it finishes. Agent definitions load at session start, so nothing applies until you do.
 
 That installs at user scope, so the crew is available in every session. Add `--scope project` to write to the project's `.claude/settings.json` instead, which is what you want when a team shares one repository.
+
+Run `/capstan:setup` next, in the repository you plan to work in. It asks where the glossary, decision log, decision records and tracker should live, in the repository by default or in a vault, and writes the answer down so nothing asks again. Skip it and the first effort you start asks the same question.
 
 ## Your first run
 
@@ -49,7 +51,7 @@ Three efforts at once is the ceiling. Three gates each against one reader is nin
 
 ## The disciplines
 
-The disciplines the roles pull in, plus [`effort`](skills/effort/SKILL.md) itself: the front door, invoked only by you.
+The disciplines the roles pull in, plus the two front doors: [`effort`](skills/effort/SKILL.md) starts a run, and [`setup`](skills/setup/SKILL.md) configures where its artifacts live. Both are invoked only by you, and neither is a discipline.
 
 | Skill | For |
 |---|---|
@@ -82,29 +84,39 @@ By default, everything lands in `.capstan/`, inside the repository the work is h
   effort/         scratch: the claim, spec, plan, scout returns. gitignored.
 ```
 
-Add `.capstan/effort/` to your `.gitignore`. That folder is deleted at delivery, because a stale spec is worse than no spec: the next agent reads it as current.
+`setup` adds `.capstan/effort/` to your `.gitignore`, if it is not there already. That folder is deleted at delivery, because a stale spec is worse than no spec: the next agent reads it as current.
 
 `tracker.md` answers what shipped, one row per slice, with the commit that merged it, and it is on by default, so you get it without configuring anything.
 
-Two more things are read from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoded. Where the Courier writes the permanent per-effort note, which it skips and says so if you have not set one. And where the document home below points, if you have moved it.
+Capstan reads two more things from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoding them. The permanent per-effort note's destination is yours to set, and the Courier skips the note and says so if you have not set it. The document home described below also lives in one of those files, but `setup` writes that line for you rather than you writing it yourself.
 
 ## Document home
 
-By default, the glossary, the decision log, the decision records, and the tracker live in `.capstan/` in the repository, next to your code. That is the layout above, and configuring nothing keeps it that way.
+By default, the glossary, the decision log, the decision records, and the tracker live in `.capstan/` in the repository, next to your code. That is the layout above, and the first effort you run writes it down as soon as you answer its one question with the default, rather than leaving anything unconfigured.
 
-Read somewhere else instead, a folder in an Obsidian vault, say, and point Capstan there.
+The effort scratch never moves, whichever layout you pick below: the claim, the spec, the plan, and scout returns stay at `.capstan/effort/` in the repository under every configuration, and are deleted at delivery.
 
-**Capstan never commits a configured document home, and it never runs git inside one.** It writes the files and stops; committing them from then on is yours, the same as committing anything else in that vault. Left uncommitted, a document home can sit that way for days before anyone notices, so weigh that before you switch it on.
+Some operators would rather keep a growing decision log out of the repository entirely, or keep one project's notes fully apart from another's. Three layouts cover that. `setup` asks the fork first, here in the repository or somewhere outside it, and only asks which of the two vault layouts you want if you choose outside:
 
-Set `capstan-document-home` in this repository's own `CLAUDE.md` or `AGENTS.md` — the one at the root of this working copy, not a user-level file — alongside the knowledge-base setting mentioned above. A `~/.claude/CLAUDE.md` is never read for this key: set it only there and Capstan falls back to the default without telling you.
+- in the repository: the default above, nothing to configure, and the files sit next to the code they document.
+- one vault per project: a dedicated vault for this project alone, for someone who wants it kept apart from every other project.
+- one folder per project in a shared vault: one vault holding every project as its own folder, for someone who wants related projects visible together.
+
+Capstan stores no difference between the last two. Both are an absolute path configured away from the default, and the list above exists to help you choose, not because Capstan branches on which one it is.
+
+Run `/capstan:setup` to choose, and run it again later to change your mind. It asks the fork first and the vault layout only if you go outside the repository, confirms the path, creates the folder if it does not exist, checks whether anything is already sitting at the destination before it moves a thing, and moves the four artifacts on your approval. It also writes `capstan-document-home` into whichever of `CLAUDE.md` or `AGENTS.md` you already have, creating `AGENTS.md` if you have neither.
+
+**Capstan never commits a configured document home, and it never runs git inside one.** It writes the files and stops; committing them from then on is yours, the same as committing anything else in that vault. Left uncommitted, a document home can sit that way for days before anyone notices, so weigh that before you switch it on. A document home inside a vault synced by iCloud, Dropbox, or Obsidian Sync is untested.
+
+`capstan-document-home` lives in this repository's own `CLAUDE.md` or `AGENTS.md`, the one at the root of this working copy, not a user-level file. A `~/.claude/CLAUDE.md` is never read for this key: set it only there and Capstan falls back to the default without telling you.
 
 ```markdown
 capstan-document-home: /Users/you/vault/YourProject
 ```
 
-The value must be an absolute path. One folder per project inside one vault, never one vault per project, and never a copy in both places. A file lives in exactly one location, and Capstan resolves every path to it against that one root.
+The value must be an absolute path. A file lives in exactly one location, never a copy in both places, and Capstan resolves every path to it against that one root.
 
-The glossary (`CONTEXT.md`), the decision log (`decisions.md`), the decision records (`decisions/`), and the tracker (`tracker.md`) resolve there from then on. Nothing migrates the copies already sitting in `.capstan/`: switching an existing project's document home is on you, or you end up with a stale copy in `.capstan/` and a fresh one in the vault. The effort scratch never moves regardless: the claim, the spec, the plan, and scout returns stay at `.capstan/effort/` in the repository under every configuration, and are deleted at delivery.
+The glossary (`CONTEXT.md`), the decision log (`decisions.md`), the decision records (`decisions/`), and the tracker (`tracker.md`) resolve there from then on. Switching an existing project's document home runs through `setup`, which reports what it finds at the new destination and moves the four artifacts once you approve, rather than leaving you with a stale copy in `.capstan/` and a fresh one in the vault.
 
 An unreachable configured root stops the run rather than falling back to the default, since a missing source of truth would otherwise produce two records that quietly disagree.
 
@@ -143,7 +155,7 @@ cp -r capstan/agents/* ~/.claude/agents/
 cp -r capstan/skills/* ~/.claude/skills/
 ```
 
-Then start work with `/effort <what you want built>`.
+Run `/setup` next, in the repository you plan to work in, to choose where the glossary, decision log, decision records and tracker should live. Skip it and the first effort you start asks the same question. Then start work with `/effort <what you want built>`.
 
 A plugin namespaces what it ships, so the Builder is `capstan:builder` under a plugin install and plain `builder` under a manual one. [`skills/effort/SKILL.md`](skills/effort/SKILL.md) tells the Architect which agent to spawn for each role, so use whichever form your install produced. The plugin path is the exercised one: installing, updating, and a full remove and re-add have all been run against it. The manual copy is there for a setup with no marketplace, and sees less use.
 
