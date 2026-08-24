@@ -93,8 +93,8 @@ capstan_type: tracker
 
 | Effort | Slice | Status | Commit |
 |---|---|---|---|
-| tracker | slice1 | merged | adb5f99 |
-| tracker | slice2 | planned | |
+| checkout | cart-api | merged | 1a2b3c4 |
+| checkout | payment-flow | planned | |
 ```
 
 A row holds one of four statuses: `planned`, `building`, `merged`, `dropped`. Nothing else. Rows are closed and kept, never deleted — a tracker that erases completed work cannot answer what shipped.
