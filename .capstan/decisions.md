@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 346 | 2026-08-23 | Slice 2 merges after one review and two fix rounds, verified by the Architect. The blocking finding was a missing location at three named sites and is checkable by reading; the second round was one clause the Architect had left out of the first brief | accepted |
 | 345 | 2026-08-23 | Slice 3 merges after one review and one fix round, verified by the Architect. Three blocking findings, all incomplete-sweep or false-claim, all mechanical and readable in the diff. Same call as 257 | accepted |
 | 344 | 2026-08-23 | The contraction finding rested on a false premise: `README.md` carries `you've` at line 9, so it was not the only one. The change to "it is" stands rather than being reverted, since both read fine and churn is worse. Recorded because the record should say why a finding was actioned | accepted |
 | 343 | 2026-08-23 | `durable artifact` is a counted noun with no glossary row, now hard-coded as "four" across two files. The next artifact makes it five and nothing says what qualifies, which is how the three-becomes-four sweep happens again. Raised by the slice 3 review | open |
