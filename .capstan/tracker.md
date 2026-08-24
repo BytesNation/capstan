@@ -7,5 +7,5 @@ capstan_type: tracker
 | Effort | Slice | Status | Commit |
 |---|---|---|---|
 | tracker | slice1 | merged | 6527694 |
-| tracker | slice2 | planned | |
-| tracker | slice3 | planned | |
+| tracker | slice2 | building | |
+| tracker | slice3 | building | |
