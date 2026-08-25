@@ -14,4 +14,4 @@ capstan_type: tracker
 | home-setup | effort-branch | merged | cdc4a80 |
 | home-setup | readme | merged | 7a81dfe |
 | home-setup | release | merged | cbbb098 |
-| home-setup | ghost-report | building |  |
+| home-setup | ghost-report | merged | 2d12a69 |
