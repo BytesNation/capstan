@@ -59,7 +59,7 @@ Created empty, it can still be empty when this run ends, most often a fresh repo
 
 ### 2. Check the destination
 
-When the confirmed path is the home currently in force already, there is nothing to check or move: continue at step 4. This is the ordinary case of confirming the same answer back, even on a project too new to have all four artifacts yet.
+When the confirmed path is the home currently in force already, there is nothing to check or move: continue at step 4. This is the ordinary case of confirming the same answer back, even on a project too new to have all four artifacts yet. But if step 1 had to create it just now, say plainly that it was missing and now holds nothing, so anything that was there is gone.
 
 Otherwise, check whether the confirmed path already holds any of `CONTEXT.md`, `decisions.md`, `decisions/` or `tracker.md`.
 
