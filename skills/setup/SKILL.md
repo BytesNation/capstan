@@ -33,6 +33,8 @@ Strip any trailing slash from a value found before comparing it to anything else
 
 Report the home currently in force before asking anything else, always under the same word, "Currently:". If the two files carry the key with different values, there is no single value to put there; report both under it instead, "Currently: `CLAUDE.md` says `<value>`. `AGENTS.md` says `<value>`.", and ask which one is correct before anything else. The answer becomes the home currently in force, and step 4 removes the key from the file that lost, without asking again which file that is. Otherwise, "Currently: `<value>`." carries the single value, whether a file carries the key or not: an operator who has never run this before sees the default stated as plainly as one changing an existing answer does. Then continue below regardless, since changing an existing answer runs the same procedure as setting it the first time.
 
+Check too, in the same breath, whether the home currently in force exists on disk right now, before step 1 gets the chance to create the confirmed path and erase the signal. If it does not and a key was found for it in either file, say so plainly: it held something once and that is gone now. If it does not and no key was found anywhere, there is nothing recorded to say it ever held anything; the "Currently:" line above already covers it, and nothing more is added here. This is a fact about the home in force itself, true regardless of which path gets confirmed below or which branch the run takes from there, so it is said once, here, rather than inside whichever branch happens to notice it later.
+
 The layout ask below is two steps, never a three-way menu: someone who wants the default should not read two paragraphs about vault layouts to get there. Step 4 asks a different question, which file to write into, whenever both `CLAUDE.md` and `AGENTS.md` exist; a disagreement already resolved above does not ask again, and either way that is a separate ask that does not turn this one into three.
 
 **First, the fork.** Ask where the glossary, the decision log, the decision records and the tracker should live:
@@ -59,7 +61,7 @@ Created empty, it can still be empty when this run ends, most often a fresh repo
 
 ### 2. Check the destination
 
-When the confirmed path is the home currently in force already, there is nothing to check or move: continue at step 4. This is the ordinary case of confirming the same answer back, even on a project too new to have all four artifacts yet.
+When the confirmed path is the home currently in force already, there is nothing to check or move: continue at step 4. This is the ordinary case of confirming the same answer back, even on a project too new to have all four artifacts yet; whether it existed a moment ago is already said above.
 
 Otherwise, check whether the confirmed path already holds any of `CONTEXT.md`, `decisions.md`, `decisions/` or `tracker.md`.
 
@@ -86,7 +88,7 @@ List which of the four artifacts sit at **the home currently in force** (the val
 If none of them do, ask the operator which is true, since nothing here can tell the two apart:
 
 - **Nothing exists yet.** Proceed to step 4 with nothing moved.
-- **The key is wrong**, pointing at a home that is not where the artifacts actually are. Stop here. The operator corrects it by hand, then runs this again.
+- **This is not where the artifacts live.** The home currently in force, whether that came from a key or from standing at the default, is pointing at the wrong place; they sit somewhere else. Stop here. The operator points it at the right place by hand, then runs this again.
 
 Otherwise, on the operator's approval, move them and continue to step 4. On refusal, move nothing, say plainly that `<home currently in force>` still holds what was just listed and the confirmed path is not receiving it, and stop here: do not write the key and do not commit. A refusal that still rewrote the key would leave that key pointing at an empty destination while the real log sat untouched at the old home, worse than either finishing the move or leaving everything as it was.
 
