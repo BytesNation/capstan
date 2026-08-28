@@ -45,6 +45,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Fixed point | The commit, branch or tag a review diffs against. Supplied by whoever dispatches, never guessed. |
 | `<working copy>` | The repository an effort's work lives in, established by absolute path at the Precondition and never assumed to be the session's own directory. The prefix that qualifies a scratch path, so an agent resolves it against that repository rather than wherever its session sits. |
 | Fix dispatch | A task sent back on something already built once: a Builder on a slice, from a slice review or a verify return, or the Courier on the note. What the fix-dispatch count counts, rather than review returns filed. The one term; "fix round" and "fix task" mean this. |
+| Load point | The named moment at which a continuous discipline is invoked. Supplied because a duty true at all times attaches to no point in a run, so it never fires. |
 | Glossed site | A scratch path left bare because the sentence around it already says which working copy in words. One of the four classes a path falls into, beside a bare instruction site, a folder the agent acts on, and the `.gitignore` entry that takes no prefix. |
 | Live slice | A slice that can still receive a Fix dispatch: every status but `dropped`, while the effort is open. A merged slice stays live, because a verify return reopens it, and its count resumes rather than restarting. |
 | Open | A log status. Raised and unsettled, with no default in force. |
