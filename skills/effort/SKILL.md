@@ -131,7 +131,7 @@ next: <what the run after this one picks up, and, once plan.md has cut slices, e
 last-touched: <ISO timestamp>
 ```
 
-Update `phase`, `head`, `next` and `last-touched` at every gate. You delete it with the rest of `.capstan/effort/` at delivery.
+Update `phase`, `head`, `next` and `last-touched` at every gate. You delete it with the rest of `<working copy>/.capstan/effort/` at delivery.
 
 `next` is written for the Architect who resumes, not for the operator. `phase` says where the effort got to; `next` says what is outstanding inside it, which matters most in phase 3: git shows the same branch and worktree for a slice under review and for one nobody has opened, and says nothing about which findings were dismissed or how many fix dispatches a slice has already had. Phase 3 spans runs, and a fix-dispatch count held only in one run's context window means the question `PHASE-3-BUILD.md` asks at the third dispatch only fires when a single Architect happens to make three dispatches in one sitting. Write what the next run picks up, name slices as `plan.md` names them, and carry each live slice's fix-dispatch count. `next` stops being kept to a line: carrying the counts is worth the width.
 
@@ -154,7 +154,7 @@ git -C <working copy> status --short
 
 If `HEAD` has moved since the claim recorded it, **stop and read what landed** before doing anything else. Someone may have built the thing you were about to build. Report what moved and who moved it rather than dispatching on top of it.
 
-Also re-list `.capstan/effort/scout/` and compare it against what you filed. Files you did not write mean another run touched this effort, and its findings may be better than yours.
+Also re-list `<working copy>/.capstan/effort/scout/` and compare it against what you filed. Files you did not write mean another run touched this effort, and its findings may be better than yours.
 
 Where `next` and the repository disagree, the repository wins. The line was written before the gap and cannot know what happened during it.
 
@@ -164,10 +164,10 @@ Verifying costs two commands. Building on a stale premise costs the whole phase.
 
 1. Invoke the `interview` skill and run it. Rounds of questions, a recommended answer attached to each one, wait between rounds. Keep running rounds until no answer you could get would change what goes in `spec.md`.
 2. Fire Scouts **in parallel** for any external fact a decision is waiting on. Do not stall the interview while they read.
-   - A Scout has no write tools, so it returns findings as text and cannot file them. **You** write each return to `.capstan/effort/scout/<slug>.md` verbatim. Do not summarise it on the way in; the citations and the confidence split are the parts that matter later.
+   - A Scout has no write tools, so it returns findings as text and cannot file them. **You** write each return to `<working copy>/.capstan/effort/scout/<slug>.md` verbatim. Do not summarise it on the way in; the citations and the confidence split are the parts that matter later.
    - Read what comes back rather than trusting it. A Scout that says medium confidence, or that reports a fetch it could not complete, is telling you which of its claims still need checking. Verify anything load-bearing yourself before a decision rests on it.
 3. Record decisions as they resolve, per the `decision-record` skill. Do not batch them to the end. Record the ones that refuse to resolve too, as `open` or `assumed`, and the areas nobody can phrase a question about yet as `unformed`. A question the operator could not answer is a finding, not a hole in the interview.
-4. Write `.capstan/effort/spec.md` in these six sections:
+4. Write `<working copy>/.capstan/effort/spec.md` in these six sections:
    - **Problem**: what is wrong or missing, and how it was found.
    - **What is being built**: the shape of the change, in one paragraph.
    - **What it must do**: the requirements a Builder builds against.
@@ -176,7 +176,7 @@ Verifying costs two commands. Building on a stale premise costs the whole phase.
    - **Assumptions**: what was defaulted rather than settled, and the condition that would reopen it.
 
    A spike section appears only when the effort ran one.
-5. Update `.capstan/effort/CLAIM.md` (phase, head, next, last-touched), then post the gate-1 brief per the `brief` skill. End the run.
+5. Update `<working copy>/.capstan/effort/CLAIM.md` (phase, head, next, last-touched), then post the gate-1 brief per the `brief` skill. End the run.
 
 **Done when** `spec.md` carries Problem, What is being built, What it must do, Explicitly out of scope, Test seams and Assumptions. Every question raised in the interview is answered in it, written down there as an explicit assumption, or carried in `decisions.md` in the document home as `open`, `assumed` or `unformed`, and every Scout return is filed.
 
@@ -231,7 +231,7 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
       review/       <slice>-<n>.md for a Reviewer's return, verify-<n>.md for a verify return
 ```
 
-This skill ensures `.gitignore` carries `.capstan/effort/`, replacing an older scratch line with it where one is already there. `setup` ensures the same line on its first run. The scratch never enters git history, which is what keeps repositories from accumulating stale planning material.
+This skill ensures `.gitignore` carries `.capstan/effort/`, replacing an older scratch line with it where one is already there. `setup` ensures the same line on its first run. The scratch never enters git history, which is what keeps repositories from accumulating stale planning material. The entry stays bare: a `.gitignore` line is relative to the repository root.
 
 At delivery the Courier writes one note per effort to the knowledge base, and Capstan never runs git there — the operator commits the note. That is the permanent cross-venture record.
 
