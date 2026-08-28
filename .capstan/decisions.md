@@ -6,6 +6,7 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 504 | 2026-08-28 | All three of the README's bare `.capstan/effort/` occurrences stay. Line 46 per 500. Line 87 is the same case as `SKILL.md:234`, describing the `.gitignore` entry, so it must stay bare for the reason 498 names. Line 97 already carries "in the repository" as its gloss. 481's fix is line 247 alone, and the `readme` slice touches nothing else in the file it owns | accepted |
 | 503 | 2026-08-28 | Qualifying costs nothing on density. Thirteen longer paths across four already dense files is defaulted as acceptable rather than measured; `PHASE-3-BUILD.md` is at 1205 words against siblings at 313 and 414 before this effort adds to it. Revisit if the result reads worse than what it replaced | assumed |
 | 502 | 2026-08-28 | The five sites already glossed in words need nothing. A gloss such as "in the main working copy" is defaulted as being as clear to an agent as the symbolic `<working copy>/` prefix, which is untested. Revisit if a review or a build shows an agent missing one | assumed |
 | 501 | 2026-08-28 | No new artifact records the qualification convention. 499 in the decision log already does it, and a Reviewer reads that file before grading Standards, which is the documented mechanism for a standard binding on this repository. A glossary row would be a second home for one rule, and `CONTEXT.md` holds terms rather than conventions | accepted |
