@@ -43,7 +43,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Verify | Running the checks the repository declares against the merged result, and reporting what they showed. Never an exit code alone. |
 | Axis | One of the two independent review questions: Standards (built right) and Spec (right thing). Never blended. |
 | Fixed point | The commit, branch or tag a review diffs against. Supplied by whoever dispatches, never guessed. |
-| Fix dispatch | A Builder task sent back on a slice already built once, whether the finding came from a slice review or a verify return. What the rework count counts, rather than review returns filed. |
+| Fix dispatch | A Builder task sent back on a slice already built once, whether the finding came from a slice review or a verify return. What the fix-dispatch count counts, rather than review returns filed. |
 | Live slice | A slice that can still receive a Fix dispatch: every status but `dropped`, while the effort is open. A merged slice stays live, because a verify return reopens it, and its count resumes rather than restarting. |
 | Open | A log status. Raised and unsettled, with no default in force. |
 | Assumed | A log status. Defaulted so work could proceed, carrying the condition that would reopen it. |
