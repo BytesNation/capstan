@@ -244,6 +244,6 @@ Some skills here are not ours. Every one is MIT, and every one is redistributed 
 Beyond those, nothing is vendored, though some ideas are borrowed, all from [Matt Pocock](https://github.com/mattpocock/skills). The prose is ours; the mechanics are his.
 
 - The frontier in `interview`: a design tree, where a question depending on an open question waits for a later round. Sharpened from `grilling`.
-- The `next` line in `CLAIM.md`: what the run after this one picks up, written for the agent that resumes rather than the person at the gate, and each live slice's fix-dispatch count, held there so it survives a run boundary rather than dying with one session's context. From `handoff`, sized down to a field in a file that already exists.
+- The `next` line in `CLAIM.md`: what the run after this one picks up and each live slice's fix-dispatch count, written for the agent that resumes rather than the person at the gate. From `handoff`, sized down to a field in a file that already exists.
 - The `unformed` status in the decision log: an area nobody can phrase a question about yet. His fog of war from `wayfinder`, without the issue tracker it is charted on.
 - Two moves in `interview`: challenging a term against the glossary rather than only within the session, and inventing an edge-case scenario when a relationship between concepts stays vague. From `domain-modeling`, minus its file layout.
