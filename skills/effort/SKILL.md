@@ -127,13 +127,13 @@ effort: <slug>
 started: <ISO timestamp>
 phase: concept
 head: <the commit the effort starts from>
-next: <what the run after this one picks up, and each live slice's fix-dispatch count>
+next: <what the run after this one picks up, and, once plan.md has cut slices, each live slice's fix-dispatch count>
 last-touched: <ISO timestamp>
 ```
 
 Update `phase`, `head`, `next` and `last-touched` at every gate. You delete it with the rest of `.capstan/effort/` at delivery.
 
-`next` is written for the Architect who resumes, not for the operator. `phase` says where the effort got to; `next` says what is outstanding inside it, which matters most in phase 3: git shows the same branch and worktree for a slice under review and for one nobody has opened, and says nothing about which findings were dismissed or how many fix dispatches a slice has already had. Phase 3 spans runs, and a fix-dispatch count held only in one run's context window means the question `PHASE-3-BUILD.md` asks at the third dispatch only fires when a single Architect happens to make three dispatches in one sitting — so `next` carries the count too, one per live slice, alongside what the next run picks up and the slice names as `plan.md` names them. `next` stops being kept to a line: carrying the counts is worth the width.
+`next` is written for the Architect who resumes, not for the operator. `phase` says where the effort got to; `next` says what is outstanding inside it, which matters most in phase 3: git shows the same branch and worktree for a slice under review and for one nobody has opened, and says nothing about which findings were dismissed or how many fix dispatches a slice has already had. Phase 3 spans runs, and a fix-dispatch count held only in one run's context window means the question `PHASE-3-BUILD.md` asks at the third dispatch only fires when a single Architect happens to make three dispatches in one sitting. Write what the next run picks up, name slices as `plan.md` names them, and carry each live slice's fix-dispatch count. `next` stops being kept to a line: carrying the counts is worth the width.
 
 The claim is the only thing standing between two sessions and the same files. The three-effort ceiling counts efforts, not sessions, so without a claim two Architects will happily run the same work, fire duplicate Scouts at the same questions, and write over each other.
 
