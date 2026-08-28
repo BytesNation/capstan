@@ -160,6 +160,10 @@ Where `next` and the repository disagree, the repository wins. The line was writ
 
 Verifying costs two commands. Building on a stale premise costs the whole phase.
 
+## Before the first decision row
+
+Invoke `decision-record` here, before this run's first row goes into `decisions.md`: a continuous duty has no moment of its own to attach to, so this section supplies one. Every run writes rows and every run has a first one, so the moment recurs on its own, with no differently worded copy needed in each phase file.
+
 ## Phase 1: Concept
 
 1. Invoke the `interview` skill and run it. Rounds of questions, a recommended answer attached to each one, wait between rounds. Keep running rounds until no answer you could get would change what goes in `spec.md`.
