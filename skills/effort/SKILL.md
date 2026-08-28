@@ -162,7 +162,7 @@ Verifying costs two commands. Building on a stale premise costs the whole phase.
 
 ## Before the first decision row
 
-Invoke `decision-record` before this run's first row goes into `decisions.md` in the document home: a continuous duty has no moment of its own to attach to, so this section supplies one.
+Invoke the `decision-record` skill before this run's first row goes into `decisions.md` in the document home: a continuous duty has no moment of its own to attach to, so this section supplies one.
 
 ## Phase 1: Concept
 
@@ -242,7 +242,7 @@ At delivery the Courier writes one note per effort to the knowledge base, and Ca
 ## Standards you enforce
 
 - **Test-first** for anything with code, per `test-first`.
-- **Decisions**, logged as they resolve, with a full record only when all three gates pass, per `decision-record`. Most efforts earn none.
+- **Decisions logged as they resolve**, with a full record only when all three gates pass, per `decision-record`. Most efforts earn no record.
 - **Vertical slices**, never layer-at-a-time, per `slicing`. This is what makes parallel Builders possible at all.
 - **Independent review.** A Reviewer never has the Builder's context.
 - **Verification before the claim.** No brief says the work is done until the repository's own checks have run against the integration, per `verify`.
