@@ -231,7 +231,7 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
       review/       <slice>-<n>.md for a Reviewer's return, verify-<n>.md for a verify return
 ```
 
-This skill ensures `.gitignore` carries `.capstan/effort/`, replacing an older scratch line with it where one is already there. The entry stays bare: a `.gitignore` line is relative to the repository root, and `<working copy>/.capstan/effort/` there would be a broken ignore rule. `setup` ensures the same line on its first run. The scratch never enters git history, which is what keeps repositories from accumulating stale planning material.
+This skill ensures `.gitignore` carries `.capstan/effort/`, replacing an older scratch line with it where one is already there. `setup` ensures the same line on its first run. The scratch never enters git history, which is what keeps repositories from accumulating stale planning material. The entry stays bare: a `.gitignore` line is relative to the repository root.
 
 At delivery the Courier writes one note per effort to the knowledge base, and Capstan never runs git there — the operator commits the note. That is the permanent cross-venture record.
 
