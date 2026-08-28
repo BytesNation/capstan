@@ -15,3 +15,4 @@ capstan_type: tracker
 | home-setup | readme | merged | 7a81dfe |
 | home-setup | release | merged | cbbb098 |
 | home-setup | ghost-report | merged | 2d12a69 |
+| third-round | rework-check | planned |  |
