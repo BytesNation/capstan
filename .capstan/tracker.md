@@ -18,4 +18,4 @@ capstan_type: tracker
 | third-round | rework-check | merged | 20c098e |
 | qualified-paths | scratch-paths | merged | 50c0892 |
 | qualified-paths | readme | merged | d8a2a8d |
-| architect-disciplines | load-point | building |  |
+| architect-disciplines | load-point | merged | 0bd7aa9 |
