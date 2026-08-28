@@ -17,4 +17,4 @@ capstan_type: tracker
 | home-setup | ghost-report | merged | 2d12a69 |
 | third-round | rework-check | merged | 20c098e |
 | qualified-paths | scratch-paths | building |  |
-| qualified-paths | readme | building |  |
+| qualified-paths | readme | merged | d8a2a8d |
