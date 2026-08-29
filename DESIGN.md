@@ -101,6 +101,20 @@ The same reasoning is why the effort scratch never follows the document home whe
 
 The log stays a single file for a related reason, even inside a vault where one note per item is the native shape. Scanning every decision on one screen, in order, is the entire value of the log, and one note per decision is the bloat `decision-record` was designed to prevent. Splitting it up in a vault would buy back the ability to query decisions like data, at the cost of the one property that makes the log worth keeping: reading the whole history in one pass. We chose that trade in the log's favour.
 
+## Why the knowledge base sits outside the document home
+
+The document home holds this project's records. The knowledge base holds what the operator knows across every project, and the difference is not filing. A repository can answer what this project decided. Nothing inside it can answer what was decided across every venture at once, because each repository only ever sees itself. The Courier writes one note per effort into that second place, and it is the only thing Capstan produces whose value comes from sitting beside notes from work this repository has never heard of.
+
+So it gets its own key rather than a corner of the document home. The two settings behave differently in every way that matters. The document home has a default, so unset is ambiguous and `setup` writes the answer down either way. The knowledge base has none, so unset is a complete answer. There is no knowledge base, the Courier writes no note, and it says so in the close-out. That branch lived as prose the Courier read out of the same two files, and prose degraded badly. A Courier finding nothing reported no knowledge base and skipped, which reads exactly like a correct outcome and stays invisible until somebody notices the notes stopped arriving.
+
+**Capstan never runs git in there.** Not a commit, not a stage, not a branch. This started life as a vault-detection step, working out whether the folder was a repository and behaving differently if it was, and one flat rule beat two branches outright. The operator commits the note, once, after it passes review.
+
+That choice costs something worth naming. Because the note is never committed, its review has no fixed point to diff against, so the Reviewer reads the whole file and says in its report that it did. A degraded review every time beats a clean review that only works where someone happened to keep their notes under version control.
+
+The frontmatter belongs to the folder rather than to Capstan. A knowledge base carries conventions Capstan did not write and cannot safely infer, so the Courier reads the folder it is writing into instead of generalising from one example somewhere else. The rule that keeps biting is copy versus derive. A link to the folder's own map is a property of the folder, so it gets copied. The date, the note's type, and every tag naming the work are facts about this effort, so they get derived. Copying where the rule says derive is never obviously wrong, because a neighbour's value is always plausible, and nothing surfaces the mistake until one search returns two projects at once.
+
+Two things Capstan will not do in someone else's vault, both of which it did once. It does not create a node in their taxonomy, because deciding that a knowledge base needs a new branch is the operator's call. And it does not edit neighbouring notes to satisfy the vault's own health check, a rule that lives in their configuration and can push a Courier into changing notes an earlier decision told it to leave alone.
+
 ## Why the Architect creates worktrees by hand
 
 Subagents support `isolation: worktree` in frontmatter. This crew deliberately does not use it.
