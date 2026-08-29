@@ -115,6 +115,16 @@ The frontmatter belongs to the folder rather than to Capstan. A knowledge base c
 
 Two things Capstan will not do in someone else's vault, both of which it did once. It does not create a node in their taxonomy, because deciding that a knowledge base needs a new branch is the operator's call. And it does not edit neighbouring notes to satisfy the vault's own health check, a rule that lives in their configuration and can push a Courier into changing notes an earlier decision told it to leave alone.
 
+## Why the tracker gained a second surface
+
+A second surface for slice state was left as an open question a long time before anyone built one. `tracker.md` shipped first and stayed the only surface it had, not because a second one was ruled out but because nothing forced the question until an operator actually asked for a board.
+
+What a board buys is entirely for people. An agent building or reviewing a slice already has `tracker.md` open, offline, at the commit it is reading. Pointing that agent at a board instead would gain it nothing. What a board gives you is a link a teammate can open without cloning the repository, and an issue that closes itself when the pull request closing it merges. That is a real want, and it belongs to whoever typed `setup`, not to the crew that reads the file underneath it.
+
+The trade is named rather than hidden. `tracker.md` at any commit is always the same table: read it twice against that commit and the rows come back identical, which is what lets a resumed phase check what it expected against what is actually there. A Projects board has no such point to stand on. It is live, mutable state on someone else's server, and two reads a minute apart can disagree with nothing recording why. That is the same degradation the knowledge-base note already carries, and here it costs more: the note is written once, at delivery, and left alone from then on. The tracker is written on every slice transition, planned to building to merged or dropped, so the board's missing fixed point gets paid on every single move a slice makes, not once.
+
+This was accepted with the cost named, not solved. Nothing here makes a board diffable the way a committed file is. An operator who wants that guarantee keeps the tracker on `tracker.md`. An operator who wants the board takes this trade knowingly.
+
 ## Why the Architect creates worktrees by hand
 
 Subagents support `isolation: worktree` in frontmatter. This crew deliberately does not use it.

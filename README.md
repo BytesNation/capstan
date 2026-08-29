@@ -88,7 +88,7 @@ By default, everything lands in `.capstan/`, inside the repository the work is h
 
 `tracker.md` answers what shipped, one row per slice, with the commit that merged it, and it is on by default, so you get it without configuring anything.
 
-Capstan reads two keys from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoding either. `capstan-knowledge-base` is where the permanent per-effort note goes, and it is yours to write; leave it out and the Courier skips the note and says so. `capstan-document-home` is the section below, and `setup` writes that line for you.
+Capstan reads three keys from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoding any of them. `capstan-document-home` and `capstan-tracker` are the two sections below, and `setup` writes both lines for you. `capstan-knowledge-base` is where the permanent per-effort note goes, and it is yours to write; leave it out and the Courier skips the note and says so.
 
 ## Document home
 
@@ -133,6 +133,28 @@ capstan-knowledge-base: /Users/you/vault/Efforts
 `setup` does not write this one. There is no default to fall back to, so leaving the key out is a complete answer. The Courier writes no note and says so in its close-out, rather than guessing a folder, because a note nobody can find again is worse than no note.
 
 Capstan never runs git in there either. It writes the note, a Reviewer reads it at that path, and you commit it.
+
+## Tracker surface
+
+Slice state lives in `tracker.md` in the document home by default: one row per slice, carrying the effort it belongs to, the slice itself, its status and the commit that merged it. Set `capstan-tracker` and it moves to a GitHub Projects v2 board instead: an issue per slice, a milestone per effort, a custom status field, and the merge commit posted as a comment once the slice lands.
+
+The value is for people, not agents. An agent building or reviewing a slice already has `tracker.md` open, offline, at the commit it is reading. A board gives a teammate something to open without cloning the repository, and issues that link straight to the pull requests that close them.
+
+Set it in the same `CLAUDE.md` or `AGENTS.md` that carries the other two keys:
+
+```markdown
+capstan-tracker: github:your-org/your-repo#3
+```
+
+Leave it out and nothing changes. Every project has run on `tracker.md` since the tracker existed, and unset keeps it that way for anyone who never asks. `setup` asks the question and writes the key for you; you should not need to type this line by hand.
+
+Projects v2 needs a scope grant most tokens do not carry yet. `setup` checks for it and, if it is missing, hands you off to a walkthrough: you run `gh auth refresh -s project` yourself, since an auth change is never the crew's to make, then confirm it landed before the key gets written.
+
+Three costs worth knowing before you turn this on:
+
+- **GitHub unreachable stops the run.** No retry, no backoff, no bounded wait. A rate limit and an expired token end it the same way.
+- **Reading the full tracker costs more.** `tracker.md` is one file read. A board reconstructs the effort, the slice and the status in one call, but the merge commit lives in a comment on each issue, so a full read costs one call plus one more per slice.
+- **An existing `tracker.md` stays exactly where it is.** Turning this on only changes where new slice state goes from here on. Nothing moves what is already in the file onto the board, and that migration is not built yet.
 
 ## Upgrading
 
