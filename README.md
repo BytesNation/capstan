@@ -19,7 +19,7 @@ Restart Claude Code once it finishes. Agent definitions load at session start, s
 
 That installs at user scope, so the crew is available in every session. Add `--scope project` to write to the project's `.claude/settings.json` instead, which is what you want when a team shares one repository.
 
-Run `/capstan:setup` next, in the repository you plan to work in. It asks where the glossary, decision log, decision records and tracker should live, in the repository by default or in a vault, and writes the answer down so nothing asks again. Skip it and your first effort asks a narrower version: take the default here, or stop and run `setup` to choose a folder outside the repository. You cannot name a vault path from inside an effort.
+Run `/capstan:setup` next, in the repository you plan to work in. It asks two questions, kept apart because they answer separately: where the glossary, decision log, decision records and tracker should live, in the repository by default or in a vault, and whether slice state is written to `tracker.md` there or to a GitHub Projects v2 board instead. It writes the answers down so nothing asks again. Skip it and your first effort asks a narrower version of the first question: take the default here, or stop and run `setup` to choose a folder outside the repository. You cannot name a vault path from inside an effort.
 
 ## Your first run
 
@@ -88,7 +88,7 @@ By default, everything lands in `.capstan/`, inside the repository the work is h
 
 `tracker.md` answers what shipped, one row per slice, with the commit that merged it, and it is on by default, so you get it without configuring anything.
 
-Capstan reads three keys from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoding any of them. `capstan-document-home` and `capstan-tracker` are the two sections below, and `setup` writes both lines for you. `capstan-knowledge-base` is where the permanent per-effort note goes, and it is yours to write; leave it out and the Courier skips the note and says so.
+Capstan reads three keys from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoding any of them. `capstan-document-home` and `capstan-tracker` are the two sections below. `setup` always writes `capstan-document-home`; it writes `capstan-tracker` only when you choose GitHub, and removes any existing line there when you choose the default instead. `capstan-knowledge-base` is where the permanent per-effort note goes, and it is yours to write; leave it out and the Courier skips the note and says so.
 
 ## Document home
 
@@ -136,9 +136,9 @@ Capstan never runs git in there either. It writes the note, a Reviewer reads it 
 
 ## Tracker surface
 
-Slice state lives in `tracker.md` in the document home by default: one row per slice, carrying the effort it belongs to, the slice itself, its status and the commit that merged it. Set `capstan-tracker` and it moves to a GitHub Projects v2 board instead: an issue per slice, a milestone per effort, a custom status field, and the merge commit posted as a comment once the slice lands.
+Slice state lives in `tracker.md` in the document home by default: one row per slice, carrying the effort it belongs to, the slice itself, its status and the commit that merged it. Set `capstan-tracker` and slice state is read and written on a GitHub Projects v2 board from then on instead: an issue per slice, a milestone per effort, a custom status field, and the merge commit posted as a comment once the slice lands.
 
-The value is for people, not agents. An agent building or reviewing a slice already has `tracker.md` open, offline, at the commit it is reading. A board gives a teammate something to open without cloning the repository, and issues that link straight to the pull requests that close them.
+The value is for people, not agents. An agent building or reviewing a slice already has `tracker.md` open, offline, at the commit it is reading. A board gives a teammate something to open without cloning the repository, and an issue that closes the moment its slice merges or drops, with the merge commit recorded on it as a comment.
 
 Set it in the same `CLAUDE.md` or `AGENTS.md` that carries the other two keys:
 
@@ -146,12 +146,13 @@ Set it in the same `CLAUDE.md` or `AGENTS.md` that carries the other two keys:
 capstan-tracker: github:your-org/your-repo#3
 ```
 
-Leave it out and nothing changes. Every project has run on `tracker.md` since the tracker existed, and unset keeps it that way for anyone who never asks. `setup` asks the question and writes the key for you; you should not need to type this line by hand.
+Leave it out and nothing changes. Every project has run on `tracker.md` since the tracker existed, and unset keeps it that way for anyone who never asks. `setup` asks the question either way, and writes this key only if you choose GitHub; you should not need to type it by hand.
 
 Projects v2 needs a scope grant most tokens do not carry yet. `setup` checks for it and, if it is missing, hands you off to a walkthrough: you run `gh auth refresh -s project` yourself, since an auth change is never the crew's to make, then confirm it landed before the key gets written.
 
-Three costs worth knowing before you turn this on:
+Four costs worth knowing before you turn this on:
 
+- **A public repository asks for confirmation on every write.** Every write to the board there is third-party-visible, so the operator confirms it, the same as any other third-party-visible action; a private repository writes unattended, the same as `tracker.md` always has. The tracker is written on every slice transition, so this is the cost that changes daily operation most.
 - **GitHub unreachable stops the run.** No retry, no backoff, no bounded wait. A rate limit and an expired token end it the same way.
 - **Reading the full tracker costs more.** `tracker.md` is one file read. A board reconstructs the effort, the slice and the status in one call, but the merge commit lives in a comment on each issue, so a full read costs one call plus one more per slice.
 - **An existing `tracker.md` stays exactly where it is.** Turning this on only changes where new slice state goes from here on. Nothing moves what is already in the file onto the board, and that migration is not built yet.
