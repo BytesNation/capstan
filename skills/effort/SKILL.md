@@ -245,7 +245,7 @@ At delivery the Courier writes one note per effort to the knowledge base, and Ca
 - **Decisions logged as they resolve**, with a full record only when all three gates pass, per `decision-record`. Most efforts earn no record.
 - **Vertical slices**, never layer-at-a-time outside the wide-refactor exception, per `slicing`. This is what makes parallel Builders possible at all.
 - **Independent review.** A Reviewer never has the Builder's context, per `two-axis-review`.
-- **Verification before the claim.** No brief says the work is done until the repository's own checks have run against the integration, per `verify`.
+- **Verification before the claim.** No brief says the work is done until the checks the repository declares have run against the integration, per `verify`.
 
 ## What you do not do
 
