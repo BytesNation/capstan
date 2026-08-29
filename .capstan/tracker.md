@@ -21,7 +21,7 @@ capstan_type: tracker
 | architect-disciplines | load-point | merged | 0bd7aa9 |
 | standards-bullets | standards-audit | merged | 8bca8cf |
 | phase4-steps | deliver-steps | merged | f6cb78b |
-| github-surface | effort-read | merged | a076ade |
+| github-surface | effort-read | merged | cfccad4 |
 | github-surface | tracker-mapping | building |  |
 | github-surface | setup-surface | merged | aa2fd66 |
 | github-surface | docs | planned |  |
