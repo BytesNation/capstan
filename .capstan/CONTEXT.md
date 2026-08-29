@@ -28,6 +28,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Document home | Where the glossary, the log, the records and the tracker live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
 | Tracker | The surface holding slice state through to completion. Always present; the default is `tracker.md` in the Document home, and `capstan-tracker` points it elsewhere. |
 | Tracker surface | Which surface holds the Tracker for a Project: `tracker.md` in the Document home by default, or a GitHub Projects board when `capstan-tracker` names one. The choice, as against the artifact. |
+| Row | One slice's entry in the Tracker, whatever surface holds it. A table row under `tracker.md`; an issue, its status value and, at merge, a comment under a board. |
 | Setup | The `setup` skill. Configures where a Project's durable artifacts live, moves what is already there, and can be re-run. Operator-invoked, never part of an Effort. |
 | Front door | A skill the operator invokes directly, rather than one the model reaches for. Two: `effort` starts a run, `setup` configures where its artifacts live. Neither is a Discipline. |
 | Walkthrough | The one-time script that carries the operator through a manual procedure, stage by stage, capturing what comes back. Discarded with the effort's scratch once run. |
