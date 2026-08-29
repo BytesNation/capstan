@@ -22,7 +22,7 @@ capstan_type: tracker
 | standards-bullets | standards-audit | merged | 8bca8cf |
 | phase4-steps | deliver-steps | merged | f6cb78b |
 | github-surface | effort-read | merged | a076ade |
-| github-surface | tracker-mapping | planned |  |
+| github-surface | tracker-mapping | building |  |
 | github-surface | setup-surface | building |  |
 | github-surface | docs | planned |  |
-| github-surface | phase-files | planned |  |
+| github-surface | phase-files | building |  |
