@@ -92,9 +92,9 @@ Phases 2, 3 and 4 never ask this question. Where phase 1 left an `assumed` defau
 
 ## Tracker
 
-The Tracker is the surface that holds slice state through to completion. Read the key `capstan-tracker` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — the same two files and the same rules as `capstan-document-home`, never a user-level file — before resolving the term anywhere else. Both files carrying it with a different value stops the phase, and says so, the same disagreement case `## Document home` stops for.
+The Tracker is the surface that holds slice state through to completion. Read the key `capstan-tracker` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — the same two files, addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — before resolving the term anywhere else. Both files carrying it with a different value stops the phase, and says so, the same disagreement case `## Document home` stops for.
 
-Unset means `tracker.md` in the document home, described below, which is what every existing project has and what none of them must change. Set, its value is scheme-prefixed: `github:<owner>/<repo>#<project-number>`. Read [`TRACKER-GITHUB.md`](TRACKER-GITHUB.md) when the key names a GitHub surface: it carries the column mapping, the four statuses as GitHub holds them, the visibility gate on writes, and the unreachable stop.
+Unset means `tracker.md` in the document home, described below, which is what every existing project has and what none of them must change. Set, its value is scheme-prefixed: `github:<owner>/<repo>#<project-number>`. Read [`TRACKER-GITHUB.md`](TRACKER-GITHUB.md) when the key names a GitHub surface: it carries the column mapping, the four statuses as GitHub holds them, and the unreachable stop. A value that is neither unset nor a recognised scheme — an unrecognised scheme, since a later surface may add one, or a malformed `github:` value — stops the phase, and says so: proceeding would mean guessing which surface holds slice state.
 
 `tracker.md` is the fourth durable artifact, alongside the glossary, the log and the records, and it lives in the document home and relocates with it under either configuration, the same as its three neighbours.
 
@@ -115,9 +115,9 @@ capstan_type: tracker
 
 A row holds one of four statuses: `planned`, `building`, `merged`, `dropped`. Nothing else. Rows are closed and kept, never deleted — a tracker that erases completed work cannot answer what shipped.
 
-Tracking is always on. No configuration is needed to have `tracker.md`. A repository with no `tracker.md` yet is normal, the same as a repository with no `.capstan/` on its first effort: the file is created on first write, not provisioned ahead of one.
+Tracking is always on; unset is the only branch where that means `tracker.md`. No configuration is needed to have it there: a repository with no `tracker.md` yet is normal, the same as a repository with no `.capstan/` on its first effort, and the file is created on first write, not provisioned ahead of one.
 
-A status change rides the commit that phase already makes, rather than generating one of its own. At a configured document home, where Capstan never runs git, the operator's own commit carries it instead, per `## Document home` above.
+Unset, a status change rides the commit that phase already makes, rather than generating one of its own — at a configured document home, where Capstan never runs git, the operator's own commit carries it instead, per `## Document home` above.
 
 ## Before you start
 
@@ -227,7 +227,7 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
   CONTEXT.md      one line per term. persists. edited in place.
   decisions.md    one line per decision. persists.
   decisions/      full records, only when gated. persists.
-  tracker.md      one row per slice. persists. created on first write.
+  tracker.md      one row per slice. persists when the tracker is unset, absent under a GitHub surface. created on first write.
 
 <working copy>/
   .capstan/
