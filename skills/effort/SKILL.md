@@ -127,7 +127,7 @@ effort: <slug>
 started: <ISO timestamp>
 phase: concept
 head: <the commit the effort starts from>
-next: <what the run after this one picks up, and, once plan.md has cut slices, each live slice's fix-dispatch count>
+next: <what the run after this one picks up, and, once plan.md has cut slices, each live slice's fix-dispatch count, and, once phase 4 has begun, the note's fix-dispatch count>
 last-touched: <ISO timestamp>
 ```
 
