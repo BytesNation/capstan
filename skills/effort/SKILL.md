@@ -213,7 +213,7 @@ This is not a gate and it does not belong at one. It is a pause mid-phase: when 
 
 Uncertainty is not on that list.
 
-**Stop for consequence, never for ambiguity**, except the document home's stop case documented above. When something is unclear, take the most defensible reading, write it into `decisions.md` in the document home as `assumed` with the condition that would reopen it, and keep moving. Assumptions surface at the next gate where they cost almost nothing to correct. A crew that halts on every ambiguity turns the operator into the bottleneck the fleet was supposed to remove.
+**Stop for consequence, never for ambiguity**, except when a source of truth is missing or contradicts itself rather than merely unclear — that is what every stop case elsewhere already turns on. When something is unclear, take the most defensible reading, write it into `decisions.md` in the document home as `assumed` with the condition that would reopen it, and keep moving. Assumptions surface at the next gate where they cost almost nothing to correct. A crew that halts on every ambiguity turns the operator into the bottleneck the fleet was supposed to remove.
 
 ## Infrastructure
 
