@@ -58,7 +58,7 @@ If the work has no repository, say so and ask whether to create one. An effort n
 
 The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records, and the tracker. It defaults to `<working copy>/.capstan`.
 
-Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside `capstan-knowledge-base`, the other key those two files carry, before resolving the term anywhere else. Both files carrying the key with a different value stops the phase, and says so: two roots means two logs, the same "two records that disagree" outcome this section stops for elsewhere, and not a case to resolve by precedence or first-wins. A value that is not itself an absolute path stops the phase too, and says so: resolving it would mean assuming the session's working directory, which the Precondition section above forbids. The value is an absolute path to the folder:
+Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside `capstan-knowledge-base` and `capstan-tracker`, the other keys those two files carry, before resolving the term anywhere else. Both files carrying the key with a different value stops the phase, and says so: two roots means two logs, the same "two records that disagree" outcome this section stops for elsewhere, and not a case to resolve by precedence or first-wins. A value that is not itself an absolute path stops the phase too, and says so: resolving it would mean assuming the session's working directory, which the Precondition section above forbids. The value is an absolute path to the folder:
 
 ```
 capstan-document-home: /Users/example/vault/ProjectName
@@ -92,7 +92,11 @@ Phases 2, 3 and 4 never ask this question. Where phase 1 left an `assumed` defau
 
 ## Tracker
 
-The Tracker is the surface that holds slice state through to completion. `tracker.md` is the default surface, the one you get without configuring anything. It is the fourth durable artifact, alongside the glossary, the log and the records, and it lives in the document home and relocates with it under either configuration, the same as its three neighbours.
+The Tracker is the surface that holds slice state through to completion. Read the key `capstan-tracker` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — the same two files, addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — before resolving the term anywhere else. Both files carrying it with a different value stops the phase, and says so, the same disagreement case `## Document home` stops for.
+
+Unset means `tracker.md` in the document home, described below, which is what every existing project has and what none of them must change. Set, its value is scheme-prefixed: `github:<owner>/<repo>#<project-number>`. Read [`TRACKER-GITHUB.md`](TRACKER-GITHUB.md) when the key names a GitHub surface: it carries the column mapping, the four statuses as GitHub holds them, and the unreachable stop. A value that is neither unset nor a recognised scheme — an unrecognised scheme, since a later surface may add one, or a malformed `github:` value — stops the phase, and says so: proceeding would mean guessing which surface holds slice state.
+
+`tracker.md` is the fourth durable artifact, alongside the glossary, the log and the records, and it lives in the document home and relocates with it under either configuration, the same as its three neighbours.
 
 One markdown table, one row per slice, with exactly four columns: the effort the slice belongs to, the slice itself, its status, and the commit that merged it. Nothing else — `plan.md` holds Owns, Demonstrated, Seam, Red at base and Blocked by, and only the slice name appears in both.
 
@@ -111,9 +115,9 @@ capstan_type: tracker
 
 A row holds one of four statuses: `planned`, `building`, `merged`, `dropped`. Nothing else. Rows are closed and kept, never deleted — a tracker that erases completed work cannot answer what shipped.
 
-Tracking is always on. `tracker.md` is the default, and no configuration is needed to have one. A repository with no `tracker.md` yet is normal, the same as a repository with no `.capstan/` on its first effort: the file is created on first write, not provisioned ahead of one.
+Tracking is always on; unset is the only branch where that means `tracker.md`. No configuration is needed to have it there: a repository with no `tracker.md` yet is normal, the same as a repository with no `.capstan/` on its first effort, and the file is created on first write, not provisioned ahead of one.
 
-A status change rides the commit that phase already makes, rather than generating one of its own. At a configured document home, where Capstan never runs git, the operator's own commit carries it instead, per `## Document home` above.
+Unset, a status change rides the commit that phase already makes, rather than generating one of its own — at a configured document home, where Capstan never runs git, the operator's own commit carries it instead, per `## Document home` above.
 
 ## Before you start
 
@@ -204,8 +208,8 @@ This is not a gate and it does not belong at one. It is a pause mid-phase: when 
 
 | Action | Who |
 |---|---|
-| Read, research, draft, build, test, review, commit to a branch, push a branch, write the decision log, post a brief, delete the gitignored scratch | Crew, unattended |
-| Secrets or credentials. Anything a third party will see. Anything that costs money. Deletes other than the gitignored scratch, production deploys, infrastructure changes, anything hard to reverse | The operator, every time |
+| Read, research, draft, build, test, review, commit to a branch, push a branch, write the decision log, post a brief, delete the gitignored scratch, write a GitHub tracker on a private repository | Crew, unattended |
+| Secrets or credentials. Anything a third party will see, including a write to a GitHub tracker on a public repository. Anything that costs money. Deletes other than the gitignored scratch, production deploys, infrastructure changes, anything hard to reverse | The operator, every time |
 
 Uncertainty is not on that list.
 
@@ -223,7 +227,7 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
   CONTEXT.md      one line per term. persists. edited in place.
   decisions.md    one line per decision. persists.
   decisions/      full records, only when gated. persists.
-  tracker.md      one row per slice. persists. created on first write.
+  tracker.md      one row per slice. persists when the tracker is unset, absent under a GitHub surface. created on first write.
 
 <working copy>/
   .capstan/
