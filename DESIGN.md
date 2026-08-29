@@ -34,11 +34,11 @@ Which is why phases 2, 3 and 4 live in their own files beside `skills/effort/SKI
 
 The crew does not halt on unclear requirements. It takes the most defensible reading, writes the assumption down, and keeps moving, then surfaces every assumption at the next gate where correcting one is nearly free.
 
-What does stop the line: secrets and credentials, anything a third party will see, anything that costs money, and anything destructive or production-facing.
+What does stop the line: secrets and credentials, anything a third party will see, anything that costs money, and anything destructive or production-facing. The one delete the crew makes on its own authority is the gitignored scratch, at delivery.
 
 ## The disciplines
 
-The disciplines the roles pull in, plus `effort` itself, the front door invoked only by the operator. Three agents preload the disciplines they need via `skills:` frontmatter, so the discipline is in context before the first turn rather than hopefully invoked.
+The disciplines the roles pull in. The two front doors sit outside this table and are not disciplines: `effort` starts a run, `setup` configures where the artifacts live, and only the operator invokes either. Three agents preload the disciplines they need via `skills:` frontmatter, so the discipline is in context before the first turn rather than hopefully invoked.
 
 | Skill | Used by | For |
 |---|---|---|
@@ -54,7 +54,7 @@ The disciplines the roles pull in, plus `effort` itself, the front door invoked 
 | `to-questionnaire` | Architect | The other direction: open questions out to whoever holds the answers, aimed at the gap between what they know and what the effort needs. Vendored from Matt Pocock. |
 | `two-axis-review` | Reviewer | Standards and spec, answered independently, never blended into one verdict. |
 | `verify` | Architect | Runs the checks the repository declares against the merged result. A Reviewer reads a diff and skips what a typechecker would catch, on the grounds that CI catches it. This is that CI. |
-| `codebase-design` | Reviewer, Builder | The words for structure: module, interface, depth, seam, adapter, leverage, locality. Gives the standards axis something to judge interface shape against. Vendored from Matt Pocock, see [0003](.capstan/decisions/0003-adopt-deep-modules-as-the-design-standard.md). |
+| `codebase-design` | Reviewer | The words for structure: module, interface, depth, seam, adapter, leverage, locality. Gives the standards axis something to judge interface shape against. Vendored from Matt Pocock, see [0003](.capstan/decisions/0003-adopt-deep-modules-as-the-design-standard.md). |
 | `unslop` | Anything writing prose | Cuts AI tells from writing a person will read. |
 | `writing-for-agents` | You, editing this repo | The levers that make a document an agent consumes behave the same way every run. |
 
