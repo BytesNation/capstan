@@ -56,7 +56,7 @@ If the work has no repository, say so and ask whether to create one. An effort n
 
 ## Document home
 
-The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records, and the tracker. It defaults to `<working copy>/.capstan`.
+The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records, and, when the tracker is unset, the tracker. It defaults to `<working copy>/.capstan`.
 
 Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside `capstan-knowledge-base` and `capstan-tracker`, the other keys those two files carry, before resolving the term anywhere else. Both files carrying the key with a different value stops the phase, and says so: two roots means two logs, the same "two records that disagree" outcome this section stops for elsewhere, and not a case to resolve by precedence or first-wins. A value that is not itself an absolute path stops the phase too, and says so: resolving it would mean assuming the session's working directory, which the Precondition section above forbids. The value is an absolute path to the folder:
 
@@ -84,7 +84,7 @@ Two conditions send you here instead of accepting what the key resolves to, both
 
 **The key is absent** from both files, or neither file exists. Ask one question: use the default `.capstan/` here, or run `setup` to choose a folder outside the repository. Answering default writes the key itself, the same way `setup` writes it, so the effort proceeds and is never asked again. This does not stop the phase. Answering to run `setup` does: the Architect cannot invoke `setup` itself, so the operator runs it and starts the effort again.
 
-**The key resolves to a home holding none of the four durable artifacts, while `<working copy>/.capstan/` holds at least one.** Report what is at each location and point at `setup`. You never perform the move yourself.
+**The key resolves to a home holding none of its durable artifacts, while `<working copy>/.capstan/` holds at least one.** Report what is at each location and point at `setup`. You never perform the move yourself.
 
 A project already running on the default meets the first condition like any other project, and is asked the same way.
 
@@ -96,9 +96,9 @@ The Tracker is the surface that holds slice state through to completion. Read th
 
 Unset means `tracker.md` in the document home, described below, which is what every existing project has and what none of them must change. Set, its value is scheme-prefixed: `github:<owner>/<repo>#<project-number>`. Read [`TRACKER-GITHUB.md`](TRACKER-GITHUB.md) when the key names a GitHub surface: it carries the column mapping, the four statuses as GitHub holds them, and the unreachable stop. A value that is neither unset nor a recognised scheme — an unrecognised scheme, since a later surface may add one, or a malformed `github:` value — stops the phase, and says so: proceeding would mean guessing which surface holds slice state.
 
-`tracker.md` is the fourth durable artifact, alongside the glossary, the log and the records, and it lives in the document home and relocates with it under either configuration, the same as its three neighbours.
+Unset, `tracker.md` is the fourth durable artifact, alongside the glossary, the log and the records, and it lives in the document home and relocates with it under either document-home configuration, the same as its three neighbours. Under a GitHub surface there is no `tracker.md` to relocate: the tracker lives on the board instead, and the document home holds three durable artifacts, not four.
 
-One markdown table, one row per slice, with exactly four columns: the effort the slice belongs to, the slice itself, its status, and the commit that merged it. Nothing else — `plan.md` holds Owns, Demonstrated, Seam, Red at base and Blocked by, and only the slice name appears in both.
+One row per slice, with exactly four columns: the effort the slice belongs to, the slice itself, its status, and the commit that merged it. Nothing else — `plan.md` holds Owns, Demonstrated, Seam, Red at base and Blocked by, and only the slice name appears in both. Unset, those rows form one markdown table:
 
 ```markdown
 ---
