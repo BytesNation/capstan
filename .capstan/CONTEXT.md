@@ -33,6 +33,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | `.capstan/` | The folder holding the artifacts Capstan writes for itself: `CONTEXT.md`, `decisions.md`, `decisions/`, `tracker.md`, and the effort scratch at `effort/`. Distinct from the namespace above, which is a prefix rather than a folder. |
 | Slice | A change that can be demonstrated on its own once it is done. |
 | Layer | A horizontal cut that nothing can demonstrate until other cuts land. What a slice must never be. |
+| Duplication | One rule written in two places, which drift apart because nothing keeps them in step. Distinct from co-location, the within-file case `writing-for-agents` names. The reason a rule gets one home and a pointer rather than a second copy. |
 | Wide refactor exception | The one shape that breaks the vertical rule: a single mechanical change whose blast radius fans across the codebase, sequenced as expand, migrate, contract. Named for `slicing`'s own heading, against which "the expand-migrate-contract exception" is the same thing described by its sequence. |
 | Owns | The files one slice, and only that slice, touches. Every file the change touches is owned by exactly one slice, so nothing is left for no slice to fix and no two Builders collide. |
 | Demonstrated | What a reader or user can observe once a slice is done. A slice with no answer is a Layer. |
