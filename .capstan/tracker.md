@@ -20,3 +20,4 @@ capstan_type: tracker
 | qualified-paths | readme | merged | d8a2a8d |
 | architect-disciplines | load-point | merged | 0bd7aa9 |
 | standards-bullets | standards-audit | merged | 8bca8cf |
+| phase4-steps | deliver-steps | planned |  |
