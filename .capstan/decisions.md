@@ -6,6 +6,8 @@ capstan_type: decision-log
 
 | # | Date | Decision | Status |
 |---|------|----------|--------|
+| 570 | 2026-08-29 | Whether the repository stays on the personal account or returns to the `BytesNation` organisation. The move was found in a push redirect rather than recorded, so nothing here says it was intended or is permanent, and every address just repointed assumes it is | open |
+| 569 | 2026-08-29 | Supersedes 15. The GitHub repository is `MokeyBytes/capstan`. It moved off the `BytesNation` organisation, which still exists, so only the repository path changed and the redirect from the old address still resolves. 15's other half survives unchanged: the marketplace id stays `bytesnation`, which README line 146 already explains is taken from `marketplace.json` rather than from the repository path, so the install identifier is unaffected. Four addresses repointed: the git remote, `plugin.json`'s `repository`, the clone line, and the two `marketplace add` lines. Both `owner` blocks are left alone, because the organisation is live and still the publisher. `decisions/0001` names the old path in passing and stands unedited, per the rule against editing an accepted record | accepted |
 | 568 | 2026-08-29 | Whether the version bump becomes a numbered step in `PHASE-4-DELIVER.md` rather than something an effort is trusted to remember. 7 puts it inside the effort and it has now been missed twice running, at `qualified-paths` and at `architect-disciplines`. Raised by 567 | open |
 | 567 | 2026-08-29 | Version goes to 2.15.0, bumped on its own rather than inside an effort, against 7. Two efforts merged since the last bump and neither carried one, and `qualified-paths` already reached origin under the 2.14.0 label, so what a user holds as 2.14.0 is not what that number named. Minor rather than patch by 1 and 35's precedent: a skill changes and the glossary gains rows, and nothing a user types breaks. Carried as 568 | accepted |
 | 566 | 2026-08-28 | The note's fix dispatch is verified by the Architect rather than sent for a second review, and the note took one, against the two and three its predecessors took. All six fixes were the Reviewer's own moves prescribed verbatim and applied faithfully, including the one new paragraph, which 563 asked for rather than the Architect adding scope; that distinction is what made 551 send a second review last time and it does not apply here. Third data point for 492, and the count is falling: three, two, one | accepted |
@@ -559,7 +561,7 @@ capstan_type: decision-log
 | 18 | 2026-08-21 | The description is plain language. No role names, no internal vocabulary | accepted |
 | 17 | 2026-08-21 | `displayName` is "Capstan" with no descriptive tail | accepted |
 | 16 | 2026-08-21 | Version goes to 2.0.0. The skill namespace is the public interface and it breaks | accepted |
-| 15 | 2026-08-21 | The GitHub repo renames to `BytesNation/capstan`. The marketplace id stays `bytesnation` | accepted |
+| 15 | 2026-08-21 | The GitHub repo renames to `BytesNation/capstan`. The marketplace id stays `bytesnation` | superseded by 569 |
 | 14 | 2026-08-21 | Rename to `capstan`. Both the skill namespace and the install identifier change. See [0001](decisions/0001-rename-to-capstan.md) | accepted |
 | 13 | 2026-08-21 | The in-session equivalent of `claude plugin update <plugin>@<marketplace>`. Not verified; the CLI form is documented instead | open |
 | 12 | 2026-08-21 | The `Upgrading` section documents the full two-step sequence. Refreshing the marketplace alone does not install a new version | accepted |

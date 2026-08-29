@@ -11,7 +11,7 @@ This repository's own [glossary](.capstan/CONTEXT.md) defines every word it uses
 ## Install
 
 ```bash
-claude plugin marketplace add BytesNation/capstan
+claude plugin marketplace add MokeyBytes/capstan
 claude plugin install capstan@bytesnation
 ```
 
@@ -139,7 +139,7 @@ No command edits a marketplace's source in place, and editing `~/.claude/plugins
 
 ```bash
 claude plugin marketplace remove bytesnation
-claude plugin marketplace add BytesNation/capstan
+claude plugin marketplace add MokeyBytes/capstan
 claude plugin install capstan@bytesnation --scope user
 ```
 
@@ -150,7 +150,7 @@ The version cache under `~/.claude/plugins/cache/` is untouched throughout. A se
 ## Installing by hand
 
 ```bash
-git clone https://github.com/BytesNation/capstan.git
+git clone https://github.com/MokeyBytes/capstan.git
 cp -r capstan/agents/* ~/.claude/agents/
 cp -r capstan/skills/* ~/.claude/skills/
 ```
