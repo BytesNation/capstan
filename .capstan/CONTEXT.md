@@ -17,11 +17,13 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Builder | Builds exactly one slice in its own worktree. Never reviews its own work. |
 | Reviewer | Reviews one slice's diff without the Builder's reasoning. Reports, never fixes. |
 | Courier | Packages a delivered effort, writes the knowledge-base note, which the operator commits. Never sends. |
+| Knowledge base | The operator's own surface outside the working copy, holding what they know across every Project. Capstan writes one note into it per Effort and never runs git there. |
 | Knowledge-base note | The one permanent note per effort the Courier writes at delivery. Written by Capstan, committed by the operator. |
 | Discipline | A skill the roles pull in, as opposed to a role itself. |
 | Project | The work an Effort belongs to and outlives. One Project holds many Efforts, its own Document home, and, once built, its Tracker. |
 | `capstan_type` | The frontmatter property naming which durable artifact a note is: `glossary`, `decision-log`, `decision-record` or `tracker`. Prefixed per the vault-wide typing rule. |
 | `capstan-document-home` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding an absolute path to the Document home. Unset means the `effort` skill asks once, offering the default or Setup. |
+| `capstan-knowledge-base` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding an absolute path to the Knowledge base. Unset means there is none, and the Courier writes no note. |
 | Document home | Where the glossary, the log, the records and the tracker live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
 | Tracker | The surface holding slice state through to completion. Always present; the default is `tracker.md` in the Document home. |
 | Setup | The `setup` skill. Configures where a Project's durable artifacts live, moves what is already there, and can be re-run. Operator-invoked, never part of an Effort. |
