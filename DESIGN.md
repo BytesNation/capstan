@@ -80,7 +80,7 @@ Three tiers of decision, sorted by lifespan, the glossary standing beside them, 
 - **Glossary**: one line per term, `CONTEXT.md` in [the document home](README.md#document-home). The only file here edited in place rather than superseded, because a glossary you have to read archaeologically is a glossary nobody reads. Every agent that writes or reviews code reads it; a name that contradicts it is a review finding.
 - **Log**: one line per decision, `decisions.md` in the document home. Cannot bloat.
 - **Record**: a full document only when a decision is hard to reverse *and* surprising without context *and* a real trade-off. All three, so most efforts produce none.
-- **Tracker**: one row per slice, `tracker.md` in the document home, carrying the effort, the slice, its status and the commit that merged it. Nothing else here records what shipped, so it is the one place that question stays answerable once the plan that shipped it is gone.
+- **Tracker**: one row per slice, carrying the effort, the slice, its status and the commit that merged it. Unset, that's `tracker.md` in the document home; configured, it's the board [described below](#why-the-tracker-gained-a-second-surface) instead. Nothing else here records what shipped, so it is the one place that question stays answerable once the plan that shipped it is gone.
 - **Brief**: generated per recipient at send time, never stored, never maintained.
 
 The log carries unsettled questions too. A question the interview could not resolve becomes an `open` line, or an `assumed` one when the crew picked a default to keep moving. Both get reported at every gate, neither blocks one, and the next interview reads them back before its first round. Without that, a hard question asked in March dies with the spec that held it.
@@ -114,6 +114,16 @@ That choice costs something worth naming. Because the note is never committed, i
 The frontmatter belongs to the folder rather than to Capstan. A knowledge base carries conventions Capstan did not write and cannot safely infer, so the Courier reads the folder it is writing into instead of generalising from one example somewhere else. The rule that keeps biting is copy versus derive. A link to the folder's own map is a property of the folder, so it gets copied. The date, the note's type, and every tag naming the work are facts about this effort, so they get derived. Copying where the rule says derive is never obviously wrong, because a neighbour's value is always plausible, and nothing surfaces the mistake until one search returns two projects at once.
 
 Two things Capstan will not do in someone else's vault, both of which it did once. It does not create a node in their taxonomy, because deciding that a knowledge base needs a new branch is the operator's call. And it does not edit neighbouring notes to satisfy the vault's own health check, a rule that lives in their configuration and can push a Courier into changing notes an earlier decision told it to leave alone.
+
+## Why the tracker gained a second surface
+
+`tracker.md` shipped first and stayed the only surface for a long stretch, not because a second one was ruled out but because nothing forced the question until an operator asked for a board.
+
+What a board buys is entirely for people. An agent building or reviewing a slice already has `tracker.md` open, offline, at the commit it is reading. Pointing that agent at a board instead would gain it nothing. What a board gives you is a link a teammate can open without cloning the repository, and an issue: the one project-item kind GitHub lets a pull request or a linked commit close, which is why this surface maps a slice onto an issue rather than a bare project item. That is a real want, and it belongs to whoever typed `setup`, not to the crew that reads the file underneath it.
+
+The trade is named rather than hidden. `tracker.md` at any commit is always the same table: read it twice against that commit and the rows come back identical, which is what lets a resumed phase check what it expected against what is there. A Projects board has no such point to stand on. It is live, mutable state on someone else's server, and two reads a minute apart can disagree with nothing recording why. That is the same degradation the knowledge-base note already carries, and here it costs more: the note is written once, at delivery, and left alone from then on. The tracker is written on every slice transition, planned to building to merged or dropped, so the board's missing fixed point gets paid on every move a slice makes, not once.
+
+This was accepted with the cost named, not solved. Nothing here makes a board diffable the way a committed file is. An operator who wants that guarantee keeps the tracker on `tracker.md`. An operator who wants the board takes this trade knowingly.
 
 ## Why the Architect creates worktrees by hand
 
