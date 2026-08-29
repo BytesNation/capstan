@@ -14,7 +14,7 @@ Begin by re-reading the world, per [`SKILL.md`](SKILL.md). Then, in order:
 
    If the run ends before step 5, for any reason, update the claim's `next` line before it does. Phase 4 ends in deletion rather than a gate, so nothing else records how many fix dispatches the note has already had if a run stops mid-loop.
 
-5. Delete `<working copy>/.capstan/effort/`. All of it: spec, plan, scratch, scout findings, review output, checkpoint drafts. A stale spec or an old research file left behind is worse than none: the next agent reads it as current and builds on something that stopped being true. The Tracker is not part of this deletion. Unset, that means `tracker.md`: it lives in the document home, not the scratch, and stays, carrying every row this effort's slices reached. Set to a GitHub surface, there is no local file to spare — the board `TRACKER-GITHUB.md` describes sits outside the scratch already, and this deletion never touches it.
+5. Delete `<working copy>/.capstan/effort/`. All of it: spec, plan, scratch, scout findings, review output, checkpoint drafts. A stale spec or an old research file left behind is worse than none: the next agent reads it as current and builds on something that stopped being true. The Tracker is not part of this deletion. Unset, that means `tracker.md`: it lives in the document home, not the scratch, and stays, carrying every row this effort's slices reached.
 
 6. Report to the operator: what shipped, what review found on the note, and what was actioned or dismissed. Say that the note is reviewed and ready, and that committing it is the operator's own action, to be done once, now. Say the same of the default branch: pushing it is the operator's own action too, done once, now.
 
