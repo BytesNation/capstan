@@ -19,4 +19,4 @@ capstan_type: tracker
 | qualified-paths | scratch-paths | merged | 50c0892 |
 | qualified-paths | readme | merged | d8a2a8d |
 | architect-disciplines | load-point | merged | 0bd7aa9 |
-| standards-bullets | standards-audit | planned |  |
+| standards-bullets | standards-audit | merged | 8bca8cf |
