@@ -23,6 +23,6 @@ capstan_type: tracker
 | phase4-steps | deliver-steps | merged | f6cb78b |
 | github-surface | effort-read | merged | cfccad4 |
 | github-surface | tracker-mapping | merged | 6c36b2e |
-| github-surface | setup-surface | merged | aa2fd66 |
+| github-surface | setup-surface | merged | ace4bff |
 | github-surface | docs | merged | 04d33d6 |
 | github-surface | phase-files | merged | a681858 |
