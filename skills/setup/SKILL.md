@@ -82,22 +82,24 @@ The tracker value to write is `github:<owner>/<repo>#<project-number>`. It is no
 
 The confirmed path is `<working copy>/.capstan` for "in the repository," written and compared without a trailing slash from here on even though the rest of this document spells the directory `.capstan/` to mark it as one, or the path the operator just gave for "outside." An absolute path only. A relative one is rejected right here, before it gets the chance to stop a later step on an assumption about the session's own directory. Strip any trailing slash before comparing it to the home currently in force below; the two are compared by path, not by spelling.
 
-Create the confirmed path if it does not already exist, before anything below can branch on it. Without this, choosing a folder outside the repository fails on its first run every time: a project folder named for the first time inside a vault is unreachable by definition. It also closes the case a re-confirmed key can otherwise reach: a folder deleted since the last run, waved through by every branch below because each one continues past this point rather than through it. This runs whether the confirmed path matches the home already in force or not, and whether the collision check below finds all four artifacts, some, or none: the guarantee is a property of the confirmed path itself, not of whichever branch happens to ask for it first.
+Create the confirmed path if it does not already exist, before anything below can branch on it. Without this, choosing a folder outside the repository fails on its first run every time: a project folder named for the first time inside a vault is unreachable by definition. It also closes the case a re-confirmed key can otherwise reach: a folder deleted since the last run, waved through by every branch below because each one continues past this point rather than through it. This runs whether the confirmed path matches the home already in force or not, and whether the collision check below finds all the artifacts, some, or none: the guarantee is a property of the confirmed path itself, not of whichever branch happens to ask for it first.
 
 Created empty, it can still be empty when this run ends, most often a fresh repository choosing the default with nothing yet to move into it, or a later step that stops before anything moves. Git does not track an empty directory, so step 6 commits nothing for it, and there is nothing to unwind either way: an empty directory left here is the same expected outcome as a fresh repository choosing the default, and the operator removes it by hand if they would rather it were gone.
 
 ### 2. Check the destination
 
-When the confirmed path is the home currently in force already, there is nothing to check or move: continue at step 4. This is the ordinary case of confirming the same answer back, even on a project too new to have all four artifacts yet; whether it existed a moment ago is already said above.
+The artifacts this step and step 3 track are `CONTEXT.md`, `decisions.md` and `decisions/`, always, plus `tracker.md` too when **The tracker-surface ask** settled on the default. When it settled on GitHub there is no `tracker.md` at all: it is never part of this set, and its absence is never a collision. Call this set **the artifacts** for the rest of this step and the next.
 
-Otherwise, check whether the confirmed path already holds any of `CONTEXT.md`, `decisions.md`, `decisions/` or `tracker.md`.
+When the confirmed path is the home currently in force already, there is nothing to check or move: continue at step 4. This is the ordinary case of confirming the same answer back, even on a project too new to have any of the artifacts yet; whether it existed a moment ago is already said above.
 
-**All four are there.** Report it, and ask the operator to choose:
+Otherwise, check whether the confirmed path already holds any of the artifacts.
+
+**All of them are there.** Report it, and ask the operator to choose:
 
 - **Give a different path.** Return to **The ask** and ask it again from the fork, so choosing the default is a live answer this time too, then return to step 1 with whatever the operator gives. **The tracker-surface ask** does not run again here: it already answered its own separate question once this run, a document-home collision has nothing to do with it, and the answer it settled on stands.
-- **Proceed.** The confirmed path's existing four become the ones in force from here on. Skip step 3 entirely, and continue at step 4: the key still gets written, pointing at the confirmed path. If the home currently in force holds any of the four, say plainly that it now holds a stale copy; if it holds none, there is nothing to say.
+- **Proceed.** The confirmed path's existing artifacts become the ones in force from here on. Skip step 3 entirely, and continue at step 4: the key still gets written, pointing at the confirmed path. If the home currently in force holds any of the artifacts, say plainly that it now holds a stale copy; if it holds none, there is nothing to say.
 
-**Some but not all four are there.** Never merge, never overwrite: a partial merge is the most dangerous kind, indistinguishable from data loss until someone diffs it by hand. Report exactly what is there, and offer only:
+**Some but not all of them are there.** Never merge, never overwrite: a partial merge is the most dangerous kind, indistinguishable from data loss until someone diffs it by hand. Report exactly what is there, and offer only:
 
 - **Give a different path.** Same as above, return to step 1.
 - **Stop.** End the run here. The operator clears the destination by hand before running this again.
@@ -110,7 +112,7 @@ This step runs every time a different path is in play, because two working copie
 
 ### 3. Report what would move, then move it
 
-List which of the four artifacts sit at **the home currently in force** (the value read at the top of **The ask**) today and would move to the confirmed path.
+List which of the artifacts sit at **the home currently in force** (the value read at the top of **The ask**) today and would move to the confirmed path.
 
 If none of them do, ask the operator which is true, since nothing here can tell the two apart:
 
@@ -119,7 +121,7 @@ If none of them do, ask the operator which is true, since nothing here can tell 
 
 Otherwise, on the operator's approval, move them and continue to step 4. On refusal, move nothing, say plainly that `<home currently in force>` still holds what was just listed and the confirmed path is not receiving it, and stop here: do not write the key and do not commit. A refusal that still rewrote the key would leave that key pointing at an empty destination while the real log sat untouched at the old home, worse than either finishing the move or leaving everything as it was.
 
-The move covers exactly those four: `CONTEXT.md`, `decisions.md`, `decisions/`, `tracker.md`. The effort scratch stays at `<working copy>/.capstan/effort/` under every configuration, and `.capstan/` itself is never deleted by this step. It can end up empty once the four move out and no effort is currently running, the same expected emptiness as step 1's newly created folder.
+The move covers exactly the artifacts defined in step 2, nothing more and nothing less: `CONTEXT.md`, `decisions.md` and `decisions/` always, `tracker.md` too on the default and never on GitHub, where none exists to move. The effort scratch stays at `<working copy>/.capstan/effort/` under every configuration, and `.capstan/` itself is never deleted by this step. It can end up empty once the artifacts move out and no effort is currently running, the same expected emptiness as step 1's newly created folder.
 
 ### 4. Write the keys
 
@@ -170,14 +172,14 @@ Nothing to commit is a valid outcome. Confirming the same answer back changes no
 
 When the confirmed path is a folder outside the repository, tell the operator that the vault is theirs to commit, and that a document home can sit unversioned for days if they let it. When the artifacts also moved out of a vault, the source is theirs to commit too, for the same reason: this step ran no git there either, and the deletions sitting inside it are just as real as the arrivals in the destination. Nothing here runs git outside the working copy.
 
-**Done when** exactly one `capstan-document-home` line exists across `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` combined, at most one `capstan-tracker` line exists across those same two files combined and where one is present it reads `github:<owner>/<repo>#<project-number>`, `<working copy>/.gitignore` carries `.capstan/effort/`, and listing the confirmed path directly, not recalling what an earlier step reported, shows a directory that exists and holds every one of the four artifacts that exists anywhere. Zero of the four, two, or all four all satisfy this equally, since step 2 itself calls some-but-not-all the ordinary case; what fails it is one of the four sitting somewhere else without also sitting at the confirmed path, or the confirmed path not existing at all. A stale copy left behind at the old home under step 2's full-collision Proceed, reported there as stale, does not fail this on its own: the confirmed path still holds every artifact currently in force.
+**Done when** exactly one `capstan-document-home` line exists across `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` combined, at most one `capstan-tracker` line exists across those same two files combined and where one is present it reads `github:<owner>/<repo>#<project-number>`, `<working copy>/.gitignore` carries `.capstan/effort/`, and listing the confirmed path directly, not recalling what an earlier step reported, shows a directory that exists and holds every one of the artifacts (step 2's set, for whichever surface **The tracker-surface ask** settled on) that exists anywhere. Zero of them, some of them, or all of them all satisfy this equally, since step 2 itself calls some-but-not-all the ordinary case; what fails it is one of the artifacts sitting somewhere else without also sitting at the confirmed path, or the confirmed path not existing at all. A stale copy left behind at the old home under step 2's full-collision Proceed, reported there as stale, does not fail this on its own: the confirmed path still holds every artifact currently in force.
 
 ## Re-running
 
 Running this a second time is not a special mode. It is the same skill, and the reads at the top of **The ask** and **The tracker-surface ask** are what make re-running work. Each reports the current value, or the disagreement between the two files if there is one, before offering its own fork again, so the operator always sees what is in force before they change it, one surface at a time.
 
-Confirming the same document-home value back finds nothing to move. Step 2 sees the confirmed path is the home already in force and skips straight to step 4, step 4 replaces the key line with the same value, step 5 is a no-op once the `.gitignore` line already carries it, and step 6 commits nothing further for it. Choosing a different answer runs steps 1 through 7 exactly as a first run would, moving the four artifacts from the home currently in force, wherever that is today, to the newly confirmed path: vault A to vault B, `.capstan/` back to a vault, or any pair between them.
+Confirming the same document-home value back finds nothing to move. Step 2 sees the confirmed path is the home already in force and skips straight to step 4, step 4 replaces the key line with the same value, step 5 is a no-op once the `.gitignore` line already carries it, and step 6 commits nothing further for it. Choosing a different answer runs steps 1 through 7 exactly as a first run would, moving the artifacts from the home currently in force, wherever that is today, to the newly confirmed path: vault A to vault B, `.capstan/` back to a vault, or any pair between them.
 
-The tracker surface re-runs the same way on its own question, independent of whatever the document-home fork answered this time: confirming GitHub back re-checks the `project` scope and replaces the key line with the same value; moving from GitHub to the default removes it; moving from the default to GitHub writes it for the first time. None of this touches step 2's move or step 1's four artifacts, since the tracker surface was never one of them.
+The tracker surface re-runs the same way on its own question, independent of whatever the document-home fork answered this time: confirming GitHub back re-checks the `project` scope and replaces the key line with the same value; moving from GitHub to the default removes it; moving from the default to GitHub writes it for the first time. None of this touches step 2's move or the artifacts it moves, since the tracker surface was never one of them.
 
 This is what a one-shot question could not do. An operator who wants to change either answer runs `setup` again, rather than editing a key by hand and hoping the rest follows it there on their own.
