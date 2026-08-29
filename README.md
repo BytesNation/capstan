@@ -19,7 +19,7 @@ Restart Claude Code once it finishes. Agent definitions load at session start, s
 
 That installs at user scope, so the crew is available in every session. Add `--scope project` to write to the project's `.claude/settings.json` instead, which is what you want when a team shares one repository.
 
-Run `/capstan:setup` next, in the repository you plan to work in. It asks where the glossary, decision log, decision records and tracker should live, in the repository by default or in a vault, and writes the answer down so nothing asks again. Skip it and the first effort you start asks the same question.
+Run `/capstan:setup` next, in the repository you plan to work in. It asks where the glossary, decision log, decision records and tracker should live, in the repository by default or in a vault, and writes the answer down so nothing asks again. Skip it and your first effort asks a narrower version: take the default here, or stop and run `setup` to choose a folder outside the repository. You cannot name a vault path from inside an effort.
 
 ## Your first run
 
@@ -45,7 +45,7 @@ What happens, in order:
 
 **The run ends at every gate.** Nothing polls, nothing waits in the background, and the crew never asks whether it should stop. The run being over is what makes the gate real. `.capstan/effort/CLAIM.md` records which phase the effort reached and what is still outstanding inside it, so the next session picks up where the last one stopped, however many hours later.
 
-**Unclear requirements never stop the run.** The crew takes the most defensible reading, writes the assumption into the decision log, and keeps going. Every assumption surfaces at the next gate, where correcting one costs almost nothing. Four things do stop it: secrets and credentials, anything a third party will see, anything that costs money, and anything destructive or production-facing.
+**Unclear requirements never stop the run.** The crew takes the most defensible reading, writes the assumption into the decision log, and keeps going. Every assumption surfaces at the next gate, where correcting one costs almost nothing. Four things do stop it: secrets and credentials, anything a third party will see, anything that costs money, and anything destructive or production-facing. The one delete the crew makes on its own authority is the gitignored scratch, at delivery.
 
 Three efforts at once is the ceiling. Three gates each against one reader is nine briefs a cycle, which is about where briefs stop being read and start being rubber-stamped. Fan-out inside a single effort has no limit.
 
@@ -104,7 +104,7 @@ Some operators would rather keep a growing decision log out of the repository en
 
 Capstan stores no difference between the last two. Both are an absolute path configured away from the default, and the list above exists to help you choose, not because Capstan branches on which one it is.
 
-Run `/capstan:setup` to choose, and run it again later to change your mind. It asks the fork first and the vault layout only if you go outside the repository, confirms the path, creates the folder if it does not exist, checks whether anything is already sitting at the destination before it moves a thing, and moves the four artifacts on your approval. It also writes `capstan-document-home` into whichever of `CLAUDE.md` or `AGENTS.md` you already have, creating `AGENTS.md` if you have neither.
+Run `/capstan:setup` to choose, and run it again later to change your mind. It asks the fork first and the vault layout only if you go outside the repository, confirms the path, creates the folder if it does not exist, checks whether anything is already sitting at the destination before it moves a thing, and moves the four artifacts on your approval. It also writes `capstan-document-home` into `CLAUDE.md` or `AGENTS.md`: whichever one you have, asking you which when you have both, and creating `AGENTS.md` when you have neither. Exactly one file carries the key when it finishes, never two.
 
 **Capstan never commits a configured document home, and it never runs git inside one.** It writes the files and stops; committing them from then on is yours, the same as committing anything else in that vault. Left uncommitted, a document home can sit that way for days before anyone notices, so weigh that before you switch it on. A document home inside a vault synced by iCloud, Dropbox, or Obsidian Sync is untested.
 
@@ -141,7 +141,7 @@ claude plugin marketplace update bytesnation
 claude plugin update capstan@bytesnation
 ```
 
-The first refreshes the marketplace catalogue and installs nothing by itself. The second does the install and needs the marketplace-qualified name: `capstan@bytesnation` resolves, a bare `capstan` does not. Add `-s project` if that is where you installed, then restart Claude Code.
+The first refreshes the marketplace catalogue and changes no installed plugin by itself. The second moves your install onto the new version and needs the marketplace-qualified name: `capstan@bytesnation` resolves, a bare `capstan` does not. Reaching for `install` instead does nothing useful: it reports the plugin is already installed and leaves the old version running. Add `-s project` if that is where you installed, then restart Claude Code.
 
 Leave the `/plugin` auto-update toggle off, the same as for any third-party marketplace.
 
@@ -169,7 +169,7 @@ cp -r capstan/agents/* ~/.claude/agents/
 cp -r capstan/skills/* ~/.claude/skills/
 ```
 
-Run `/setup` next, in the repository you plan to work in, to choose where the glossary, decision log, decision records and tracker should live. Skip it and the first effort you start asks the same question. Then start work with `/effort <what you want built>`.
+Run `/setup` next, in the repository you plan to work in, to choose where the glossary, decision log, decision records and tracker should live. Skip it and your first effort offers you the default or sends you back here. Then start work with `/effort <what you want built>`.
 
 A plugin namespaces what it ships, so the Builder is `capstan:builder` under a plugin install and plain `builder` under a manual one. [`skills/effort/SKILL.md`](skills/effort/SKILL.md) tells the Architect which agent to spawn for each role, so use whichever form your install produced. The plugin path is the exercised one: installing, updating, and a full remove and re-add have all been run against it. The manual copy is there for a setup with no marketplace, and sees less use.
 
@@ -239,7 +239,7 @@ The Architect reads the file for the phase it is in, so a run that reaches gate 
 
 **Fan-out does nothing for single-artifact work.** Parallel Builders need slices that own different files. A document, a video script, a single config file: each is one artifact and inherently one Builder. Software usually fans out because slices own different things. Most other work does not, and a one-slice plan there is correct rather than a failure to parallelise.
 
-**The knowledge-base note is always reviewed whole.** The note is never committed, so it has no fixed point to diff against. The Reviewer reads the full note, and review is never skipped.
+**The knowledge-base note is reviewed whole, when there is one.** The note is never committed, so it has no fixed point to diff against, and the Reviewer reads the whole file rather than a diff. A project with no `capstan-knowledge-base` key gets no note, and then there is nothing to review.
 
 ## Licence
 
