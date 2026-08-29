@@ -66,25 +66,15 @@ Ask where slice state should live:
 
 **On GitHub.** If the project already has a `tracker.md`, say plainly that this step leaves it exactly where it is: nothing here moves a single row out of it, deletes it, or creates a matching issue on the board. Choosing GitHub only changes where slice state is read and written **from now on**; carrying what `tracker.md` already holds onto the board is a separate piece of work this skill does not do.
 
-Ask for the project number alone; the owner and repository are never asked for, they come from the working copy's own remote:
+Ask for the project number alone; the owner and repository are never asked for, they come from the working copy's own remote. Resolve that remote without assuming its name is `origin`, since a repository can call its GitHub remote `upstream`, `github`, or anything else:
 
 ```bash
-git -C <working copy> remote get-url origin
+git -C <working copy> remote -v
 ```
 
-Read `<owner>/<repo>` out of that URL. No remote, or a remote on a host that is not `github.com`, means this surface cannot be reached from this working copy at all: say so and stop, before asking for a project number nothing can use.
+Read `<owner>/<repo>` out of whichever remote's URL has `github.com` as its host. No remote does, or the working copy has no remote at all, means this surface cannot be reached from this working copy at all: say so and stop, before asking for a project number nothing can use.
 
-With the remote resolved, check whether the token in force can reach Projects v2 by calling the thing the surface itself will call, rather than by reading the scope list `gh auth status` reports:
-
-```bash
-gh project list --owner <owner>
-```
-
-**It succeeds.** The token already reaches Projects v2. Continue below to write the key.
-
-**It fails on a missing scope.** Reading a board needs a scope this token does not carry. Hand off to the `walkthrough` skill for one stage: it tells the operator to run `gh auth refresh -s project` themselves, since granting a scope is an auth change and never this skill's to run, then stops and waits for the operator to confirm they ran it. Once confirmed, re-run the same `gh project list --owner <owner>` call. It succeeding now is the grant landing; continue below. It failing again is not a step to loop on: stop the run here and report what still fails.
-
-Once the check above has succeeded, one way or the other, the tracker value to write is `github:<owner>/<repo>#<project-number>`, and step 4 below writes it.
+The tracker value to write is `github:<owner>/<repo>#<project-number>`. It is not written yet: the scope check that must pass first runs later, under **Before writing, on GitHub** in step 4 below, not here. Running it here would walk the operator through granting a scope for a run that step 2's partial collision or step 3's refusal could still abort before writing anything.
 
 ## Then, in order
 
@@ -104,7 +94,7 @@ Otherwise, check whether the confirmed path already holds any of `CONTEXT.md`, `
 
 **All four are there.** Report it, and ask the operator to choose:
 
-- **Give a different path.** Return to **The ask** and ask it again from the fork, so choosing the default is a live answer this time too, then return to step 1 with whatever the operator gives.
+- **Give a different path.** Return to **The ask** and ask it again from the fork, so choosing the default is a live answer this time too, then return to step 1 with whatever the operator gives. **The tracker-surface ask** does not run again here: it already answered its own separate question once this run, a document-home collision has nothing to do with it, and the answer it settled on stands.
 - **Proceed.** The confirmed path's existing four become the ones in force from here on. Skip step 3 entirely, and continue at step 4: the key still gets written, pointing at the confirmed path. If the home currently in force holds any of the four, say plainly that it now holds a stale copy; if it holds none, there is nothing to say.
 
 **Some but not all four are there.** Never merge, never overwrite: a partial merge is the most dangerous kind, indistinguishable from data loss until someone diffs it by hand. Report exactly what is there, and offer only:
@@ -133,9 +123,21 @@ The move covers exactly those four: `CONTEXT.md`, `decisions.md`, `decisions/`, 
 
 ### 4. Write the keys
 
+**Before writing, on GitHub.** When **The tracker-surface ask** settled on GitHub, confirm the scope now, having reached this point only after steps 1 through 3 have run and after step 3's approval, if step 3 asked for one. Checking any earlier would walk the operator through granting a scope for a run that step 2's partial collision or step 3's refusal could still abort before writing anything. Check whether the token in force can reach Projects v2 by calling the thing the surface itself will call, rather than by reading the scope list `gh auth status` reports:
+
+```bash
+gh project list --owner <owner>
+```
+
+**It succeeds.** The token already reaches Projects v2. Continue below to write the key.
+
+**It fails naming a missing scope.** Reading a board needs a scope this token does not carry. Hand off to the `walkthrough` skill for one stage: it tells the operator to run `gh auth refresh -s project` themselves, since granting a scope is an auth change and never this skill's to run, then stops and waits for the operator to confirm they ran it. Once confirmed, re-run the same `gh project list --owner <owner>` call. It succeeding now is the grant landing; continue below. It failing again is not a step to loop on: stop the run here and report what still fails.
+
+**It fails any other way.** A network failure, an expired token, a rate limit, or `gh` itself missing all land here, along with anything else that is not the missing-scope error above. Per 648: say so and stop, no retry. `gh auth refresh -s project` fixes none of these, so do not send the operator to run it on the strength of this failure.
+
 Determine which file carries both keys from here on:
 
-- **The ask found the two files disagreeing.** The operator already picked which one is correct there; write into that file, and do not ask again.
+- **The ask, or the tracker-surface ask, found the two files disagreeing.** The operator already picked which one is correct there; write into that file, and do not ask again.
 - **Neither `CLAUDE.md` nor `AGENTS.md` exists.** Create `AGENTS.md`, since both Claude Code and Codex read it; `CLAUDE.md` is never created by this step.
 - **Exactly one of the two exists.** Write into that one.
 - **Both exist, for any other reason.** Ask which file to write into. This covers two files that already carry the same value, two files where only one carries the key, and two files where neither does: which file exists is not settled by what either one holds, so it is the same question regardless.
@@ -160,7 +162,7 @@ Create `<working copy>/.gitignore` if it does not exist, and add the line if it 
 
 ### 6. Commit everything, once
 
-Commit every change this run made to the working copy as a single commit, ordinary unattended work: whichever keys step 4 wrote, replaced, or removed, and a second file's key removed or the file deleted alongside it if step 4 found one; the artifacts removed from the home currently in force, if they moved out of the working copy; and the `.gitignore` line from step 5. Subject it `Configure document home` when step 4 touched `capstan-document-home`, `Configure tracker surface` when it touched only `capstan-tracker`. Do not commit anything on the far side of a move. That is the operator's, always, the same as anything else in a vault they did not ask this skill to touch.
+Commit every change this run made to the working copy as a single commit, ordinary unattended work: whichever keys step 4 wrote, replaced, or removed, and a second file's key removed or the file deleted alongside it if step 4 found one; the artifacts removed from the home currently in force, if they moved out of the working copy; and the `.gitignore` line from step 5. Subject it `Configure document home`. Do not commit anything on the far side of a move. That is the operator's, always, the same as anything else in a vault they did not ask this skill to touch.
 
 Nothing to commit is a valid outcome. Confirming the same answer back changes none of the working copy's own files, and this step is then a no-op.
 
@@ -168,7 +170,7 @@ Nothing to commit is a valid outcome. Confirming the same answer back changes no
 
 When the confirmed path is a folder outside the repository, tell the operator that the vault is theirs to commit, and that a document home can sit unversioned for days if they let it. When the artifacts also moved out of a vault, the source is theirs to commit too, for the same reason: this step ran no git there either, and the deletions sitting inside it are just as real as the arrivals in the destination. Nothing here runs git outside the working copy.
 
-**Done when** exactly one `capstan-document-home` line exists across `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` combined, `capstan-tracker` carries no line anywhere across those same two files when the default tracker was chosen or exactly one line naming the value **The tracker-surface ask** settled on when GitHub was, `<working copy>/.gitignore` carries `.capstan/effort/`, and listing the confirmed path directly, not recalling what an earlier step reported, shows a directory that exists and holds every one of the four artifacts that exists anywhere. Zero of the four, two, or all four all satisfy this equally, since step 2 itself calls some-but-not-all the ordinary case; what fails it is one of the four sitting somewhere else without also sitting at the confirmed path, or the confirmed path not existing at all. A stale copy left behind at the old home under step 2's full-collision Proceed, reported there as stale, does not fail this on its own: the confirmed path still holds every artifact currently in force.
+**Done when** exactly one `capstan-document-home` line exists across `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` combined, at most one `capstan-tracker` line exists across those same two files combined and where one is present it reads `github:<owner>/<repo>#<project-number>`, `<working copy>/.gitignore` carries `.capstan/effort/`, and listing the confirmed path directly, not recalling what an earlier step reported, shows a directory that exists and holds every one of the four artifacts that exists anywhere. Zero of the four, two, or all four all satisfy this equally, since step 2 itself calls some-but-not-all the ordinary case; what fails it is one of the four sitting somewhere else without also sitting at the confirmed path, or the confirmed path not existing at all. A stale copy left behind at the old home under step 2's full-collision Proceed, reported there as stale, does not fail this on its own: the confirmed path still holds every artifact currently in force.
 
 ## Re-running
 
