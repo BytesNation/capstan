@@ -37,11 +37,11 @@ You draft. You never send. Sending is a gated action and it belongs to the opera
 
 Write one note per effort into the operator's knowledge base. One note, not a copy of the decision records.
 
-The location and its frontmatter schema are setup-specific. Read them from `CLAUDE.md` or `AGENTS.md`. If neither declares one, match the frontmatter of the notes already there rather than inventing a schema, and ask before choosing a location.
+The location is the key `capstan-knowledge-base`, read from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` exactly as `capstan-document-home` is: a bare line holding an absolute path, never a user-level file of the same name. Both files carrying it with different values stops this step and says so, rather than picking one; two knowledge bases is the same "two records that disagree" outcome the document home stops for. Neither file carrying it means no knowledge base is configured: skip this step and say so in the close-out. A note written somewhere arbitrary is worse than no note, because nothing will find it again.
+
+The frontmatter schema is not a path and stays prose. Read what those two files say about it, and where they say nothing, match the frontmatter of the notes already there rather than inventing a schema.
 
 **Copied fields and derived fields.** Wherever a schema says to match neighbouring notes, here or in the file that declared it, that word covers two operations. Ask of each value, not each field, whether it is a property of the folder or a fact about this effort. A link to the folder's own map is a property of the folder, so copy it. A date, this note's type, and each tag naming the work are facts about this effort, so derive them: the tag comes from the project the effort belongs to, never from the organisation that owns the folder. Copying where the rule says derive is the failure mode, because a neighbour's value is always plausible and nothing surfaces the mistake until one search returns two projects at once.
-
-If no knowledge base is configured at all, skip this step and say so in the close-out. A note written somewhere arbitrary is worse than no note, because nothing will find it again.
 
 The body covers: what the effort was, what was decided, what was rejected and why, where the code lives, and where the full decision records live. Use the project's own vocabulary rather than generic description. Link to the decision log and the decision records — `decisions.md` and `decisions/` in the document home, which is `<working copy>/.capstan/` unless configured otherwise; do not copy them into the note.
 

@@ -88,7 +88,7 @@ By default, everything lands in `.capstan/`, inside the repository the work is h
 
 `tracker.md` answers what shipped, one row per slice, with the commit that merged it, and it is on by default, so you get it without configuring anything.
 
-Capstan reads two more things from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoding them. The permanent per-effort note's destination is yours to set, and the Courier skips the note and says so if you have not set it. The document home described below also lives in one of those files, but `setup` writes that line for you rather than you writing it yourself.
+Capstan reads two keys from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoding either. `capstan-knowledge-base` is where the permanent per-effort note goes, and it is yours to write; leave it out and the Courier skips the note and says so. `capstan-document-home` is the section below, and `setup` writes that line for you.
 
 ## Document home
 
@@ -119,6 +119,20 @@ The value must be an absolute path. A file lives in exactly one location, never 
 The glossary (`CONTEXT.md`), the decision log (`decisions.md`), the decision records (`decisions/`), and the tracker (`tracker.md`) resolve there from then on. Switching an existing project's document home runs through `setup`, which reports what it finds at the new destination and moves the four artifacts once you approve, rather than leaving you with a stale copy in `.capstan/` and a fresh one in the vault.
 
 An unreachable configured root stops the run rather than falling back to the default, since a missing source of truth would otherwise produce two records that quietly disagree.
+
+## Knowledge base
+
+The document home holds this project's records. The knowledge base is the other thing: your own vault or notes folder, outside the repository, holding what you know across every project. At delivery the Courier writes one note there per effort, covering what the effort was, what was decided, what was rejected, and where the code and the records live. It is the only place that can answer a question spanning two projects, because no single repository can.
+
+Set it with a key in this repository's own `CLAUDE.md` or `AGENTS.md`, the same two files the document home uses, and never a user-level file:
+
+```markdown
+capstan-knowledge-base: /Users/you/vault/Efforts
+```
+
+`setup` does not write this one. There is no default to fall back to, so leaving the key out is a complete answer. The Courier writes no note and says so in its close-out, rather than guessing a folder, because a note nobody can find again is worse than no note.
+
+Capstan never runs git in there either. It writes the note, a Reviewer reads it at that path, and you commit it.
 
 ## Upgrading
 
