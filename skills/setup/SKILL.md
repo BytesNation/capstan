@@ -9,6 +9,8 @@ argument-hint: "absolute path to the repository (defaults to the current one)"
 
 This configures the **document home**: the one root Capstan resolves every path to its own durable artifacts against, the glossary, the decision log, the decision records and the tracker. The default is `<working copy>/.capstan/`, and unset means nothing has chosen yet.
 
+It also configures the **tracker surface**: whether slice state stays in the document home as `tracker.md`, or moves to a GitHub Projects v2 board instead. The two are separate questions asked separately below; the default document home and the default tracker are each reachable without reading about the other.
+
 The operator types `setup` to run this. Nothing else reaches for it on its own reading of a sentence. Relocating someone's decision log on a guess is worse than the operator typing one command.
 
 It is safe to run more than once. See **Re-running** at the end.
@@ -48,6 +50,41 @@ The layout ask below is two steps, never a three-way menu: someone who wants the
 - One folder per project in a shared vault, where the absolute path is this project's own folder inside it.
 
 Both resolve to the same thing from here on, an absolute path configured away from the default. The description above exists to help a person choose; nothing below branches on which one they picked.
+
+## The tracker-surface ask
+
+A second ask, kept apart from the fork above rather than folded into it: someone who wants the default tracker should never have to read a sentence about GitHub to get there, and the reverse holds too, the two are asked separately because they answer separately.
+
+Before asking, read `capstan-tracker` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md`, both by absolute path, under the same bare-line rule as `capstan-document-home` above: a bare `capstan-tracker: <value>` line, never frontmatter. Reject the key appearing twice in one file and an empty value, the same way and for the same reason as above; each ends the run, reported so the operator can fix the file by hand. Report the value currently in force before asking anything else, under "Currently:" as above: "`tracker.md` in the document home." when unset, the value itself when one file carries it, or the two-file disagreement, worded the same way as above, when they differ, asking which is correct before anything else and treating that answer as the value in force from here on.
+
+Ask where slice state should live:
+
+- **The default.** `tracker.md` in the document home, unchanged from every project today.
+- **GitHub.** A Projects v2 board on the working copy's own remote.
+
+**On the default.** When nothing is currently recorded, there is nothing to write: step 4 below writes no `capstan-tracker` line, because an unset key already means `tracker.md`. When a `capstan-tracker` line already exists from an earlier run and the operator is choosing the default back, step 4 removes it instead: a line spelling out the default would be a second way of saying what its own absence already says.
+
+**On GitHub.** If the project already has a `tracker.md`, say plainly that this step leaves it exactly where it is: nothing here moves a single row out of it, deletes it, or creates a matching issue on the board. Choosing GitHub only changes where slice state is read and written **from now on**; carrying what `tracker.md` already holds onto the board is a separate piece of work this skill does not do.
+
+Ask for the project number alone; the owner and repository are never asked for, they come from the working copy's own remote:
+
+```bash
+git -C <working copy> remote get-url origin
+```
+
+Read `<owner>/<repo>` out of that URL. No remote, or a remote on a host that is not `github.com`, means this surface cannot be reached from this working copy at all: say so and stop, before asking for a project number nothing can use.
+
+With the remote resolved, check whether the token in force can reach Projects v2 by calling the thing the surface itself will call, rather than by reading the scope list `gh auth status` reports:
+
+```bash
+gh project list --owner <owner>
+```
+
+**It succeeds.** The token already reaches Projects v2. Continue below to write the key.
+
+**It fails on a missing scope.** Reading a board needs a scope this token does not carry. Hand off to the `walkthrough` skill for one stage: it tells the operator to run `gh auth refresh -s project` themselves, since granting a scope is an auth change and never this skill's to run, then stops and waits for the operator to confirm they ran it. Once confirmed, re-run the same `gh project list --owner <owner>` call. It succeeding now is the grant landing; continue below. It failing again is not a step to loop on: stop the run here and report what still fails.
+
+Once the check above has succeeded, one way or the other, the tracker value to write is `github:<owner>/<repo>#<project-number>`, and step 4 below writes it.
 
 ## Then, in order
 
@@ -94,9 +131,9 @@ Otherwise, on the operator's approval, move them and continue to step 4. On refu
 
 The move covers exactly those four: `CONTEXT.md`, `decisions.md`, `decisions/`, `tracker.md`. The effort scratch stays at `<working copy>/.capstan/effort/` under every configuration, and `.capstan/` itself is never deleted by this step. It can end up empty once the four move out and no effort is currently running, the same expected emptiness as step 1's newly created folder.
 
-### 4. Write the key
+### 4. Write the keys
 
-Determine which file carries the key from here on:
+Determine which file carries both keys from here on:
 
 - **The ask found the two files disagreeing.** The operator already picked which one is correct there; write into that file, and do not ask again.
 - **Neither `CLAUDE.md` nor `AGENTS.md` exists.** Create `AGENTS.md`, since both Claude Code and Codex read it; `CLAUDE.md` is never created by this step.
@@ -111,9 +148,11 @@ This file carries configuration read by Capstan and by other agents working in t
 capstan-document-home: /Users/example/vault/ProjectName
 ```
 
-Then, whichever file was not chosen: if it still carries a `capstan-document-home` line, remove it entirely, together with the sentence introducing it if this step wrote that sentence itself. If nothing else remains in that file afterward, delete it rather than leave an empty `CLAUDE.md` or `AGENTS.md` behind; a zero-byte file in git history looks like it means something. This runs every time both files exist, not only when **The ask** found them disagreeing: a file that already agreed, or a file that carried the key while the chosen one did not, leaves a second line behind exactly the same way if this is skipped. One file carries the key line across both from here on; no mismatch, and no duplicate, survives this run regardless of how the two started.
+Write `capstan-tracker` into the same chosen file, by the same replace-in-place rule, never a second line: **on GitHub**, `capstan-tracker: github:<owner>/<repo>#<project-number>` from the value **The tracker-surface ask** settled on. **On the default**, the opposite of the document-home key above: if the chosen file carries a `capstan-tracker` line, remove it; if it carries none, write nothing. Unset already means `tracker.md`, so nothing here needs distinguishing a project that was never asked from one that was asked and chose the default, the way `capstan-document-home` does; `capstan-tracker` carries no such ambiguity to resolve.
 
-Write the key even when the confirmed path is the default. Otherwise a project that was never asked and a project that was asked and chose the default look identical on disk, and telling those two states apart is the reason this skill exists.
+Then, whichever file was not chosen: if it still carries a `capstan-document-home` line, remove it entirely, together with the sentence introducing it if this step wrote that sentence itself. Remove a `capstan-tracker` line there too, under the same reasoning: one file carries both keys, so a stray line left standing in the other file states a second, contradicting answer for a project that has one. If nothing else remains in that file afterward, delete it rather than leave an empty `CLAUDE.md` or `AGENTS.md` behind; a zero-byte file in git history looks like it means something. This runs every time both files exist, not only when **The ask** found them disagreeing: a file that already agreed, or a file that carried a key while the chosen one did not, leaves a stray line behind exactly the same way if this is skipped. One file carries both keys across both from here on; no mismatch, and no duplicate, survives this run regardless of how the two started.
+
+Write `capstan-document-home` even when the confirmed path is the default. Otherwise a project that was never asked and a project that was asked and chose the default look identical on disk, and telling those two states apart is the reason this skill exists. `capstan-tracker` does not carry the same reason: its own unset state already means `tracker.md` before this skill ever runs.
 
 ### 5. Add `.capstan/effort/` to `.gitignore`
 
@@ -121,7 +160,7 @@ Create `<working copy>/.gitignore` if it does not exist, and add the line if it 
 
 ### 6. Commit everything, once
 
-Commit every change this run made to the working copy as a single commit, subject `Configure document home`, ordinary unattended work: the key written or replaced in step 4, and a second file's key removed or the file deleted alongside it if step 4 found one; the artifacts removed from the home currently in force, if they moved out of the working copy; and the `.gitignore` line from step 5. Do not commit anything on the far side of a move. That is the operator's, always, the same as anything else in a vault they did not ask this skill to touch.
+Commit every change this run made to the working copy as a single commit, ordinary unattended work: whichever keys step 4 wrote, replaced, or removed, and a second file's key removed or the file deleted alongside it if step 4 found one; the artifacts removed from the home currently in force, if they moved out of the working copy; and the `.gitignore` line from step 5. Subject it `Configure document home` when step 4 touched `capstan-document-home`, `Configure tracker surface` when it touched only `capstan-tracker`. Do not commit anything on the far side of a move. That is the operator's, always, the same as anything else in a vault they did not ask this skill to touch.
 
 Nothing to commit is a valid outcome. Confirming the same answer back changes none of the working copy's own files, and this step is then a no-op.
 
@@ -129,12 +168,14 @@ Nothing to commit is a valid outcome. Confirming the same answer back changes no
 
 When the confirmed path is a folder outside the repository, tell the operator that the vault is theirs to commit, and that a document home can sit unversioned for days if they let it. When the artifacts also moved out of a vault, the source is theirs to commit too, for the same reason: this step ran no git there either, and the deletions sitting inside it are just as real as the arrivals in the destination. Nothing here runs git outside the working copy.
 
-**Done when** exactly one `capstan-document-home` line exists across `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` combined, `<working copy>/.gitignore` carries `.capstan/effort/`, and listing the confirmed path directly, not recalling what an earlier step reported, shows a directory that exists and holds every one of the four artifacts that exists anywhere. Zero of the four, two, or all four all satisfy this equally, since step 2 itself calls some-but-not-all the ordinary case; what fails it is one of the four sitting somewhere else without also sitting at the confirmed path, or the confirmed path not existing at all. A stale copy left behind at the old home under step 2's full-collision Proceed, reported there as stale, does not fail this on its own: the confirmed path still holds every artifact currently in force.
+**Done when** exactly one `capstan-document-home` line exists across `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` combined, `capstan-tracker` carries no line anywhere across those same two files when the default tracker was chosen or exactly one line naming the value **The tracker-surface ask** settled on when GitHub was, `<working copy>/.gitignore` carries `.capstan/effort/`, and listing the confirmed path directly, not recalling what an earlier step reported, shows a directory that exists and holds every one of the four artifacts that exists anywhere. Zero of the four, two, or all four all satisfy this equally, since step 2 itself calls some-but-not-all the ordinary case; what fails it is one of the four sitting somewhere else without also sitting at the confirmed path, or the confirmed path not existing at all. A stale copy left behind at the old home under step 2's full-collision Proceed, reported there as stale, does not fail this on its own: the confirmed path still holds every artifact currently in force.
 
 ## Re-running
 
-Running this a second time is not a special mode. It is the same skill, and the read at the top of **The ask** is what makes re-running work. It reports the current value, or the disagreement between the two files if there is one, before offering the fork again, so the operator always sees what is in force before they change it.
+Running this a second time is not a special mode. It is the same skill, and the reads at the top of **The ask** and **The tracker-surface ask** are what make re-running work. Each reports the current value, or the disagreement between the two files if there is one, before offering its own fork again, so the operator always sees what is in force before they change it, one surface at a time.
 
-Confirming the same value back finds nothing to move. Step 2 sees the confirmed path is the home already in force and skips straight to step 4, step 4 replaces the key line with the same value, step 5 is a no-op once the `.gitignore` line already carries it, and step 6 commits nothing. Choosing a different answer runs steps 1 through 7 exactly as a first run would, moving the four artifacts from the home currently in force, wherever that is today, to the newly confirmed path: vault A to vault B, `.capstan/` back to a vault, or any pair between them.
+Confirming the same document-home value back finds nothing to move. Step 2 sees the confirmed path is the home already in force and skips straight to step 4, step 4 replaces the key line with the same value, step 5 is a no-op once the `.gitignore` line already carries it, and step 6 commits nothing further for it. Choosing a different answer runs steps 1 through 7 exactly as a first run would, moving the four artifacts from the home currently in force, wherever that is today, to the newly confirmed path: vault A to vault B, `.capstan/` back to a vault, or any pair between them.
 
-This is what a one-shot question could not do. An operator who wants to change the answer runs `setup` again, rather than editing the key by hand and hoping the artifacts follow it there on their own.
+The tracker surface re-runs the same way on its own question, independent of whatever the document-home fork answered this time: confirming GitHub back re-checks the `project` scope and replaces the key line with the same value; moving from GitHub to the default removes it; moving from the default to GitHub writes it for the first time. None of this touches step 2's move or step 1's four artifacts, since the tracker surface was never one of them.
+
+This is what a one-shot question could not do. An operator who wants to change either answer runs `setup` again, rather than editing a key by hand and hoping the rest follows it there on their own.
