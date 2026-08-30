@@ -58,11 +58,19 @@ If the work has no repository, say so and ask whether to create one. An effort n
 
 The **document home** is the one configured root against which Capstan resolves every path to its own durable artifacts: the glossary, the decision log, the decision records, and, when the tracker is unset, the tracker. It defaults to `<working copy>/.capstan`.
 
-Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside `capstan-knowledge-base` and `capstan-tracker`, the other keys those two files carry, before resolving the term anywhere else. Both files carrying the key with a different value stops the phase, and says so: two roots means two logs, the same "two records that disagree" outcome this section stops for elsewhere, and not a case to resolve by precedence or first-wins. A value that is not itself an absolute path stops the phase too, and says so: resolving it would mean assuming the session's working directory, which the Precondition section above forbids. The value is an absolute path to the folder:
+Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<working copy>/AGENTS.md` — both addressed by absolute path against the working copy the Precondition section establishes, never a user-level file of the same name — beside `capstan-knowledge-base` and `capstan-tracker`, the other keys those two files carry, before resolving the term anywhere else. Both files carrying the key with a different value stops the phase, and says so: two roots means two logs, the same "two records that disagree" outcome this section stops for elsewhere, and not a case to resolve by precedence or first-wins. The value is either the literal `default`, resolving to `<working copy>/.capstan` against the working copy root the Precondition section establishes, or an absolute path to the folder:
+
+```
+capstan-document-home: default
+```
+
+or
 
 ```
 capstan-document-home: /Users/example/vault/ProjectName
 ```
+
+Any other value — one that is neither `default` nor itself an absolute path — stops the phase, and says so: resolving it would mean assuming the session's working directory, which the Precondition section above forbids.
 
 Configuration cannot live inside the thing being relocated, so the key never lives inside `.capstan/` itself.
 
@@ -86,7 +94,7 @@ Two conditions send you here instead of accepting what the key resolves to, both
 
 **The key resolves to a home holding none of its durable artifacts, while `<working copy>/.capstan/` holds at least one.** Report what is at each location and point at `setup`. You never perform the move yourself.
 
-A project already running on the default meets the first condition like any other project, and is asked the same way.
+A project whose key is absent but whose `<working copy>/.capstan/` already holds artifacts meets the first condition like any other project, and is asked the same way.
 
 Phases 2, 3 and 4 never ask this question. Where phase 1 left an `assumed` default, they read that line and proceed.
 
