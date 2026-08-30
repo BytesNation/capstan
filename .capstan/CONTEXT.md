@@ -28,6 +28,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Document home | Where the glossary, the log and the records live, and the tracker too when its surface is `tracker.md`. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
 | Tracker | The surface holding slice state through to completion. Always present; the default is `tracker.md` in the Document home, and `capstan-tracker` points it elsewhere. |
 | Tracker surface | Which surface holds the Tracker for a Project: `tracker.md` in the Document home by default, or a GitHub Projects board when `capstan-tracker` names one. The choice, as against the artifact. |
+| Teardown | Emptying a Tracker surface after its Rows have moved to another one. Closes and removes; never deletes. |
 | Conforming comment | A comment whose whole body matches the merge-commit format `TRACKER-GITHUB.md` declares. A `merged` Row's issue carries exactly one; anything else on it is ordinary discussion. |
 | Row | One slice's entry in the Tracker, whatever surface holds it. A table row under `tracker.md`; an issue, its status value and, at merge, a comment under a board. |
 | Setup | The `setup` skill. Configures where a Project's durable artifacts live, moves what is already there, and can be re-run. Operator-invoked, never part of an Effort. |
