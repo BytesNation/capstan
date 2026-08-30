@@ -110,11 +110,19 @@ Run `/capstan:setup` to choose, and run it again later to change your mind. It a
 
 `capstan-document-home` lives in this repository's own `CLAUDE.md` or `AGENTS.md`, the one at the root of this working copy, not a user-level file. A `~/.claude/CLAUDE.md` is never read for this key: set it only there and Capstan falls back to the default without telling you.
 
+Taking the default writes the word `default`, not a path:
+
+```markdown
+capstan-document-home: default
+```
+
+Naming a folder outside the repository writes an absolute path instead:
+
 ```markdown
 capstan-document-home: /Users/you/vault/YourProject
 ```
 
-The value must be an absolute path. A file lives in exactly one location, never a copy in both places, and Capstan resolves every path to it against that one root.
+You should not need to write either line by hand: `setup` writes it once you answer its question, and answering default at the start of your first effort writes it the same way. `default` is what a reader taking the default sees committed, not their own filesystem layout. The value is always one of those two shapes: the literal `default`, resolving to `.capstan/` in the repository, or an absolute path. A file lives in exactly one location, never a copy in both places, and Capstan resolves every path to it against that one root.
 
 The glossary (`CONTEXT.md`), the decision log (`decisions.md`), the decision records (`decisions/`), and the tracker (`tracker.md`) resolve there from then on. Switching an existing project's document home runs through `setup`, which reports what it finds at the new destination and moves the four artifacts once you approve, rather than leaving you with a stale copy in `.capstan/` and a fresh one in the vault.
 
@@ -140,7 +148,7 @@ Slice state lives in `tracker.md` in the document home by default: one row per s
 
 The value is for people, not agents. An agent building or reviewing a slice already has `tracker.md` open, offline, at the commit it is reading. A board gives a teammate something to open without cloning the repository, and an issue that closes the moment its slice merges or drops, with the merge commit recorded on it as a comment.
 
-Set it in the same `CLAUDE.md` or `AGENTS.md` that carries the other two keys:
+It lives in `CLAUDE.md` or `AGENTS.md`, the same two files the other keys can use, though not necessarily the same one: each key picks its own file, independently of the other, and `setup` asks which file should carry this one if both exist and nothing has settled it already.
 
 ```markdown
 capstan-tracker: github:your-org/your-repo#3
@@ -155,7 +163,7 @@ Four costs worth knowing before you turn this on:
 - **A public repository asks for confirmation on every write.** Every write to the board there is third-party-visible, so the operator confirms it, the same as any other third-party-visible action; a private repository writes unattended, the same as `tracker.md` always has. The tracker is written on every slice transition, so this is the cost that changes daily operation most.
 - **GitHub unreachable stops the run.** No retry, no backoff, no bounded wait. A rate limit and an expired token end it the same way.
 - **Reading the full tracker costs more.** `tracker.md` is one file read. A board reconstructs the effort, the slice and the status in one call, but the merge commit lives in a comment on each issue, so a full read costs one call plus one more per slice.
-- **An existing `tracker.md` stays exactly where it is.** Turning this on only changes where new slice state goes from here on. Nothing moves what is already in the file onto the board, and that migration is not built yet.
+- **Switching deletes your `tracker.md`.** Choosing GitHub on a project that already has a `tracker.md` carries every row onto the board as an issue, then deletes the file once every row has one carrying its status. `setup` describes the batch first, how many rows and how many milestones, and asks for one approval covering the whole thing, before either key is written, so refusing writes no key and leaves the rows where they are. That delete needs the operator's approval on a public repository and a private one alike; the per-write confirmation above is the only part that depends on whether the repository is public.
 
 ## Upgrading
 
