@@ -103,11 +103,11 @@ equivalently, the whole body matches
 
 where `<commit-sha>` is the commit's SHA in lowercase hexadecimal, abbreviated or full. Nothing precedes or follows it, and the SHA sits inside the single pair of backticks shown.
 
-A `dropped` row never carries this comment — step 6 closes it directly, naming no commit — so an issue with no merge-commit comment is a conforming `dropped` row, not a gap to fill in.
+A `dropped` row never carries this comment — step 6 closes it directly, naming no commit. The `Capstan Status` field is what decides a row's status, never the presence or absence of a comment, so this runs one way only: on a row that is already `dropped`, no merge-commit comment is expected, and its absence there is not a gap to fill in.
 
-A `merged` row's issue carries exactly one conforming comment. When a later fix dispatch changes which commit merged the slice's final state, the correction edits that comment in place, the same way `tracker.md`'s Commit column is a cell overwritten rather than a log appended to. It never posts a second conforming comment alongside the first — two would read back no differently than one that changed its mind, and nothing on this surface could say which is current.
+A `merged` row's issue carries exactly one conforming comment: two would read back no differently than one that changed its mind, and nothing on this surface could say which is current.
 
-An issue can otherwise carry any number of comments that do not match the pattern above — a question, a status update, a remark from anyone with access to the repository. Those are ordinary discussion, not a gap or a corruption, and reading the tracker back ignores them. What stops the run is a count: a `merged` row whose issue carries zero conforming comments, or more than one, has no single commit to read, and reports what it found rather than guessing at what was meant.
+An issue can otherwise carry any number of comments that do not match the pattern above — a question, a status update, a remark from anyone with access to the repository. Those are ordinary discussion, not a gap or a corruption, and none of them stops the run on its own. When a `merged` row's issue carries exactly one conforming comment, any non-conforming comment on that issue is reported alongside the commit that was read, so an operator sees that something else on the issue named a commit and can judge it. What stops the run is a count: a `merged` row whose issue carries zero conforming comments, or more than one, has no single commit to read, and reports what it found rather than guessing at what was meant.
 
 ## Reading the tracker back
 
