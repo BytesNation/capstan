@@ -158,12 +158,20 @@ Leave it out and nothing changes. Every project has run on `tracker.md` since th
 
 Projects v2 needs a scope grant most tokens do not carry yet. `setup` checks for it and, if it is missing, hands you off to a walkthrough: you run `gh auth refresh -s project` yourself, since an auth change is never the crew's to make, then confirm it landed before the key gets written.
 
+Moving onto the board is not final. Run `setup` again and choose the default, and it reconstructs `tracker.md` from the board and tears the board down, on your approval, the same shape in reverse.
+
 Four costs worth knowing before you turn this on:
 
 - **A public repository asks for confirmation on every write.** Every write to the board there is third-party-visible, so the operator confirms it, the same as any other third-party-visible action; a private repository writes unattended, the same as `tracker.md` always has. The tracker is written on every slice transition, so this is the cost that changes daily operation most.
 - **GitHub unreachable stops the run.** No retry, no backoff, no bounded wait. A rate limit and an expired token end it the same way.
 - **Reading the full tracker costs more.** `tracker.md` is one file read. A board reconstructs the effort, the slice and the status in one call, but the merge commit lives in a comment on each issue, so a full read costs one call plus one more per slice.
-- **Switching deletes your `tracker.md`.** Choosing GitHub on a project that already has a `tracker.md` carries every row onto the board as an issue, then deletes the file once every row has one carrying its status. `setup` describes the batch first, how many rows and how many milestones, and asks for one approval covering the whole thing, before either key is written, so refusing writes no key and leaves the rows where they are. That delete needs the operator's approval on a public repository and a private one alike; the per-write confirmation above is the only part that depends on whether the repository is public.
+- **Moving onto GitHub deletes your `tracker.md`.** Choosing GitHub on a project that already has a `tracker.md` carries every row onto the board as an issue, then deletes the file once every row has one carrying its status. `setup` describes the batch first, how many rows and how many milestones, and asks for one approval covering the whole thing, before either key is written, so refusing writes no key and leaves the rows where they are. That delete needs the operator's approval on a public repository and a private one alike; the per-write confirmation above is the only part that depends on whether the repository is public.
+
+Moving back costs something different:
+
+- **It needs your approval, the same way.** `setup` describes the batch first, how many rows and how many milestones are on the board, before closing or removing anything. Decline and it tells you the same thing: how many rows are on the board and that leaving them there strands them. The run stops there and writes no key.
+- **It closes every issue and removes every item from the board.** That removal is the only delete either direction makes. The issues stay, closed rather than gone. The board stays too, untouched apart from the removals. Each milestone closes, once every row under it is back, rather than being deleted.
+- **An interrupted run can leave rows on both surfaces until you run `setup` again.** That is deliberate. A row nobody can get back is worse than a duplicate a second run clears up.
 
 ## Upgrading
 
