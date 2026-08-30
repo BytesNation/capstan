@@ -62,6 +62,11 @@ Read the key `capstan-document-home` from `<working copy>/CLAUDE.md` and `<worki
 
 ```
 capstan-document-home: default
+```
+
+or
+
+```
 capstan-document-home: /Users/example/vault/ProjectName
 ```
 
@@ -89,7 +94,7 @@ Two conditions send you here instead of accepting what the key resolves to, both
 
 **The key resolves to a home holding none of its durable artifacts, while `<working copy>/.capstan/` holds at least one.** Report what is at each location and point at `setup`. You never perform the move yourself.
 
-A project already running on the default meets the first condition like any other project, and is asked the same way.
+A project whose key is absent but whose `<working copy>/.capstan/` already holds artifacts meets the first condition like any other project, and is asked the same way.
 
 Phases 2, 3 and 4 never ask this question. Where phase 1 left an `assumed` default, they read that line and proceed.
 
