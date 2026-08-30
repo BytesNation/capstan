@@ -88,7 +88,7 @@ By default, everything lands in `.capstan/`, inside the repository the work is h
 
 `tracker.md` answers what shipped, one row per slice, with the commit that merged it, and it is on by default, so you get it without configuring anything.
 
-Capstan reads three keys from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoding any of them. `capstan-document-home` and `capstan-tracker` are the two sections below. `setup` always writes `capstan-document-home`; it writes `capstan-tracker` only when you choose GitHub, and removes any existing line there when you choose the default instead. It places each key on its own terms, so the two can end up in different files: a project might keep `capstan-document-home` in the committed `CLAUDE.md` while `capstan-tracker` sits in a gitignored `AGENTS.md`, so a contributor who clones the repository is never pointed at a board they cannot write to. `capstan-knowledge-base` is where the permanent per-effort note goes, and it is yours to write; leave it out and the Courier skips the note and says so.
+Capstan reads three keys from your own `CLAUDE.md` or `AGENTS.md` rather than hardcoding any of them. `capstan-document-home` and `capstan-tracker` are the two sections below. `setup` always writes `capstan-document-home`; it writes `capstan-tracker` only when you choose GitHub, and removes any existing line there when you choose the default instead. `capstan-knowledge-base` is where the permanent per-effort note goes, and it is yours to write; leave it out and the Courier skips the note and says so.
 
 ## Document home
 
@@ -110,7 +110,7 @@ Run `/capstan:setup` to choose, and run it again later to change your mind. It a
 
 `capstan-document-home` lives in this repository's own `CLAUDE.md` or `AGENTS.md`, the one at the root of this working copy, not a user-level file. A `~/.claude/CLAUDE.md` is never read for this key: set it only there and Capstan falls back to the default without telling you.
 
-Taking the default writes the literal sentinel, not a path:
+Taking the default writes the word `default`, not a path:
 
 ```markdown
 capstan-document-home: default
@@ -122,7 +122,7 @@ Naming a folder outside the repository writes an absolute path instead:
 capstan-document-home: /Users/you/vault/YourProject
 ```
 
-You never write either line by hand. `setup` writes it once you answer its question, and `default` is what a reader taking the default sees committed, not their own filesystem layout. The value is always one of those two shapes: the literal `default`, resolving to `.capstan/` in the repository, or an absolute path. A file lives in exactly one location, never a copy in both places, and Capstan resolves every path to it against that one root.
+You should not need to write either line by hand: `setup` writes it once you answer its question, and answering default at the start of your first effort writes it the same way. `default` is what a reader taking the default sees committed, not their own filesystem layout. The value is always one of those two shapes: the literal `default`, resolving to `.capstan/` in the repository, or an absolute path. A file lives in exactly one location, never a copy in both places, and Capstan resolves every path to it against that one root.
 
 The glossary (`CONTEXT.md`), the decision log (`decisions.md`), the decision records (`decisions/`), and the tracker (`tracker.md`) resolve there from then on. Switching an existing project's document home runs through `setup`, which reports what it finds at the new destination and moves the four artifacts once you approve, rather than leaving you with a stale copy in `.capstan/` and a fresh one in the vault.
 
@@ -148,7 +148,7 @@ Slice state lives in `tracker.md` in the document home by default: one row per s
 
 The value is for people, not agents. An agent building or reviewing a slice already has `tracker.md` open, offline, at the commit it is reading. A board gives a teammate something to open without cloning the repository, and an issue that closes the moment its slice merges or drops, with the merge commit recorded on it as a comment.
 
-It lives in `CLAUDE.md` or `AGENTS.md`, the same two files the other keys can use, though not necessarily the same one: `setup` places each key on its own terms, and asks which file should carry this one if both exist and nothing has settled it already.
+It lives in `CLAUDE.md` or `AGENTS.md`, the same two files the other keys can use, though not necessarily the same one: each key picks its own file, independently of the other, and `setup` asks which file should carry this one if both exist and nothing has settled it already.
 
 ```markdown
 capstan-tracker: github:your-org/your-repo#3
@@ -163,7 +163,7 @@ Four costs worth knowing before you turn this on:
 - **A public repository asks for confirmation on every write.** Every write to the board there is third-party-visible, so the operator confirms it, the same as any other third-party-visible action; a private repository writes unattended, the same as `tracker.md` always has. The tracker is written on every slice transition, so this is the cost that changes daily operation most.
 - **GitHub unreachable stops the run.** No retry, no backoff, no bounded wait. A rate limit and an expired token end it the same way.
 - **Reading the full tracker costs more.** `tracker.md` is one file read. A board reconstructs the effort, the slice and the status in one call, but the merge commit lives in a comment on each issue, so a full read costs one call plus one more per slice.
-- **An existing `tracker.md` migrates when you switch.** Choosing GitHub on a project that already has a `tracker.md` carries every row onto the board as an issue, then deletes the file once every row has one carrying its status. `setup` describes the batch first, how many rows and how many milestones, and asks for one approval covering the whole thing, before either key is written, so refusing leaves nothing half-configured. That delete needs the operator's approval on a public repository and a private one alike; only the board writes above branch on visibility.
+- **Switching deletes your `tracker.md`.** Choosing GitHub on a project that already has a `tracker.md` carries every row onto the board as an issue, then deletes the file once every row has one carrying its status. `setup` describes the batch first, how many rows and how many milestones, and asks for one approval covering the whole thing, before either key is written, so refusing writes no key and leaves the rows where they are. That delete needs the operator's approval on a public repository and a private one alike; the per-write confirmation above is the only part that depends on whether the repository is public.
 
 ## Upgrading
 
