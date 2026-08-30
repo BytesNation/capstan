@@ -17,7 +17,7 @@ A slice becomes an issue rather than a bare project item because only an issue c
 
 ## The write path
 
-Do these in order. Steps 1 and 2 happen once each — per board, per effort — and are already done for every slice after the first one. Steps 3 through 6 happen once per slice, and step 5 repeats every time that slice's status changes.
+Do these in order. Steps 1 and 2 happen once each — per board, per effort — and are already done for every slice after the first one. Steps 3 through 6 happen once per slice, and step 5 repeats every time that slice's status changes; step 6's merge-commit comment can be revisited afterward too, per the declaration below.
 
 1. **The field, once per board.** Check whether `Capstan Status` already exists before creating it — a second `field-create` is not obviously a no-op:
 
@@ -65,18 +65,49 @@ Do these in order. Steps 1 and 2 happen once each — per board, per effort — 
 
 6. **Close the issue.** This surface closes it explicitly, in both terminal cases — the write path never relies on a pull request or on GitHub's own automation to do it.
 
-   For a `merged` slice, first post the merge commit as a comment, then close with reason `completed`:
+   For a `merged` slice, first post the merge commit as a comment, in the format declared below, then close with reason `completed`:
 
    ```
    gh issue comment <issue-url> --body "merged in \`<commit-sha>\`"
    gh issue close <issue-url> --reason completed
    ```
 
+   If a later fix dispatch changes which commit merged the slice's final state, correcting the row is an edit of that comment, never a second one posted alongside it — the declaration below says why. Either of these edits it in place, both verified against a live comment:
+
+   ```
+   gh issue comment <issue-url> --edit-last --body "merged in \`<commit-sha>\`"
+   gh api -X PATCH repos/<owner>/<repo>/issues/comments/<comment-id> -f body="merged in \`<commit-sha>\`"
+   ```
+
+   `--edit-last` edits the authenticated user's own most recent comment on the issue — correct as long as nothing else posts under that same identity after the merge comment. The `PATCH` form edits by comment ID instead, so it works regardless of who posted it or what else was said afterward; reach for it once a run has already located the single conforming comment by ID while reading the issue back.
+
    For a `dropped` slice there is no merge commit, and no pull request to close the issue either, so close it directly with reason `not planned`:
 
    ```
    gh issue close <issue-url> --reason "not planned"
    ```
+
+## The merge-commit comment format
+
+The comment step 6 posts on a `merged` row's issue is a contract, not just an example: this is the one declaration of it, and every direction that writes or reads it points here rather than restating it. A conforming comment's body is exactly
+
+```
+merged in `<commit-sha>`
+```
+
+equivalently, the whole body matches
+
+```
+^merged in `[0-9a-f]{4,40}`$
+```
+
+where `<commit-sha>` is the commit's SHA in lowercase hexadecimal, abbreviated or full. Nothing precedes or follows it, and the SHA sits inside the single pair of backticks shown.
+
+A `dropped` row never carries this comment — step 6 closes it directly, naming no commit. The `Capstan Status` field is what decides a row's status, never the presence or absence of a comment, so this runs one way only: on a row that is already `dropped`, no merge-commit comment is expected, and its absence there is not a gap to fill in.
+
+A `merged` row's issue carries exactly one conforming comment: two would read back no differently than one that changed its mind, and nothing on this surface could say which is current.
+
+An issue can otherwise carry any number of comments that do not match the pattern above — a question, a status update, a remark from anyone with access to the repository. Those are ordinary discussion, not a gap or a corruption, and none of them stops the run on its own. When a `merged` row's issue carries exactly one conforming comment, any non-conforming comment on that issue is reported alongside the commit that was read, so an operator sees that something else on the issue named a commit and can judge it. What stops the run is a count: a `merged` row whose issue carries zero conforming comments, or more than one, has no single commit to read, and reports what it found rather than guessing at what was meant.
 
 ## Reading the tracker back
 
