@@ -64,7 +64,7 @@ Ask where slice state should live:
 
 **On the default.** When nothing is currently recorded, there is nothing to write: step 4 below writes no `capstan-tracker` line, because an unset key already means `tracker.md`. When a `capstan-tracker` line already exists from an earlier run and the operator is choosing the default back, step 4 removes it instead: a line spelling out the default would be a second way of saying what its own absence already says.
 
-**On GitHub.** If the project already has a `tracker.md`, say plainly that choosing GitHub carries every row it holds onto the board and then deletes the file, under **Migrate `tracker.md` onto the board** in step 5 below, once the scope check has passed and, on a public repository, the operator has approved the batch.
+**On GitHub.** If the project already has a `tracker.md`, say plainly that choosing GitHub carries every row it holds onto the board and then deletes the file, under **Migrate `tracker.md` onto the board** in step 5 below, once the scope check has passed and the operator has approved the batch — every repository's delete needs that approval, a public one's writes too.
 
 Ask for the project number alone; the owner and repository are never asked for, they come from the working copy's own remote. Resolve that remote without assuming its name is `origin`, since a repository can call its GitHub remote `upstream`, `github`, or anything else:
 
@@ -131,11 +131,19 @@ The move covers exactly the artifacts defined in step 2, nothing more and nothin
 gh project list --owner <owner>
 ```
 
-**It succeeds.** The token already reaches Projects v2. Continue below to write the key.
+**It succeeds.** The token already reaches Projects v2. Continue below.
 
 **It fails naming a missing scope.** Reading a board needs a scope this token does not carry. Hand off to the `walkthrough` skill for one stage: it tells the operator to run `gh auth refresh -s project` themselves, since granting a scope is an auth change and never this skill's to run, then stops and waits for the operator to confirm they ran it. Once confirmed, re-run the same `gh project list --owner <owner>` call. It succeeding now is the grant landing; continue below. It failing again is not a step to loop on: stop the run here and report what still fails.
 
 **It fails any other way.** A network failure, an expired token, a rate limit, or `gh` itself missing all land here, along with anything else that is not the missing-scope error above. Per 648: say so and stop, no retry. `gh auth refresh -s project` fixes none of these, so do not send the operator to run it on the strength of this failure.
+
+**Before writing, on a migration.** Reached only when `tracker.md` exists at **the home currently in force**, deferred behind the scope check above for the same reason: an approval asked here should not outlive a run that check could still stop before anything is written. Read the Authority table in `skills/effort/SKILL.md` before writing or deleting anything below — the write and the delete it governs here are two different rows, not one gate, and only the write branches on visibility:
+
+```bash
+gh repo view <owner>/<repo> --json visibility -q .visibility
+```
+
+Either way, describe the batch before writing anything — how many rows, how many milestones, that `tracker.md` is deleted once every row carries an issue — and ask for one approval covering the whole migration, per 695: a public repository's writes need it too; a private repository's do not, but the delete needs it either way. Refusing stops the run here: do not write either key and do not commit.
 
 Each key picks its own file, independently of the other — this is what puts `capstan-document-home` and `capstan-tracker` in different files on a project that wants that, rather than forcing both into one:
 
@@ -154,29 +162,21 @@ capstan-document-home: default
 
 Write `capstan-tracker` into its own chosen file, by the same replace-in-place rule, never a second line: **on GitHub**, `capstan-tracker: github:<owner>/<repo>#<project-number>` from the value **The tracker-surface ask** settled on. **On the default**, the opposite of the document-home key above: if the chosen file carries a `capstan-tracker` line, remove it; if it carries none, write nothing. Unset already means `tracker.md`, so nothing here needs distinguishing a project that was never asked from one that was asked and chose the default, the way `capstan-document-home` does; `capstan-tracker` carries no such ambiguity to resolve.
 
-For each key, once its own file is chosen: if the other file — `CLAUDE.md` or `AGENTS.md`, whichever was not chosen for that key — still carries that key's line, remove it entirely; a stray line left standing there states a second, contradicting answer for a project that now has one settled. This runs every time both files exist, not only when an earlier ask found them disagreeing: a file that already agreed, or a file that carried a key while the chosen one did not, leaves a stray line behind exactly the same way if this is skipped. Once both keys have settled where they live, delete either `CLAUDE.md` or `AGENTS.md` that now carries neither key and nothing else, sentence this step wrote included, rather than leave an empty file behind; a zero-byte file in git history looks like it means something.
+For each key, once its own file is chosen: if the other file — `CLAUDE.md` or `AGENTS.md`, whichever was not chosen for that key — still carries that key's line, remove it entirely, and remove the introductory sentence too if the file now carries neither key, whichever run wrote that sentence — it names configuration no longer there, stray the same way the line was, even where other content in that file survives it. A stray line or sentence left standing states a second, contradicting answer for a project that now has one settled. This runs every time both files exist, not only when an earlier ask found them disagreeing: a file that already agreed, or held a key the chosen file did not, leaves the same debris behind if this is skipped. Once both keys have settled where they live, delete either `CLAUDE.md` or `AGENTS.md` that now carries neither key and nothing else, rather than leave an empty file behind; a zero-byte file in git history looks like it means something.
 
-Write `capstan-document-home` even when the confirmed path is the default — as the literal `default`, never spelled out as `<working copy>/.capstan`, so a project that commits this file never commits the operator's own filesystem layout. Otherwise a project that was never asked and a project that was asked and chose the default also look identical on disk, and telling those two states apart is the reason this skill exists. `capstan-tracker` does not carry the same reason: its own unset state already means `tracker.md` before this skill ever runs.
+`capstan-document-home` is written even when the confirmed path is the default, so a project that commits this file never commits the operator's own filesystem layout. Otherwise a project that was never asked and a project that was asked and chose the default also look identical on disk, and telling those two states apart is the reason this skill exists. `capstan-tracker` does not carry the same reason: its own unset state already means `tracker.md` before this skill ever runs.
 
 ### 5. Migrate `tracker.md` onto the board
 
-Reached only when **The tracker-surface ask** settled on GitHub this run and `tracker.md` exists at **the home currently in force** — it is never one of step 2's artifacts on that surface, so it is still there rather than at the confirmed path. Nothing to do otherwise: continue to step 6.
+Reached only when **The tracker-surface ask** settled on GitHub this run and `tracker.md` exists at **the home currently in force** — it is never one of step 2's artifacts on that surface, so it is still there rather than at the confirmed path; step 4 already secured the approval, before either key was written. Nothing to do otherwise: continue to step 6.
 
-Read every row and follow the write path in [`TRACKER-GITHUB.md`](../effort/TRACKER-GITHUB.md) for each one: the field once, a milestone once per distinct Effort column, an issue once per row under its Effort's milestone, added to the board, set to its own Status, and, for a `merged` row, its Commit posted as a comment before closing. Check for each create's own result first, by milestone title and by issue title within that milestone, before creating it — this is what makes an interrupted run resume rather than duplicate.
+Follow the write path in [`TRACKER-GITHUB.md`](../effort/TRACKER-GITHUB.md) for every row, checking each create's own result first by milestone title and then by issue title within that milestone — this is what makes an interrupted run resume rather than duplicate. A migrated issue's body departs from that path only in what it carries: where the row came from and nothing else.
 
-A migrated issue's body carries where the row came from and nothing else. Once, before creating the first issue, read the commit `tracker.md` is at right now, from whichever repository holds the home currently in force: `git -C <that repository> log -1 --format=%H -- tracker.md`. Every issue this run creates carries that same commit:
+Once, before creating the first issue, take the working copy's own head commit as the one every migrated issue's body names — `git -C <working copy> rev-parse HEAD` — the commit this migration is actually running from, and an answer even where the home currently in force is not a repository, or holds `tracker.md` untracked, neither of which a read scoped to that file can give:
 
 ```
 Migrated from `tracker.md` at commit <sha>.
 ```
-
-**Visibility.** Per the Authority table in `skills/effort/SKILL.md`, a write a third party will see needs the operator; a private repository's does not. Check which this is:
-
-```bash
-gh repo view <owner>/<repo> --json visibility -q .visibility
-```
-
-Public: before writing anything, describe the batch — how many rows, how many milestones, that `tracker.md` is deleted once every row carries an issue — and ask for one approval covering all of it, not one per write, per 695. Refusing leaves the switch incomplete rather than half-made: undo the `capstan-tracker` line step 4 just wrote, restoring whatever it held before this run or removing it if it held nothing, say plainly that `tracker.md` still holds every row and none of it moved, and stop the run here, before step 6. Private: proceed unattended, the same as any other crew work at that visibility.
 
 Delete `tracker.md` only once every row it held has an issue carrying its status, never before — an interrupted run leaves the file in place, and the next run resumes into whatever check-before-create already found on the board.
 
