@@ -25,7 +25,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | `capstan-document-home` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding the Document home: either the literal `default` or an absolute path. Unset means the `effort` skill asks once, offering the default or Setup. |
 | `capstan-knowledge-base` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` holding an absolute path to the Knowledge base. Unset means there is none, and the Courier writes no note. |
 | `capstan-tracker` | The key in `<working copy>/CLAUDE.md` or `AGENTS.md` naming the Tracker surface, scheme-prefixed. Unset means `tracker.md` in the Document home. |
-| Document home | Where the glossary, the log, the records and the tracker live. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
+| Document home | Where the glossary, the log and the records live, and the tracker too when its surface is `tracker.md`. Defaults to `.capstan/` in the repository; configurable to a vault so they render outside it. Never both. |
 | Tracker | The surface holding slice state through to completion. Always present; the default is `tracker.md` in the Document home, and `capstan-tracker` points it elsewhere. |
 | Tracker surface | Which surface holds the Tracker for a Project: `tracker.md` in the Document home by default, or a GitHub Projects board when `capstan-tracker` names one. The choice, as against the artifact. |
 | Row | One slice's entry in the Tracker, whatever surface holds it. A table row under `tracker.md`; an issue, its status value and, at merge, a comment under a board. |
@@ -35,7 +35,7 @@ The words this repository uses, defined once. This describes Capstan itself; it 
 | Spike | Throwaway work that answers one question: whether something behaves right or feels right. Never merged. |
 | Stage | One step of a Walkthrough, confirmed with the operator before it is authored. Counted in `TOTAL_STAGES`. |
 | Namespace | The `capstan:` prefix a plugin install puts on every skill and agent. Absent under a manual install. |
-| `.capstan/` | The folder holding the artifacts Capstan writes for itself: `CONTEXT.md`, `decisions.md`, `decisions/`, `tracker.md`, and the effort scratch at `effort/`. Distinct from the namespace above, which is a prefix rather than a folder. |
+| `.capstan/` | The folder holding the artifacts Capstan writes for itself: `CONTEXT.md`, `decisions.md`, `decisions/`, `tracker.md` on the default tracker surface, and the effort scratch at `effort/`. Distinct from the namespace above, which is a prefix rather than a folder. |
 | Slice | A change that can be demonstrated on its own once it is done. |
 | Layer | A horizontal cut that nothing can demonstrate until other cuts land. What a slice must never be. |
 | Duplication | One rule written in two places, which drift apart because nothing keeps them in step. Distinct from co-location, the within-file case `writing-for-agents` names. The reason a rule gets one home and a pointer rather than a second copy. |
