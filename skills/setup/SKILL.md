@@ -137,7 +137,7 @@ gh project list --owner <owner>
 
 **It fails any other way.** A network failure, an expired token, a rate limit, or `gh` itself missing all land here, along with anything else that is not the missing-scope error above. Per 648: say so and stop, no retry. `gh auth refresh -s project` fixes none of these, so do not send the operator to run it on the strength of this failure.
 
-**Before writing, on a migration.** Reached only when `tracker.md` exists at **the home currently in force**, deferred behind the scope check above for the same reason: an approval asked here should not outlive a run that check could still stop before anything is written. Read the Authority table in `skills/effort/SKILL.md` before writing or deleting anything below — the write and the delete it governs here are two different rows, not one gate, and only the write branches on visibility:
+**Before writing, on a migration.** Reached only when **The tracker-surface ask** settled on GitHub this run and `tracker.md` exists at **the home currently in force**, deferred behind the scope check above for the same reason: an approval asked here should not outlive a run that check could still stop before anything is written. Read the Authority table in `skills/effort/SKILL.md` before writing or deleting anything below — the write and the delete it governs here are two different rows, not one gate, and only the write branches on visibility:
 
 ```bash
 gh repo view <owner>/<repo> --json visibility -q .visibility
