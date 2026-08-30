@@ -7,7 +7,7 @@ description: Record decisions so they survive without bloating anything. A one-l
 
 Three tiers, sorted by how long each thing needs to survive. Nearly everything stays in tier one.
 
-The log, the records and the glossary are durable artifacts, and each carries one frontmatter property, `capstan_type`, prefixed because Obsidian types a property vault-wide by its name, naming what the note is (`decision-log`, `decision-record`, or `glossary`). The tracker is a fourth durable artifact where it is `tracker.md`, carrying `capstan_type: tracker`; where it is a GitHub board it lives outside the document home and carries no frontmatter of its own. That is the whole schema, and it exists so a vault can tell a Capstan note from any other one sitting beside it. The `effort` skill's `## Tracker` section owns which surface applies and the count that follows from it.
+The log, the records and the glossary are durable artifacts, and each carries one frontmatter property, `capstan_type`, prefixed because Obsidian types a property vault-wide by its name, naming what the note is (`decision-log`, `decision-record`, or `glossary`). The tracker carries `capstan_type: tracker` where the surface is `tracker.md`; where it is a GitHub board it lives outside the document home and carries none. That is the whole schema, and it exists so a vault can tell a Capstan note from any other one sitting beside it. The `effort` skill's `## Tracker` section owns which surface applies and the count that follows from it.
 
 ## Tier 1: the log
 
@@ -37,7 +37,7 @@ Write the line the moment the decision resolves, not batched at the end of a ses
 
 The line records the decision and the reasoning that produced it. Write it so it still makes sense to someone who has never seen the surfaces the work touched.
 
-Efforts reach outside the working copy: a knowledge base, a vault, a wiki, a ticket tracker. Those surfaces belong to the operator, and this log is committed and, for an open-source project, published. So a line about a fix made out there records what it taught the project, in the project's own vocabulary, and leaves the surface's own contents where they are. What it taught, not what it found.
+Efforts reach outside the working copy: a knowledge base, a vault, a wiki, a ticket tracker — not Capstan's own Tracker, which the `effort` skill's `## Tracker` section owns. Those surfaces belong to the operator, and this log is committed and, for an open-source project, published. So a line about a fix made out there records what it taught the project, in the project's own vocabulary, and leaves the surface's own contents where they are. What it taught, not what it found.
 
 | Write | Rather than |
 |---|---|
