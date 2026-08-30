@@ -26,7 +26,7 @@ capstan_type: tracker
 | github-surface | setup-surface | merged | ace4bff |
 | github-surface | docs | merged | 04d33d6 |
 | github-surface | phase-files | merged | a681858 |
-| tracker-migration | home-sentinel | planned | |
-| tracker-migration | setup-migrate | planned | |
-| tracker-migration | docs | planned | |
-| tracker-migration | migrate-run | planned | |
+| tracker-migration | home-sentinel | merged | a1e1a8c |
+| tracker-migration | setup-migrate | merged | aa407f7 |
+| tracker-migration | docs | merged | a581836 |
+| tracker-migration | migrate-run | building | |
