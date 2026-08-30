@@ -109,6 +109,26 @@ A `merged` row's issue carries exactly one conforming comment: two would read ba
 
 An issue can otherwise carry any number of comments that do not match the pattern above — a question, a status update, a remark from anyone with access to the repository. Those are ordinary discussion, not a gap or a corruption, and none of them stops the run on its own. When a `merged` row's issue carries exactly one conforming comment, any non-conforming comment on that issue is reported alongside the commit that was read, so an operator sees that something else on the issue named a commit and can judge it. What stops the run is a count: a `merged` row whose issue carries zero conforming comments, or more than one, has no single commit to read, and reports what it found rather than guessing at what was meant.
 
+## The teardown comment format
+
+A reverse migration closes every torn-down issue with a second, different comment, regardless of the status the row carried. This is the one declaration of that format too; the reverse migration points here rather than restating it. A conforming teardown comment's body is exactly
+
+```
+returned to `tracker.md` at `<commit-sha>`
+```
+
+equivalently, the whole body matches
+
+```
+^returned to `tracker\.md` at `[0-9a-f]{4,40}`$
+```
+
+where `<commit-sha>` is, in lowercase hexadecimal, abbreviated or full, the commit at which `tracker.md` was reconstructed — never the commit the row itself merged at, which a `merged` row's separate merge-commit comment already names and keeps.
+
+This cannot be mistaken for the merge-commit format above, on two independent grounds. The formats open on different literal words, `returned` against `merged`, so no single body can satisfy both regexes. And the merge-commit format wraps one value in backticks, the SHA; this one wraps two, the literal `` `tracker.md` `` and the SHA. Either ground alone rules out a shared match.
+
+A teardown comment is never a conforming comment: that term names only a match against the merge-commit format above, and this format's regex cannot match it. Posting a teardown comment on a `merged` row's issue does not give that issue a second conforming comment and does not trip the count that stops the run — the row still carries exactly one, the merge-commit comment already there, unchanged.
+
 ## Reading the tracker back
 
 `gh project item-list <project-number> --owner <owner> --format json` returns Effort, Slice and Status together, in one call — the milestone, the issue title, and the custom field's current value are all columns on the same item:
