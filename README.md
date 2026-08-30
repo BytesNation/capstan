@@ -170,7 +170,7 @@ Four costs worth knowing before you turn this on:
 Moving back costs something different:
 
 - **It needs your approval, the same way.** `setup` describes the batch first, how many rows and how many milestones are on the board, before closing or removing anything. Decline and it tells you the same thing: how many rows are on the board and that leaving them there strands them. The run stops there and writes no key.
-- **It closes every issue and removes every item from the board.** That removal is the only delete either direction makes. The issues stay, closed rather than gone. The board stays too, untouched apart from the removals. Each milestone closes, once every row under it is back, rather than being deleted.
+- **It closes every issue and removes every item from the board.** That removal is the only delete the reverse makes. The issues stay, closed rather than gone. The board stays too, untouched apart from the removals. Each milestone closes, once every row under it is back, rather than being deleted.
 - **An interrupted run can leave rows on both surfaces until you run `setup` again.** That is deliberate. A row nobody can get back is worse than a duplicate a second run clears up.
 
 ## Upgrading
