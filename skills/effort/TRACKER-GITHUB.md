@@ -65,7 +65,7 @@ Do these in order. Steps 1 and 2 happen once each — per board, per effort — 
 
 6. **Close the issue.** This surface closes it explicitly, in both terminal cases — the write path never relies on a pull request or on GitHub's own automation to do it.
 
-   For a `merged` slice, first post the merge commit as a comment, then close with reason `completed`:
+   For a `merged` slice, first post the merge commit as a comment, in the format declared below, then close with reason `completed`:
 
    ```
    gh issue comment <issue-url> --body "merged in \`<commit-sha>\`"
@@ -77,6 +77,26 @@ Do these in order. Steps 1 and 2 happen once each — per board, per effort — 
    ```
    gh issue close <issue-url> --reason "not planned"
    ```
+
+## The merge-commit comment format
+
+The comment step 6 posts on a `merged` row's issue is a contract, not just an example: this is the one declaration of it, and every direction that writes or reads it points here rather than restating it. A conforming comment's body is exactly
+
+```
+merged in `<commit-sha>`
+```
+
+equivalently, the whole body matches
+
+```
+^merged in `[0-9a-f]{4,40}`$
+```
+
+where `<commit-sha>` is the commit's SHA in lowercase hexadecimal, abbreviated or full. Nothing precedes or follows it, and the SHA sits inside the single pair of backticks shown.
+
+A `dropped` row never carries this comment — step 6 closes it directly, naming no commit — so an issue with no merge-commit comment is a conforming `dropped` row, not a gap to fill in.
+
+A comment on a `merged` row's issue that does not match the pattern above — extra wording, a missing or malformed SHA, backticks in the wrong place — is unparseable rather than merely unfamiliar. Whatever reads it back stops there and reports what it found, rather than guessing at what was meant.
 
 ## Reading the tracker back
 
