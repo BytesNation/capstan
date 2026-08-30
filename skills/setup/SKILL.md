@@ -7,7 +7,7 @@ argument-hint: "absolute path to the repository (defaults to the current one)"
 
 # Setup
 
-This configures the **document home**: the one root Capstan resolves every path to its own durable artifacts against, the glossary, the decision log, the decision records and the tracker. The default is `<working copy>/.capstan/`, and unset means nothing has chosen yet.
+This configures the **document home**: the one root Capstan resolves every path to its own durable artifacts against, the glossary, the decision log and the decision records. The default is `<working copy>/.capstan/`, and unset means nothing has chosen yet.
 
 It also configures the **tracker surface**: whether slice state stays in the document home as `tracker.md`, or moves to a GitHub Projects v2 board instead. The two are separate questions asked separately below; the default document home and the default tracker are each reachable without reading about the other.
 
@@ -39,7 +39,7 @@ Check too, in the same breath, whether the home currently in force exists on dis
 
 The layout ask below is two steps, never a three-way menu: someone who wants the default should not read two paragraphs about vault layouts to get there. Step 4 can ask a further question per key, which file it lives in, whenever both `CLAUDE.md` and `AGENTS.md` exist and nothing above already settled it for that key; a disagreement already resolved above does not ask again, and either way that is a separate ask that does not turn this one into three.
 
-**First, the fork.** Ask where the glossary, the decision log, the decision records and the tracker should live:
+**First, the fork.** Ask where the glossary, the decision log and the decision records should live:
 
 - In the repository, at `.capstan/`. Where they already sit if nothing has been configured elsewhere.
 - In a folder outside the repository, such as an Obsidian vault.
