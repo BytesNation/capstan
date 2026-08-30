@@ -170,7 +170,9 @@ For each key, once its own file is chosen: if the other file — `CLAUDE.md` or 
 
 Reached only when **The tracker-surface ask** settled on GitHub this run and `tracker.md` exists at **the home currently in force** — it is never one of step 2's artifacts on that surface, so it is still there rather than at the confirmed path; step 4 already secured the approval, before either key was written. Nothing to do otherwise: continue to step 6.
 
-Follow the write path in [`TRACKER-GITHUB.md`](../effort/TRACKER-GITHUB.md) for every row, checking each create's own result first by milestone title and then by issue title within that milestone — this is what makes an interrupted run resume rather than duplicate. A migrated issue's body departs from that path only in what it carries: where the row came from and nothing else.
+Follow the write path in [`TRACKER-GITHUB.md`](../effort/TRACKER-GITHUB.md) for every row, finding each row's own milestone by title and its own issue by title within that milestone before touching it. A migrated issue's body departs from that path only in what it carries: where the row came from and nothing else.
+
+A row is resumed on whether its work is **complete**, never on whether its issue exists: a `planned` or `building` row is complete once steps 3 through 5 of that write path have run for it and it sits open; a `merged` or `dropped` row is complete only once steps 3 through 6 have run and it is closed. An issue existing is step 3 alone — `setup-surface` had an issue, a status and a posted comment, and was still short of step 6's close. Test each row against this before creating anything for it, and carry forward whatever steps its own status still needs rather than stopping at the first one it already has; this is what makes an interrupted run resume rather than duplicate or stall.
 
 Once, before creating the first issue, take the working copy's own head commit as the one every migrated issue's body names — `git -C <working copy> rev-parse HEAD` — the commit this migration is actually running from, and an answer even where the home currently in force is not a repository, or holds `tracker.md` untracked, neither of which a read scoped to that file can give:
 
@@ -178,7 +180,7 @@ Once, before creating the first issue, take the working copy's own head commit a
 Migrated from `tracker.md` at commit <sha>.
 ```
 
-Delete `tracker.md` only once every row it held has an issue carrying its status, never before — an interrupted run leaves the file in place, and the next run resumes into whatever check-before-create already found on the board.
+Delete `tracker.md` only once every row it held is complete by that same test, never before — an interrupted run leaves the file in place, and the next run resumes into whichever rows above are still short of it.
 
 ### 6. Add `.capstan/effort/` to `.gitignore`
 
@@ -202,6 +204,6 @@ Running this a second time is not a special mode. It is the same skill, and the 
 
 Confirming the same document-home value back finds nothing to move. Step 2 sees the confirmed path is the home already in force and skips straight to step 4, step 4 replaces the key line with the same value, step 6 is a no-op once the `.gitignore` line already carries it, and step 7 commits nothing further for it. Choosing a different answer runs steps 1 through 8 exactly as a first run would, moving the artifacts from the home currently in force, wherever that is today, to the newly confirmed path: vault A to vault B, `.capstan/` back to a vault, or any pair between them.
 
-The tracker surface re-runs the same way on its own question, independent of whatever the document-home fork answered this time: confirming GitHub back re-checks the `project` scope and replaces the key line with the same value; moving from GitHub to the default removes it; moving from the default to GitHub writes it for the first time. None of this touches step 2's move or the artifacts it moves, since the tracker surface was never one of them. Confirming GitHub back also re-runs step 5: any row that already has an issue is found by its own title and skipped, so a run interrupted partway through a migration finishes it on the next run rather than repeating it.
+The tracker surface re-runs the same way on its own question, independent of whatever the document-home fork answered this time: confirming GitHub back re-checks the `project` scope and replaces the key line with the same value; moving from GitHub to the default removes it; moving from the default to GitHub writes it for the first time. None of this touches step 2's move or the artifacts it moves, since the tracker surface was never one of them. Confirming GitHub back also re-runs step 5: any row not yet complete by that test picks up at whichever step it stopped on, so a run interrupted partway through a migration finishes it on the next run rather than repeating it or leaving it stuck open.
 
 This is what a one-shot question could not do. An operator who wants to change either answer runs `setup` again, rather than editing a key by hand and hoping the rest follows it there on their own.
