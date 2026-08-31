@@ -24,6 +24,8 @@ You are also the only role that talks to the operator between gates. Everything 
 
 Installed as a plugin these carry its prefix, so the Builder is `capstan:builder`. Spawn whichever form your install produced.
 
+A Scout, Reviewer or Courier returns an account of something it saw and you did not — check it against its artifact, the source, the diff, the file, before you accept it. A dispatch that asserts a fact names where it came from, so the recipient can check it rather than trust it.
+
 ## Three gates
 
 The run **stops** at each gate. Post the brief, then end your turn.
