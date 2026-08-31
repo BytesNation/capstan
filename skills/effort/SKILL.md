@@ -24,8 +24,6 @@ You are also the only role that talks to the operator between gates. Everything 
 
 Installed as a plugin these carry its prefix, so the Builder is `capstan:builder`. Spawn whichever form your install produced.
 
-A Scout, Reviewer or Courier returns an account of something it saw and you did not — check it against its artifact, the source, the diff, the file, before you accept it. A dispatch that asserts a fact names where it came from, so the recipient can check it rather than trust it.
-
 ## Three gates
 
 The run **stops** at each gate. Post the brief, then end your turn.
@@ -183,7 +181,7 @@ Invoke the `decision-record` skill before this run's first row goes into `decisi
 1. Invoke the `interview` skill and run it. Rounds of questions, a recommended answer attached to each one, wait between rounds. Keep running rounds until no answer you could get would change what goes in `spec.md`.
 2. Fire Scouts **in parallel** for any external fact a decision is waiting on. Do not stall the interview while they read.
    - A Scout has no write tools, so it returns findings as text and cannot file them. **You** write each return to `<working copy>/.capstan/effort/scout/<slug>.md` verbatim. Do not summarise it on the way in; the citations and the confidence split are the parts that matter later.
-   - Read what comes back rather than trusting it. A Scout that says medium confidence, or that reports a fetch it could not complete, is telling you which of its claims still need checking. Verify anything load-bearing yourself before a decision rests on it.
+   - Read what comes back rather than trusting it. A Scout that says medium confidence, or that reports a fetch it could not complete, is telling you which of its claims still need checking.
 3. Record decisions as they resolve, per the `decision-record` skill. Do not batch them to the end. Record the ones that refuse to resolve too, as `open` or `assumed`, and the areas nobody can phrase a question about yet as `unformed`. A question the operator could not answer is a finding, not a hole in the interview.
 4. Write `<working copy>/.capstan/effort/spec.md` in these six sections:
    - **Problem**: what is wrong or missing, and how it was found.
@@ -252,6 +250,13 @@ Prepare the change and run it in check mode. Present the diff at gate three. Aft
 This skill ensures `.gitignore` carries `.capstan/effort/`, replacing an older scratch line with it where one is already there. `setup` ensures the same line on its first run. The scratch never enters git history, which is what keeps repositories from accumulating stale planning material. The entry stays bare: a `.gitignore` line is relative to the repository root.
 
 At delivery the Courier writes one note per effort to the knowledge base, and Capstan never runs git there — the operator commits the note. That is the permanent cross-venture record.
+
+## Duties you owe
+
+Reviewers check Builders by construction, and you check Reviewers and Couriers by reading what they return. Nothing checks you, and you are also the only role that can skip a step on its own authority. These two duties are how you check yourself.
+
+- **Check a return before you accept it.** A Scout, Reviewer or Courier returns an account of something it saw and you did not. Check it against its artifact — the source, the diff, the file — and against the dispatch that asked for it. The artifact catches a claim that does not match what is there; the dispatch catches an item that went out and never came back, since an omission still leaves the account and the artifact agreeing with each other.
+- **Name where a fact came from.** A dispatch you write that asserts a fact names where it came from — a decision number, a line, a grep result — so its recipient can check it rather than trust it.
 
 ## Standards you enforce
 
