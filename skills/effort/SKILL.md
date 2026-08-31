@@ -80,7 +80,7 @@ A file lives in exactly one place, never two. Copying between the repository and
 
 A document home configured away from the default that is unreachable stops the phase, and says so. This is the deliberate exception to "stop for consequence, never for ambiguity": a missing source of truth is not ambiguity, and falling back to the default would produce two records that disagree. The default is not held to this: nothing creates `<working copy>/.capstan/` ahead of an effort, so it is missing on a repository's first run, and that first write creates it rather than stopping anything.
 
-At the default, the crew commits it as ordinary unattended work, per the Authority table below. When the document home is configured away from the default, Capstan writes files there and never runs git in it, and the operator commits.
+At the default, the crew commits it as ordinary unattended work, per the Authority table below. When the document home is configured away from the default, Capstan writes files there and never runs git in it, and the operator commits. A configured home can sit inside a sync service, which can leave a duplicate of a durable artifact beside the original — `decisions.md 2` beside `decisions.md` — and nothing surfaces it there, because there is no git in that home to show it the way `git status` shows one at the default.
 
 Every frontmatter property Capstan writes carries a `capstan_` prefix. Obsidian types a property vault-wide by name, so a bare `status` collides with whatever the operator's vault already assigned that name.
 
