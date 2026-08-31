@@ -108,7 +108,7 @@ Run `/capstan:setup` to choose, and run it again later to change your mind. It a
 
 **Capstan never commits a configured document home, and it never runs git inside one.** It writes the files and stops; committing them from then on is yours, the same as committing anything else in that vault. Left uncommitted, a document home can sit that way for days before anyone notices, so weigh that before you switch it on.
 
-A vault like that is often synced too, by iCloud, Dropbox, or Obsidian Sync. Only iCloud was tested, on macOS. Desktop & Documents sync is on, the sync mechanism has already fired repeatedly on the vault used for the test, and that vault now holds ten-plus ` 2` duplicates. Dropbox and Obsidian Sync were not tested; both make their own conflict-copy names, different from iCloud's, so nothing here says how they behave.
+A vault like that is often synced too, by iCloud, Dropbox, or Obsidian Sync. Only iCloud was tested, on macOS. Desktop & Documents sync is on, and the sync mechanism has already fired repeatedly on the vault used for the test. Dropbox and Obsidian Sync were not tested; both make their own conflict-copy names, different from iCloud's, so nothing here says how they behave.
 
 Whichever one makes the copy, nothing in the vault catches it. Capstan runs no git in a configured document home, so a duplicated `decisions.md 2` sitting beside the real one has nothing to surface it. In the repository, `git status` does that job for the scratch Capstan writes there. In a vault, nothing does, and there is no guard against it. The only warning is this one, and it reaches you once, when you are choosing where the document home goes. It reaches nothing when an agent is actually writing there.
 
