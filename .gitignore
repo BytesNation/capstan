@@ -1,3 +1,5 @@
 .capstan/effort/
 .DS_Store
 /AGENTS.md
+**/.obsidian/
+*.icloud
