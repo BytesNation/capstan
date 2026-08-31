@@ -84,7 +84,7 @@ By default, everything lands in `.capstan/`, inside the repository the work is h
   effort/         scratch: the claim, spec, plan, scout returns. gitignored.
 ```
 
-`effort` and `setup` both make sure `.capstan/effort/` is in your `.gitignore`, so you never have to add it by hand. That folder is deleted at delivery, because a stale spec is worse than no spec: the next agent reads it as current.
+`effort` and `setup` both make sure `.capstan/effort/` is in your `.gitignore`, so you never have to add it by hand. That folder, and any sync-made copy of it, is deleted at delivery, because a stale spec is worse than no spec: the next agent reads it as current.
 
 `tracker.md` answers what shipped, one row per slice, with the commit that merged it, and it is on by default, so you get it without configuring anything.
 
@@ -106,7 +106,11 @@ Capstan stores no difference between the last two. Both are an absolute path con
 
 Run `/capstan:setup` to choose, and run it again later to change your mind. It asks the fork first and the vault layout only if you go outside the repository, confirms the path, creates the folder if it does not exist, checks whether anything is already sitting at the destination before it moves a thing, and moves the artifacts on your approval. That is four when the tracker stays on the default and `tracker.md` moves with the rest, three when the tracker is on GitHub and there is no `tracker.md` to move. It also writes `capstan-document-home` into `CLAUDE.md` or `AGENTS.md`: whichever one you have, asking you which when you have both, and creating `AGENTS.md` when you have neither. Exactly one file carries the key when it finishes, never two.
 
-**Capstan never commits a configured document home, and it never runs git inside one.** It writes the files and stops; committing them from then on is yours, the same as committing anything else in that vault. Left uncommitted, a document home can sit that way for days before anyone notices, so weigh that before you switch it on. A document home inside a vault synced by iCloud, Dropbox, or Obsidian Sync is untested.
+**Capstan never commits a configured document home, and it never runs git inside one.** It writes the files and stops; committing them from then on is yours, the same as committing anything else in that vault. Left uncommitted, a document home can sit that way for days before anyone notices, so weigh that before you switch it on.
+
+A vault like that is often synced too, by iCloud, Dropbox, or Obsidian Sync. Only iCloud was tested, on macOS. Desktop & Documents sync is on, and the sync mechanism has already fired repeatedly on the vault used for the test. Dropbox and Obsidian Sync were not tested; both make their own conflict-copy names, different from iCloud's, so nothing here says how they behave.
+
+Whichever one makes the copy, nothing in the vault catches it. Capstan runs no git in a configured document home, so a duplicated `decisions.md 2` sitting beside the real one has nothing to surface it. In the repository, `git status` does that job for the scratch Capstan writes there. In a vault, nothing does, and there is no guard against it. The only warning is this one, and it reaches you once, when you are choosing where the document home goes. It reaches nothing when an agent is actually writing there.
 
 `capstan-document-home` lives in this repository's own `CLAUDE.md` or `AGENTS.md`, the one at the root of this working copy, not a user-level file. A `~/.claude/CLAUDE.md` is never read for this key: set it only there and Capstan falls back to the default without telling you.
 
