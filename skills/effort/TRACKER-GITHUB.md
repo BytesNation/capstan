@@ -107,7 +107,7 @@ A `dropped` row never carries this comment — step 6 closes it directly, naming
 
 A `merged` row's issue carries exactly one conforming comment: two would read back no differently than one that changed its mind, and nothing on this surface could say which is current.
 
-An issue can otherwise carry any number of comments that do not match the pattern above — a question, a status update, a remark from anyone with access to the repository. Those are ordinary discussion, not a gap or a corruption, and none of them stops the run on its own. When a `merged` row's issue carries exactly one conforming comment, any non-conforming comment on that issue is reported alongside the commit that was read, so an operator sees that something else on the issue named a commit and can judge it. What stops the run is a count: a `merged` row whose issue carries zero conforming comments, or more than one, has no single commit to read, and reports what it found rather than guessing at what was meant.
+An issue can otherwise carry any number of comments that do not match the pattern above — a question, a status update, a remark from anyone with access to the repository. Those are ordinary discussion, not a gap or a corruption, and none of them stops the run on its own. When a `merged` row's issue carries exactly one conforming comment, any non-conforming comment on that issue is reported alongside the commit that was read, so an operator sees that something else on the issue named a commit and can judge it. What stops the run is a count: a `merged` row whose issue carries zero conforming comments, or more than one, has no single commit to read, and reports what it found rather than guessing at what was meant. That count only holds for a per-issue read that itself succeeded — see **Unreachable stops the run** below for what tells a genuine zero apart from a masked failure.
 
 ## The teardown comment format
 
@@ -158,4 +158,10 @@ There is no repair path either. `gh` has no `project field-edit`, so the built-i
 
 GitHub unreachable stops the run and says so. No retry, no backoff, no bounded wait. A rate limit and an expired token are the same case: the run ends rather than slows down. This is the same rule an unreachable document home already gets — a missing source of truth is not ambiguity to work around, it is a reason to stop.
 
-The discriminator is the call's exit status, never its message. Every read against this surface — the scope probe, a board read, a per-issue read run once for every row in a sweep — is one `gh` invocation: a nonzero exit is unreachable regardless of what it printed, and a zero exit that returns nothing is a genuine empty result, not a failure. Exhausting the rate limit made `gh project item-list` print `unknown owner type`, which read as a different failure and was this one.
+The discriminator is the call's exit status, never its message, and it reaches every read against this surface — a per-issue read run once for every row in a sweep among them, easy to undercount since it fires once per row rather than once per read.
+
+A nonzero exit is unreachable, with one exception: `skills/setup/SKILL.md`'s scope-probe branch already names the missing-`project`-scope failure and walks the operator through the grant rather than stopping here. Every other nonzero exit, at that probe and everywhere else on this surface, is unreachable.
+
+A zero exit is a genuine empty result, not a failure, only when the query behind it is the one this file declares above, `."capstan Status"`. Querying `."Capstan Status"` instead, the display name's own capitalisation, also exits zero and also returns nothing against a field that is set — the mis-keyed trap the read-back section above already warns of, not an empty board. "Returns nothing" means no rows on that declared query, before the reverse leg's own further narrowing to rows whose value came back set.
+
+Exhausting the rate limit made `gh project item-list` print `unknown owner type`. It looked like a different failure, and was in fact this one, the unreachable case.
