@@ -157,3 +157,5 @@ There is no repair path either. `gh` has no `project field-edit`, so the built-i
 ## Unreachable stops the run
 
 GitHub unreachable stops the run and says so. No retry, no backoff, no bounded wait. A rate limit and an expired token are the same case: the run ends rather than slows down. This is the same rule an unreachable document home already gets — a missing source of truth is not ambiguity to work around, it is a reason to stop.
+
+The discriminator is the call's exit status, never its message. Every read against this surface — the scope probe, a board read, a per-issue read run once for every row in a sweep — is one `gh` invocation: a nonzero exit is unreachable regardless of what it printed, and a zero exit that returns nothing is a genuine empty result, not a failure. Exhausting the rate limit made `gh project item-list` print `unknown owner type`, which read as a different failure and was this one.
